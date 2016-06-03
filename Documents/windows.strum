@@ -1,0 +1,84 @@
+#################################################################################################
+#
+#						This is a sample file with Strumming and Lyrics
+#
+#################################################################################################
+
+Title:=When I'm Cleaning Windows
+Composer:=George Formby.
+Tempo:=180
+Beats:=4
+Swing := No
+Pattern1 := d-------
+Pattern2 := d-dududu
+Ukulele := 0
+Merlin := 0
+Dulcimer := 0
+Ukulele.GDim := 0101
+
+#
+#	[A-GQ][#b][7/9/dim/sus/m/+]				Put given chord at this position, advance 1
+#	/										Duplicate previous beat play in this position advance 1
+#   +										Advance 1
+# 	. 										Advance 1/2
+#	= 										Advance 1/4
+#	nnn 									Play that fingerpick here. No advance.
+#
+
+@1
+
+Q+++   G+++          Q+++       A7+++               Q+++
+Now    I go cleanin' windows to earn an honest bob
+
+D+++       Q+++           G+++              Q+++ 
+For a nosy parker it's an interestin' job
+
+@2
+
+G///                G7///
+Now it's a job that just suits me
+
+  C///           A7///
+A window cleaner you would be
+
+   G///             E7///
+If you can see what I can see
+
+Gdim///           G///
+When I'm cleaning windows
+
+G///         G7///
+Honeymooning couples too
+
+C///                A7///
+You should see them bill and coo
+
+      G///            E7///
+You'd be surprised at things they do
+
+Gdim///           G///
+When I'm cleaning windows
+
+   B7///         B7///
+In my profession I work hard
+
+E7///          E7///
+But I'll never stop
+
+     A7///               A7///
+I'll climb this blinking ladder
+
+       D///             D7///
+Till I get right to the top
+
+G///                G7///
+The blushin' bride, she looks divine
+
+    C///             A7///
+The bridegroom he is doing fine
+
+    G///            E7///
+I'd rather have his job than mine
+
+Gdim///           G///
+When I'm cleaning windows
