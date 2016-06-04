@@ -36,6 +36,9 @@ class FileLoader:
 			self.pointer += 1
 		return retVal
 
+	def ctrl(self,key):
+		return self.assignments[key.lower().strip()]
+
 ###########################################################################################################################
 #
 #									Representation of single strum or fingerpick event
@@ -43,10 +46,10 @@ class FileLoader:
 ###########################################################################################################################
 
 class Strum:
-	def __init__(self,position,strings,direction = 1,pattern = None):
+	def __init__(self,position,strings,volume = 100,direction = 1,pattern = None):
 		self.beatSubPosition = position 												# position 0-999 in bar.
 		self.chord = None 																# No visual representation of a chord
-		self.volume = 100 if direction > 0 else 50										# save percentage volume
+		self.volume = volume if direction > 0 else volume / 2							# save percentage volume
 		self.strings = strings 															# Number of strings
 		self.frets = [ None ] * strings													# Fret positions (all no strum)
 		if pattern is not None:															# Set the strum if appropriate.
@@ -70,7 +73,7 @@ class Strum:
 		return self 
 
 	def render(self,barNumber):
-		pos = Strum.toPosition(barNumber,self.beatSubPosition)							# position prefix.
+		pos = Strum.toPosition(barNumber+1000,self.beatSubPosition)						# position prefix.
 		render = ""
 		if self.chord is not None:														# render chord if present
 			render = render + pos + "<"+self.chord.lower()+">\n"
@@ -87,12 +90,12 @@ class Strum:
 		return "{0:05}.{1:04}:".format(barNumber,beatSubPosition)
 
 class UpStrum(Strum):
-	def __init__(self,position,strings,pattern = None):
-		Strum.__init__(self,position,strings,-1,pattern)
+	def __init__(self,position,strings,volume,pattern = None):
+		Strum.__init__(self,position,strings,volume,-1,pattern)
 
 class DownStrum(Strum):
-	def __init__(self,position,strings,pattern = None):
-		Strum.__init__(self,position,strings,1,pattern)
+	def __init__(self,position,strings,volume,pattern = None):
+		Strum.__init__(self,position,strings,volume,1,pattern)
 
 ###########################################################################################################################
 #
@@ -110,17 +113,19 @@ class Bar:
 		self.strums.append(strum)
 		return self
 
-	def setLyric(self,lyric):
-		self.lyric = lyric.rstrip()
+	def addLyric(self,lyric):
+		self.lyric = self.lyric + " " + lyric.strip()
+		while self.lyric.find("  ") >= 0:
+			self.lyric = self.lyric.replace("  "," ")
+		self.lyric = self.lyric.strip()
 		return self
 
 	def render(self):
 		render = ""
 		if self.lyric.strip() != "":													# add lyric if exists
-			render = render+Strum.toPosition(self.barNumber,0)+'"'+self.lyric.rstrip()+"\n"	
+			render = render+Strum.toPosition(self.barNumber+1000,0)+'"'+self.lyric.rstrip()+"\n"	
 		for s in self.strums:															# concatenate all strum renders
 			render = render + s.render(self.barNumber)
-		render = [x for x in render.split("\n") if x != ""]								# split into lines
-		render.sort()																	# sort		
-		return "\n".join(render)														# reassemble
+		return render													
+
 
