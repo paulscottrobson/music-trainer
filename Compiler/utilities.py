@@ -6,6 +6,8 @@
 ###########################################################################################################################
 ###########################################################################################################################
 
+from dictionary import UkuleleDictionary
+
 ###########################################################################################################################
 #
 #				Class that loads in a file with the given name, strips the comments and equates out.
@@ -128,4 +130,60 @@ class Bar:
 			render = render + s.render(self.barNumber)
 		return render													
 
+###########################################################################################################################
+#
+#													Compiler Base Class
+#
+###########################################################################################################################
 
+class Compiler:
+	def __init__(self,fileName):
+		self.srcFile = fileName
+		self.music = [ Bar(1) ]															# array of music
+		self.stripList = [ "sus","dim","9","7","+","m" ]								# things to try removing.
+		self.barPosition = 0															# in bar index 0
+		self.beatPosition = 0															# on beat index 0
+		self.loader = FileLoader(fileName) 												# save loader
+		self.beats = int(self.loader.ctrl("beats"))										# read the beats in a bar.
+		stringMapper = { "ukulele":4, "merlin":3 }
+		self.strings = stringMapper[self.loader.ctrl("instrument").lower()]				# work out how many strings
+		self.dictionary = UkuleleDictionary()											# working dictionary.
+		self.compile()																	# compile the tune.
+
+	def render(self):
+		render = ""																		# build up the rendered song.
+		for bar in self.music:
+			render = render + bar.render()
+		render = render + self.getAssign("instrument",0)
+		render = render + self.getAssign("beats",1)
+		render = render + self.getAssign("tempo",2)
+		render = [x.strip() for x in render.strip().split("\n") if x.strip() != 0]		# split remove empty strings
+		render.sort()																	# sort it		
+		return "\n".join(render)
+
+	def getAssign(self,key,id):
+		return Strum.toPosition(100,id)+key.lower()+" := "+self.loader.ctrl(key.lower())+"\n"
+
+	def getChord(self,chordName):
+		chordName = chordName.lower()													# lower case.
+		fretting = self.getChordAbsolute(chordName)										# get absolute fretting.
+		for chop in self.stripList:
+			if fretting == "" and chordName[-len(chop):] == chop:						# if not found and choppable
+				chordName = chordName[:-len(chop)]										# chop the chord
+				fretting = self.getChordAbsolute(chordName)								# and try again.
+		return fretting
+
+	def getChordAbsolute(self,chordName):
+		chordName = chordName.lower()													# make L/C
+		frets = self.dictionary.getChord(chordName)										# read from the dictionary.
+		if frets == "":																	# if not found
+			key = self.loader.ctrl("instrument").lower()+"."+chordName					# is it an assigned chord
+			frets = self.loader.ctrl(key.lower())										# try it from there
+		return frets
+
+	def save(self):
+		render = self.render()															# get result
+		targetFile = ".".join(self.srcFile.split(".")[:-1])+".music"					# create object file name
+		handle = open(targetFile,"w")													# write to file.
+		handle.write(render)
+		handle.close()

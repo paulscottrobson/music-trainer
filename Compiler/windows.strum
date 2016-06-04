@@ -13,6 +13,9 @@ Swing := No
 Pattern1 := d-------
 Pattern2 := d-dududu
 Beats := 4
+
+Ukulele.Gdim := 0101
+
 @1
 
 X...   G...          X...       A7...               X...
