@@ -26,12 +26,20 @@
 #constant 	IDFRET 			103 																	// ID of frets
 #constant 	IDREDCIRCLE 	104 																	// ID of red sphere
 #constant 	IDFONT 			105 																	// ID of font
+#constant 	IDTEMP 			106 																	// ID for font measuring
+
+// ****************************************************************************************************************************************************************
+//																   Blocks of IDs
+// ****************************************************************************************************************************************************************
+
+#constant 	IDB_CHORDBUCKET	28000 																	// 28000-31000 spaces for 60 chords 
 
 // ****************************************************************************************************************************************************************
 //																  Other constants
 // ****************************************************************************************************************************************************************
 
 #constant DEPTHBACKGROUND	99																		// Background position
+#constant PCSTRINGS 		75 																		// Percentage height of render box occupied by strum/pick
 
 // ****************************************************************************************************************************************************************
 //																  Setup constants
@@ -46,8 +54,8 @@ endtype
 global ctrl as _Constants 																			// This is the actual holder of semi-constants
 
 function InitialiseConstants()
-	ctrl.scWidth = 1280																				// Physical and Logical Screen Size
-	ctrl.scHeight = 1024
+	ctrl.scWidth = 1024																				// Physical and Logical Screen Size
+	ctrl.scHeight = 768
 	ctrl.strings = 4 																				// Number of instrument strings.
 endfunction
 

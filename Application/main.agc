@@ -14,6 +14,8 @@
 #include "src/resources.agc"																		// Resource loader									
 #include "src/chorddisplay.agc"																		// Chord Display Object
 #include "src/song.agc" 																			// Song manager
+#include "src/chordbucket.agc"																		// Chord bucket object
+#include "src/barrender.agc" 																		// Bar Renderer
 
 InitialiseConstants()
 LoadResources()
@@ -27,15 +29,22 @@ SetSpriteSize(IDBACKGROUND,ctrl.scWidth,ctrl.scHeight)
 SetSpriteDepth(IDBACKGROUND,DEPTHBACKGROUND)
 
 s as Song
+cb as ChordBucket
 Song_New(s)
-Song_Load(s,"music/When I'm cleaning windows.music")
+Song_Load(s,"music/When I'm Cleaning Windows.music")
+ChordBucket_New(cb)
+ChordBucket_Load(cb,s,128,256)
+BarRender_ProcessSongLyrics(s)
+br as BarRender 
+for i = 1 to s.barCount
+	BarRender_New(br,s.bars[i],190,90,40,1000+i*100)
+	BarRender_Move(br,mod(i-1,5)*200+10,(i-1)/5*100+10)
+next i
+
 SetPrintSize(16)
 while GetRawKeyState(27) = 0   
 	for i = 1 to CountStringTokens(debug,";")
 		print(GetStringToken(debug,";",i))
-	next i
-	for i = 1 to s.barCount
-		print(str(i)+" "+_Song_BarToText(s,i))
 	next i
     Print( ScreenFPS() )
     Sync()

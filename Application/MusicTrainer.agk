@@ -6,14 +6,18 @@ FILE_2=src%2Fresources.agc;-1
 FILE_3=src%2Ftypes.agc;-1
 FILE_4=src%2Fchorddisplay.agc;-1
 FILE_5=src%2Fsong.agc;-1
+FILE_6=src%2Fchordbucket.agc;-1
+FILE_7=src%2Fbarrender.agc;-1
 
 [files]
-FILE_NAME_0=0;main.agc;331;0
-FILE_NAME_1=0;src%2Fconstants.agc;3707;1
-FILE_NAME_2=0;src%2Fresources.agc;841;2
+FILE_NAME_0=0;main.agc;1873;0
+FILE_NAME_1=0;src%2Fconstants.agc;3031;1
+FILE_NAME_2=1;src%2Fresources.agc;848;2
 FILE_NAME_3=0;src%2Ftypes.agc;1170;4
-FILE_NAME_4=0;src%2Fchorddisplay.agc;390;3
-FILE_NAME_5=1;src%2Fsong.agc;9339;5
+FILE_NAME_4=0;src%2Fchorddisplay.agc;5933;3
+FILE_NAME_5=0;src%2Fsong.agc;5040;5
+FILE_NAME_6=0;src%2Fchordbucket.agc;1202;6
+FILE_NAME_7=0;src%2Fbarrender.agc;1585;7
 
 [project]
 description=

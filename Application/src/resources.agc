@@ -10,7 +10,7 @@
 // ****************************************************************************************************************************************************************
 
 function LoadResources()
-	LoadImage(IDFONT,GFXDIR+"font.png")
+	LoadImage(IDFONT,GFXDIR+"font_l.png")
 	SetTextDefaultFontImage(IDFONT)
 	LoadImage(IDBACKGROUND,GFXDIR+"background.jpg")											
 	LoadImage(IDRECTANGLE,GFXDIR+"rectangle.png")

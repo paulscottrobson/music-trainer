@@ -22,6 +22,7 @@ type Strum
 endtype
 
 type Bar 
+	beats as integer 																				// Beats in the bar
 	strumCount as integer 																			// Number of strum events in the bar.
 	strums as Strum[1]																				// Strum events in bar
 	lyric$ as String 																				// Lyrics associated with this bar.
@@ -77,6 +78,7 @@ function Song_Load(song ref as Song,fileName as String)
 					if song.barCount > song.bars.length then song.bars.length = song.barCount + 16	// Expand the bars array if necessary
 					song.bars[song.barCount].lyric$ = "" 											// Clear the bar sub object
 					song.bars[song.barCount].strumCount = 0 										// No strums as yet.
+					song.bars[song.barCount].beats = song.beats 									// Copy beats in
 				endif
 				_Song_ProcessLine(song,mid(line$,FindString(line$,".")+1,9999))						// Process line without the bar number 														// It is <chord> [strum] or "lyric
 			endif

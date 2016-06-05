@@ -42,15 +42,18 @@ function ChordDisplay_New(cd ref as ChordDisplay,name$ as String,fretting$ as St
 	cd.name$ = name$
 	CreateSprite(baseID,IDRECTANGLE)																// Create background rectangle (S+0)
 	SetSpriteSize(baseID,width,height)
-	SetSpriteColor(baseID,0,0,0,255)																// Make it black
+	SetSpriteColor(baseID,255,255,255,255)															// Make it white (frame)
+	CreateSprite(baseID+9,IDRECTANGLE)																// Background (S+1)
+	SetSpriteSize(baseID+9,width-4,height-4)
+	SetSpriteColor(baseID+9,0,0,0,255)
 	
-	for i = 1 to cd.strings																			// Create strings (S+1..S+9)
+	for i = 1 to cd.strings																			// Create strings (S+1..S+8)
 		CreateSprite(baseID+i,IDSTRING)
 		scale# = height * 9 / 10 / GetSpriteWidth(baseID+i) 										// Calculate scale to fit 90% of height
 		SetSpriteScale(baseID+i,scale#,scale#)
 		SetSpriteAngle(baseID+i,90)
 		CreateSprite(baseID+i+30,IDREDCIRCLE)														// Create red dots (S+30..S+39)		
-		scale# = width * 8 / 10 / cd.strings / GetSpriteHeight(baseID+30+i)
+		scale# = width * 6 / 10 / cd.strings / GetSpriteHeight(baseID+30+i)
 		SetSpriteScale(baseID+30+i,scale#,scale#)
 	next i
 	
@@ -77,7 +80,8 @@ endfunction
 
 function ChordDisplay_Delete(cd ref as ChordDisplay)
 	ASSERT(GetSpriteExists(cd.baseID) <> 0,"CD2")
-	DeleteSprite(cd.baseID)																			// Delete background rectangle (S+0)
+	DeleteSprite(cd.baseID)																			// Delete background rectangle/frame
+	DeleteSprite(cd.baseID+9)
 	for i = 1 to cd.strings																			// Delete strings and circles
 		DeleteSprite(cd.baseID+i)
 		DeleteSprite(cd.baseID+i+30)
@@ -99,9 +103,13 @@ function ChordDisplay_Move(cd ref as ChordDisplay,x as integer,y as integer)
 	cd.x = x 																						// Save new position
 	cd.y = y 
 	alpha = cd.alpha# * 255 																		// Alpha in range 0-255
-	SetSpritePosition(cd.baseID,x,y)																// Background rectangle (S+0)													
+	SetSpritePosition(cd.baseID,x,y)																// Frame (S+0)													
 	SetSpriteColorAlpha(cd.baseID,alpha)
 	SetSpriteDepth(cd.baseID,cd.depth)
+	SetSpritePosition(cd.baseID+9,x+2,y+2)																// Background rectangle (S+9)													
+	SetSpriteColorAlpha(cd.baseID+9,alpha)
+	SetSpriteDepth(cd.baseID+9,cd.depth-1)
+	
 	xSpace = cd.width * 6 / 10
 	ySpace = cd.height * 9 / 10 																	// Allocate space.	
 	
@@ -109,32 +117,36 @@ function ChordDisplay_Move(cd ref as ChordDisplay,x as integer,y as integer)
 		xPos = xSpace * (i - 1) / (cd.strings-1) + x + cd.width * 30 / 100
 		SetSpritePositionByOffset(cd.baseID+i,xPos,y+cd.height/2)
 		SetSpriteColorAlpha(cd.baseID+i,alpha)
-		SetSpriteDepth(cd.baseID+i,cd.depth-2)
+		SetSpriteDepth(cd.baseID+i,cd.depth-3)
 		
 		fret = val(mid(cd.fretting$,i,1))															// Position red fingermarkers
-		SetSpritePositionByOffset(cd.baseID+30+i,xPos,ChordDisplay_yFret(cd,fret-0.5))
+		SetSpritePositionByOffset(cd.baseID+30+i,xPos,_ChordDisplay_yFret(cd,fret-0.5))
 		if fret = 0 or fret > cd.frets then SetSpriteColorAlpha(cd.baseID+30+i,0) else SetSpriteColorAlpha(cd.baseID+30+i,alpha)
-		SetSpriteDepth(cd.baseID+30+j,cd.depth-3)
+		SetSpriteDepth(cd.baseID+30+j,cd.depth-4)
 		
 	next i
 
 	for j = 0 to cd.frets																			// Position frets
-		SetSpritePositionByOffset(cd.baseID+10+j,x+cd.width*60/100,ChordDisplay_yFret(cd,j))
+		SetSpritePositionByOffset(cd.baseID+10+j,x+cd.width*60/100,_ChordDisplay_yFret(cd,j))
 		SetSpriteColorAlpha(cd.baseID+10+j,alpha)
-		SetSpriteDepth(cd.baseID+10+j,cd.depth-1)				
+		SetSpriteDepth(cd.baseID+10+j,cd.depth-2)				
 	next j
 	
 	y1 = y + cd.height * 5 / 100																	// Position letter text
 	for i = 1 to len(cd.name$)
 		SetTextPosition(cd.baseID+i,x+cd.width * 15 / 100-GetTextTotalWidth(cd.baseID+i)/2,y1)
 		SetTextColorAlpha(cd.baseID+i,alpha)
-		SetTextDepth(cd.baseID+i,cd.depth-1)
-		y1 = y1 + GetTextTotalHeight(cd.baseID+1)
+		SetTextDepth(cd.baseID+i,cd.depth-2)
+		y1 = y1 + GetTextTotalHeight(cd.baseID+1)*0.75
 	next i
 
 endfunction
 
-function ChordDisplay_yFret(cd ref as ChordDisplay,pos# as float)
+// ****************************************************************************************************************************************************************
+//														Calculate Fret Position
+// ****************************************************************************************************************************************************************
+
+function _ChordDisplay_yFret(cd ref as ChordDisplay,pos# as float)
 	y = cd.y + cd.height * 95 / 100
 	y = y - (cd.frets-pos#) * cd.height * 90 / 100 / cd.frets
 endfunction y
