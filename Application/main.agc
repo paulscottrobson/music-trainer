@@ -13,6 +13,7 @@
 #include "src/constants.agc"																		// Constant items
 #include "src/resources.agc"																		// Resource loader									
 #include "src/chorddisplay.agc"																		// Chord Display Object
+#include "src/song.agc" 																			// Song manager
 
 InitialiseConstants()
 LoadResources()
@@ -25,14 +26,17 @@ CreateSprite(IDBACKGROUND,IDBACKGROUND)
 SetSpriteSize(IDBACKGROUND,ctrl.scWidth,ctrl.scHeight)												
 SetSpriteDepth(IDBACKGROUND,DEPTHBACKGROUND)
 
-c as ChordDisplay
-ChordDisplay_New(c,"g","0232",1000,128,256)
-x = 0
-
+s as Song
+Song_New(s)
+Song_Load(s,"music/When I'm cleaning windows.music")
+SetPrintSize(16)
 while GetRawKeyState(27) = 0   
+	for i = 1 to CountStringTokens(debug,";")
+		print(GetStringToken(debug,";",i))
+	next i
+	for i = 1 to s.barCount
+		print(str(i)+" "+_Song_BarToText(s,i))
+	next i
     Print( ScreenFPS() )
-    ChordDisplay_Move(c,x,200)
-    inc x
-    c.alpha# = mod(x,100) / 100.0
     Sync()
 endwhile

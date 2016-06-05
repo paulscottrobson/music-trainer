@@ -55,6 +55,8 @@ endfunction
 //													Error handlers and assert are kept here
 // ****************************************************************************************************************************************************************
 
+global debug as String
+
 function ERROR(errMsg$ as string)
 	while GetRawKeyState(27) = 0 																	// Wait for ESC
 		print("Error:")

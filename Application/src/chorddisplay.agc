@@ -113,7 +113,7 @@ function ChordDisplay_Move(cd ref as ChordDisplay,x as integer,y as integer)
 		
 		fret = val(mid(cd.fretting$,i,1))															// Position red fingermarkers
 		SetSpritePositionByOffset(cd.baseID+30+i,xPos,ChordDisplay_yFret(cd,fret-0.5))
-		if fret = 0 then SetSpriteColorAlpha(cd.baseID+30+i,0) else SetSpriteColorAlpha(cd.baseID+30+i,alpha)
+		if fret = 0 or fret > cd.frets then SetSpriteColorAlpha(cd.baseID+30+i,0) else SetSpriteColorAlpha(cd.baseID+30+i,alpha)
 		SetSpriteDepth(cd.baseID+30+j,cd.depth-3)
 		
 	next i
