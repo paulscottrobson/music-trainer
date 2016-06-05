@@ -1,6 +1,17 @@
 
 [projectfiles]
 FILE_0=main.agc;-1
+FILE_1=src%2Fconstants.agc;-1
+FILE_2=src%2Fresources.agc;-1
+FILE_3=src%2Ftypes.agc;-1
+FILE_4=src%2Fchorddisplay.agc;-1
 
 [files]
-FILE_NAME_0=1;main.agc;337;0
+FILE_NAME_0=0;main.agc;1495;0
+FILE_NAME_1=0;src%2Fconstants.agc;3172;1
+FILE_NAME_2=0;src%2Fresources.agc;199;2
+FILE_NAME_3=0;src%2Ftypes.agc;1170;4
+FILE_NAME_4=1;src%2Fchorddisplay.agc;3062;3
+
+[project]
+description=
