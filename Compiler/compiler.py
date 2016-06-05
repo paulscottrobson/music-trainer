@@ -13,5 +13,12 @@ from dictionary import UkuleleDictionary
 from strumcompiler import StrumCompiler
 
 
-c = StrumCompiler("windows.strum")
-c.save()
+def compileTree(directory):
+	for root,dirs,files in os.walk(directory):
+		for f in files:
+			fullPath = root + os.sep + f
+			if fullPath[-6:] == ".strum":
+				print("Compiling '"+f+"'")
+				StrumCompiler(fullPath).save()
+
+compileTree("..\\Application")

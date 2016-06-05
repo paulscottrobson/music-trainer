@@ -39,7 +39,8 @@ class FileLoader:
 		return retVal
 
 	def ctrl(self,key):
-		return self.assignments[key.lower().strip()]
+		key = key.lower().strip()
+		return self.assignments[key] if key in self.assignments else ""
 
 ###########################################################################################################################
 #

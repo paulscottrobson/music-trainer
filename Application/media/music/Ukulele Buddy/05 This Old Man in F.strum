@@ -1,0 +1,26 @@
+#
+#		Ukulele Buddy version of This Old Man video 5 (F Chord)
+#
+Tempo:=90
+Beats:=4
+Swing := No
+Pattern1 := d-d-d-d-
+
+@1
+
+F///
+This old man
+F///
+he plays one
+F///
+He plays knick knack
+F///
+on my thumb. With a
+F///
+knick knack paddy wack
+F///
+Give a dog a bone
+F///
+This old man comes 
+F///
+rolling home

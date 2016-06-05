@@ -1,0 +1,21 @@
+#
+#		Ukulele Buddy exercise 16, Jamming D and A
+#
+Tempo:=90
+Beats:=4
+Swing := No
+Pattern1 := -e-d-e-d
+
+@1
+
+D/// D/// D/// D///
+
+A/// A/// A/// A///
+
+D/// D/// D/// D///
+
+A/// A/// A/// A///
+
+D/// D/// D/// D///
+
+A/// A/// A/// A///

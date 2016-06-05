@@ -1,0 +1,26 @@
+#
+#		Ukulele Buddy version of "Frere Jacques" video 3 (C Chord)
+#
+Tempo:=60
+Beats:=4
+Swing := No
+Pattern1 := d-d-d-d-
+
+@1
+
+C///
+Frere Jacques
+C///
+Frere Jacques
+C///
+Dormez Vous
+C///
+Dormez Vous
+C///
+Sonnez les Matines
+C///
+Sonnez les Matines
+C///
+Ding dang dong
+C///
+Ding dang dong
