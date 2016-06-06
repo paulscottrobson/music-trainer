@@ -29,6 +29,7 @@
 #constant 	IDTEMP 			106 																	// ID for font measuring
 #constant	IDARROW			107 																	// ID for chord arrow
 #constant 	IDFRAMEFONT 	108 																	// ID for framed font
+#constant 	IDNOTEBUTTON 	109 																	// ID for button for single string pluck
 
 // ****************************************************************************************************************************************************************
 //																   Blocks of IDs
@@ -42,6 +43,7 @@
 
 #constant DEPTHBACKGROUND	99																		// Background position
 #constant PCSTRINGS 		75 																		// Percentage height of render box occupied by strum/pick
+#constant COLOUR_SET		"#00F#0F0#F00#0FF#FF0#F80#888#F0F#800#880#088#A33#8F0#FCD"				// Colours buttons/arrows can use
 
 // ****************************************************************************************************************************************************************
 //																  Setup constants

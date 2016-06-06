@@ -19,5 +19,6 @@ function LoadResources()
 	LoadImage(IDFRET,GFXDIR+"fret.png")
 	LoadImage(IDREDCIRCLE,GFXDIR+"red.png")
 	LoadImage(IDARROW,GFXDIR+"arrow.png")
+	LoadImage(IDNOTEBUTTON,GFXDIR+"notebutton.png")
 endfunction
 

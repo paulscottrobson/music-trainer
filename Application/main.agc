@@ -37,6 +37,9 @@ ChordBucket_Load(cb,s,128,256)
 SBarRender_ProcessSongLyrics(s)
 br as BarRender 
 for i = 1 to s.barCount
+	for j = 1 to s.bars[i].strumCount
+		s.bars[i].strums[j].chordName$ = ""	// this will make it display fingerpicks
+	next j
 	BarRender_New(br,s.bars[i],200,100,40,1000+i*100)
 	//br.alpha# = 0.1
 	BarRender_Move(br,mod(i-1,5)*200+10,(i-1)/5*100+10)

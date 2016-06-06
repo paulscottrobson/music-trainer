@@ -25,6 +25,7 @@ endtype
 global _BarRenderMaxWidth as integer																// Max Width for font size given.
 global _BarRenderMaxHeight as integer																// Max Height for font size given.
 global _BarRenderTestFontSize as integer															// Given font size
+global _BarRender_ChordList$ as string 																// List of known chords
 
 // ****************************************************************************************************************************************************************
 //																		Create Bar Renderer
@@ -169,14 +170,30 @@ endfunction
 
 function _BarRender_CreateChord(rdr ref as BarRender,bar ref as bar,strum ref as Strum,id as integer)
 	CreateSprite(id,IDARROW)
-	SetSpriteSize(id,rdr.width / bar.beats / 2,rdr.height * PCSTRINGS / 100 * strum.volume / 100)
-	if strum.direction > 0 then SetSpriteFlip(id,0,1) else SetSpriteFlip(id,0,0)
-	a$ = strum.chordName$
+	SetSpriteSize(id,rdr.width / bar.beats / 2,rdr.height * PCSTRINGS / 100 * strum.volume / 100)	// Size of arrow
+	if strum.direction > 0 then SetSpriteFlip(id,0,1) else SetSpriteFlip(id,0,0)					// Up or down strum
+	a$ = strum.chordName$																			// Get chord name and case it
 	a$ = Upper(left(a$,1))+Lower(mid(a$,2,99))
-	CreateText(id,a$)
-	SetTextSize(id,GetSpriteWidth(id)/1.4)
-	if len(a$) > 2 then SetTextSize(id,GetSpriteWidth(id)/2.8)
-	SetTextFontImage(id,IDFRAMEFONT)
+	CreateText(id,a$)																				// Create text label
+	SetTextSize(id,GetSpriteWidth(id)/1.4)								
+	if len(a$) > 2 then SetTextSize(id,GetSpriteWidth(id)/2.8)										// So it can display C7sus
+	SetTextSpacing(id,-GetTextSize(id)/6)															// Compress the spacing a bit.
+	SetTextFontImage(id,IDFRAMEFONT)																// Use the white framed font.
+	
+	a$ = Lower(strum.chordName$) 																	// Get name.
+	if FindString(_BarRender_ChordList$,a$+",") = 0 												// If not in the list add it
+		_BarRender_ChordList$ = _BarRender_ChordList$ + a$ + ","									
+	endif
+	for i = 1 to CountStringTokens(_BarRender_ChordList$,",")										// Find it
+		if GetStringToken(_BarRender_ChordList$,",",i) = a$											// If found, i is the base for the colour.
+			col$ = COLOUR_SET																		// List of possible colours
+			p = mod(i-1,len(col$)/4) * 4 + 2														// Work out which to use
+			SetSpriteColorRed(id,Val(mid(col$,p+0,1),16)*15+15)										// And colour the sprite
+			SetSpriteColorGreen(id,Val(mid(col$,p+1,1),16)*15+15)
+			SetSpriteColorBlue(id,Val(mid(col$,p+2,1),16)*15+15)
+
+		endif
+	next i
 endfunction
 
 function _BarRender_MoveChord(rdr ref as BarRender,xPos as integer,yTop as integer,id as integer)
@@ -203,6 +220,7 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function SBarRender_ProcessSongLyrics(song ref as Song)
+	_BarRender_ChordList$ = "" 																		// Clear the bar chord list.
 	CreateText(IDTEMP,"")																			// Create a text to measure
 	_BarRenderMaxWidth = 0
 	_BarRenderMaxHeight = 0
