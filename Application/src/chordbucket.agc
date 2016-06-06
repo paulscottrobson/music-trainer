@@ -2,7 +2,7 @@
 // ****************************************************************************************************************************************************************
 //
 //		File:		chordbucket.agc
-//		Purpose:	Chord Bucket class, object which is all the chords in a song.
+//		Purpose:	Chord Bucket class, object which is all the display objects for a chord in a song.
 //		Date:		5th July 2016
 //		Author:		Paul Robson (paul@robsons.org.uk)
 //

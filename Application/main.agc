@@ -16,6 +16,7 @@
 #include "src/song.agc" 																			// Song manager
 #include "src/chordbucket.agc"																		// Chord bucket object
 #include "src/barrender.agc" 																		// Bar Renderer
+#include "src/rendermanager.agc"																	// Render Manager
 
 InitialiseConstants()																				// Set up constants etc.
 LoadResources()																						// Load in resources
@@ -31,26 +32,18 @@ SetSpriteDepth(IDBACKGROUND,DEPTHBACKGROUND)
 
 s as Song
 cb as ChordBucket
+rm as RenderManager
+
 Song_New(s)
 Song_Load(s,"music/When I'm Cleaning Windows.music")
-ChordBucket_New(cb)
-ChordBucket_Load(cb,s,128,256)
 SBarRender_ProcessSongLyrics(s)
 
-br as BarRender 
-for i = 1 to s.barCount
-	for j = 1 to s.bars[i].strumCount
-		s.bars[i].strums[j].displayChord = 1
-	next j
-	BarRender_New(br,s.bars[i],160,80,40,1000+i*200)
-	//br.alpha# = 0.3
-	BarRender_Move(br,mod(i-1,6)*160+10,(i-1)/6*80+10)
-	//BarRender_Delete(br)
-	//debug = debug + Song_BarToText(s,i)+";"
-next i
+ChordBucket_New(cb)
+ChordBucket_Load(cb,s,128,256)
 
-//BarRender_New(br,s.bars[16],400,200,30,900)
-
+//BarTest(s)
+RenderManager_New(rm, 924,210,70, 280,8)
+RenderManager_Move(rm,50,400)
 SetPrintSize(16)
 while GetRawKeyState(27) = 0   
 	for i = 1 to CountStringTokens(debug,";")
@@ -59,3 +52,18 @@ while GetRawKeyState(27) = 0
     Print(ScreenFPS())
     Sync()
 endwhile
+
+function BarTest(s ref as Song)
+	br as BarRender 
+	for i = 1 to s.barCount
+		for j = 1 to s.bars[i].strumCount
+			s.bars[i].strums[j].displayChord = 1
+		next j
+		BarRender_New(br,s.bars[i],160,120,40,1000+i*200)
+		//br.alpha# = 0.3
+		BarRender_Move(br,mod(i-1,6)*160+10,(i-1)/6*160+10)
+		//BarRender_Delete(br)
+		//debug = debug + Song_BarToText(s,i)+";"
+	next i
+endfunction
+
