@@ -53,7 +53,7 @@ function RenderManager_New(rm ref as RenderManager,width as integer,height as in
 	rm.isInitialised = 1																			// Is initialised.
 	
 	CreateSprite(IDB_RENDERS,IDRECTANGLE)															// Create a sprite which is for debug purposes	
-	SetSpriteSize(IDB_RENDERS,width,height+64)
+	SetSpriteSize(IDB_RENDERS,width,height+4)
 	SetSpriteColorAlpha(IDB_RENDERS,128)
 	SetSpriteDepth(IDB_RENDERS,depth+1)
 	if ctrl.showHelpers = 0 then SetSpriteColorAlpha(IDB_RENDERS,0)
@@ -101,7 +101,7 @@ endfunction
 function RenderManager_Move(rm ref as RenderManager,song ref as Song,x as integer,y as integer)
 	rm.x = x
 	rm.y = y
-	SetSpritePosition(IDB_RENDERS,x,y-32)																// Move the debugging square
+	SetSpritePosition(IDB_RENDERS,x,y-2)															// Move the debugging square
 	pos# = rm.currentPos# 																			// Save where we are
 	rm.currentPos# = 9999999.0 																		// Make sure the moveScroll routine decides on a repaint.
 	RenderManager_MoveScroll(rm,song,pos#)															// Move it back to its current position
@@ -112,9 +112,26 @@ endfunction
 // ****************************************************************************************************************************************************************
 	
 function RenderManager_MoveScroll(rm ref as RenderManager,song ref as Song,barOffset# as float)
-	isMoveable = 0 
-	if isMoveable <> 0 
-		// TODO: If so move them, replacing any on the end as requred.
+	offset# = barOffset# - rm.currentPos# 															// This is how much it shifts by.
+	if offset# = 0 then exitfunction 																// Not moving.
+	if offset# > 0.0 and offset# < 0.5																// Can we scroll it.
+		furthestX = 0 																				// Keep track of furthest X position so we can see if we need a new one.
+		highestBar = -1 																			// Keep track of the highest bar.
+		for i = 1 to rm.renderCount																	// Look at all current renders.			
+			if rm.renders[i].isUsed <> 0 
+				x = _RenderManager_getBarPosition(rm,rm.renders[i].barNumber,barOffset#)			// This is where it should go.
+				if x >= rm.x-rm.rWidth*2 															// If not off to the left so far it should be deleted 
+					BarRender_Move(rm.renders[i].renderer,x,rm.y)									// Move it there
+					if x > furthestX then furthestX = x 											// Track the furthest to the right
+					if rm.renders[i].barNumber > highestBar then highestBar=rm.renders[i].barNumber	// Track the highest bar
+				else
+					RenderManager_Erase(rm,i)														// Remove it
+				endif
+			endif
+		next i
+		if furthestX + rm.rWidth < rm.x + rm.width													// Do we need a new one.
+			_RenderManager_addRendering(rm,song,highestBar+1,barOffset#)							// Then render the bar after the highest one.
+		endif
 	else
 		RenderManager_Clear(rm) 																	// Erase all, we are doing a complete repaint.
 		offset = -1 																				// Start one before the beginning, so we can have scroll out.
@@ -124,7 +141,7 @@ function RenderManager_MoveScroll(rm ref as RenderManager,song ref as Song,barOf
 			inc offset 																				// Advance one.
 			if barOffset# + offset >= song.barCount+1 then complete = 1								// Run out of music
 			if id > 0 																				// If a renderer was grabbed
-				if rm.renders[id].renderer.x >= ctrl.scWidth then complete = 1 						// If it is off the RHS then we are done.
+				if rm.renders[id].renderer.x >= rm.x + rm.width then complete = 1 					// If it is off the RHS then we are done.
 			endif
 		endwhile
 	endif

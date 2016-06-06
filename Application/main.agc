@@ -35,7 +35,7 @@ cb as ChordBucket
 rm as RenderManager
 
 a$ = "music/When I'm Cleaning Windows.music"
-a$ = "music/Dont Worry Be Happy.music"
+//a$ = "music/Dont Worry Be Happy.music"
 Song_New(s)
 Song_Load(s,a$)
 SBarRender_ProcessSongLyrics(s)
@@ -50,17 +50,19 @@ for i = 1 to s.barCount
 next i
 
 //BarTest(s)
-RenderManager_New(rm, 924,300,70, 400,8)
-RenderManager_Move(rm,s,50,400)
+RenderManager_New(rm, 824,350,70, 400,8)
+RenderManager_Move(rm,s,190,400)
 
 SetPrintSize(16)
-pos# = 0.0
+pos# = 1.0
 while GetRawKeyState(27) = 0   
 	for i = 1 to CountStringTokens(debug,";")
 		print(GetStringToken(debug,";",i))
 	next i
+	print(pos#)
 	RenderManager_MoveScroll(rm,s,pos#)
-	pos# = pos# + 0.01
+	pos# = pos# + 0.02
+	if pos# > s.barCount+1 then pos# = s.barCount+1
     Print(ScreenFPS())
     Sync()
 endwhile

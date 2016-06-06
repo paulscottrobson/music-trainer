@@ -65,7 +65,7 @@ function InitialiseConstants()
 	ctrl.scWidth = 1024																				// Physical and Logical Screen Size
 	ctrl.scHeight = 768
 	ctrl.strings = 4 																				// Number of instrument strings.
-	ctrl.showHelpers = 0
+	ctrl.showHelpers = 0																			// When non zero displays debug boxes
 endfunction
 
 // ****************************************************************************************************************************************************************
