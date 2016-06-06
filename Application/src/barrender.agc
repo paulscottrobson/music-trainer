@@ -14,6 +14,7 @@
 // ****************************************************************************************************************************************************************
 
 type BarRender
+	isRendered as integer																			// Non zero 
 	x,y as integer																					// Position of renderer
 	width,height,depth as integer 																	// width and height and depth
 	alpha# as float																					// Alpha setting
@@ -32,6 +33,7 @@ global _BarRender_ChordList$ as string 																// List of known chords
 // ****************************************************************************************************************************************************************
 
 function BarRender_New(rdr ref as BarRender,bar ref as bar,width as integer,height as integer,depth as integer,baseID as integer)
+	rdr.isRendered = 1
 	rdr.baseID = baseID 																			// Set up structure
 	rdr.width = width
 	rdr.height = height
@@ -47,7 +49,7 @@ function BarRender_New(rdr ref as BarRender,bar ref as bar,width as integer,heig
 	endif
 	for i = 1 to bar.strumCount 																	// Look at all the strums
 		rdr.positions[i] = bar.strums[i].time														// Save the position
-		if bar.strums[i].chordName$ <> ""															// Is it a chord
+		if bar.strums[i].displayChord <> 0															// Is it a chord
 			_BarRender_CreateChord(rdr,bar,bar.strums[i],rdr.baseID+i+10)							// S+strum T+strum is are the ids used.
 		else
 			rdr.stringCount = bar.strums[i].frets.length
@@ -71,7 +73,8 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function BarRender_Delete(rdr ref as BarRender)
-	if GetSpriteExists(rdr.baseID) <> 0																// Check not already deleted
+	if rdr.isRendered <> 0																			// Check not already deleted
+		rdr.isRendered = 0
 		DeleteSprite(rdr.baseID)																	// S+0
 		if GetTextExists(rdr.baseID) <> 0 then DeleteText(rdr.baseID)								// T+0 if exists
 		
@@ -94,41 +97,45 @@ function BarRender_Delete(rdr ref as BarRender)
 	endif
 endfunction
 
+
 // ****************************************************************************************************************************************************************
 //																		  Move Bar Renderer
 // ****************************************************************************************************************************************************************
 
 function BarRender_Move(rdr ref as BarRender,x as integer,y as integer)
-	rdr.x = x																						// Save new position
-	rdr.y = y
-	alpha = rdr.alpha# * 255 																		// Calculate actual alpha value
-	SetSpritePosition(rdr.baseID,x,y)																// S+0 background
-	SetSpriteDepth(rdr.baseID,rdr.depth)															// Note we don't change ALPHA here.
+	if rdr.isRendered <> 0																			// If rendered
+		rdr.x = x																					// Save new position
+		rdr.y = y
+		alpha = rdr.alpha# * 255 																	// Calculate actual alpha value
+		SetSpritePosition(rdr.baseID,x,y)															// S+0 background
+		SetSpriteDepth(rdr.baseID,rdr.depth)														// Note we don't change ALPHA here.
 	
-	if GetTextExists(rdr.baseID) <> 0																// Lyric T+0 may have no lyric.
-		SetTextPosition(rdr.baseID,x+rdr.width/2-GetTextTotalWidth(rdr.baseID)/2,y+rdr.height-GetTextTotalHeight(rdr.baseID))
-		SetTextDepth(rdr.baseID,rdr.depth-1)
-		SetTextColorAlpha(rdr.baseID,alpha)
-	endif
-	
-	SetSpritePosition(rdr.baseID+1,x-GetSpriteWidth(rdr.baseID+1)/2,y)								// S+1 fret marker
-	SetSpriteDepth(rdr.baseID+1,rdr.depth-1)
-	SetSpriteColorAlpha(rdr.baseID+1,alpha)
-	
-	for i = 1 to rdr.positions.length 																// Look at all the strums
-		xPos = x + rdr.width * rdr.positions[i] / 1000 												// Calculate x position
-		if GetSpriteExists(rdr.baseID+i+10) <> 0													// Is it a chord (e.g. S+10 exists)
-			_BarRender_MoveChord(rdr,xPos,y,rdr.baseID+i+10)
-		else
-			for s = 1 to rdr.stringCount 															// For each string
-				n = rdr.baseID+i * 20 + s
-				if GetSpriteExists(n) <> 0														// If it was created, delete it.
-					// TODO:Move the sprite/text pair (this is a fingerpick marker)
-				endif
-			next s
+		if GetTextExists(rdr.baseID) <> 0															// Lyric T+0 may have no lyric.
+			SetTextPosition(rdr.baseID,x+rdr.width/2-GetTextTotalWidth(rdr.baseID)/2,y+rdr.height-GetTextTotalHeight(rdr.baseID))
+			SetTextDepth(rdr.baseID,rdr.depth-1)
+			SetTextColorAlpha(rdr.baseID,alpha)
 		endif
-	next i
 	
+		SetSpritePosition(rdr.baseID+1,x-GetSpriteWidth(rdr.baseID+1)/2,y)							// S+1 fret marker
+		SetSpriteDepth(rdr.baseID+1,rdr.depth-1)
+		SetSpriteColorAlpha(rdr.baseID+1,alpha)
+	
+		for i = 1 to rdr.positions.length 															// Look at all the strums
+			xPos = x + rdr.width * rdr.positions[i] / 1000 											// Calculate x position
+			if GetSpriteExists(rdr.baseID+i+10) <> 0												// Is it a chord (e.g. S+10 exists)
+				_BarRender_MoveChord(rdr,xPos,y,rdr.baseID+i+10)
+			else
+				for s = 1 to rdr.stringCount 														// For each string
+					n = rdr.baseID+i * 20 + s
+					if GetSpriteExists(n) <> 0														// If it was created, delete it.
+						if INVERTFRETBOARD <> 0 then p = rdr.stringCount+1-s else p = s
+						yPos = y + rdr.height * PCSTRINGS / 100.0 * (p - 0.5) / rdr.stringCount
+						BarRender_MovePick(rdr,xPos,yPos,n)
+					endif
+				next s
+			endif
+		next i
+	endif
 endfunction
 
 // ****************************************************************************************************************************************************************
@@ -136,8 +143,11 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function BarRender_OffScreen(rdr ref as BarRender)
-	isOff = (GetSpriteX(rdr.baseID) > ctrl.scWidth) or (GetSpriteX(rdr.baseID)+rdr.width < 0)		// Check off RHS and LHS using the bounding box.
-endfunction
+	isOff = 0
+	if rdr.isRendered <> 0
+		isOff = (GetSpriteX(rdr.baseID) > ctrl.scWidth) or (GetSpriteX(rdr.baseID)+rdr.width < 0)	// Check off RHS and LHS using the bounding box.
+	endif
+endfunction isOff
 
 // ****************************************************************************************************************************************************************
 //																	Create the lyric
@@ -191,7 +201,6 @@ function _BarRender_CreateChord(rdr ref as BarRender,bar ref as bar,strum ref as
 			SetSpriteColorRed(id,Val(mid(col$,p+0,1),16)*15+15)										// And colour the sprite
 			SetSpriteColorGreen(id,Val(mid(col$,p+1,1),16)*15+15)
 			SetSpriteColorBlue(id,Val(mid(col$,p+2,1),16)*15+15)
-
 		endif
 	next i
 endfunction
@@ -213,6 +222,26 @@ endfunction
 
 function _BarRender_CreatePick(rdr ref as BarRender,pos as integer,fret as integer,stringNo as integer,stringCount as integer,id as integer)
 	// TODO: Create fingerpick and associated text
+	CreateSprite(id,IDNOTEBUTTON)
+	sz#  = rdr.height * PCSTRINGS / 100.0 / stringCount * 0.94
+	SetSpriteSize(id,sz#,sz#)
+	col$ = COLOUR_SET																		// List of possible colours
+	p = mod(fret-1,len(col$)/4) * 4 + 2														// Work out which to use
+	SetSpriteColorRed(id,Val(mid(col$,p+0,1),16)*15+15)										// And colour the sprite
+	SetSpriteColorGreen(id,Val(mid(col$,p+1,1),16)*15+15)
+	SetSpriteColorBlue(id,Val(mid(col$,p+2,1),16)*15+15)
+	CreateText(id,str(fret))
+	SetTextSize(id,sz#)
+endfunction
+
+function BarRender_MovePick(rdr ref as BarRender,x as integer,y as integer,id as integer)
+	alpha = rdr.alpha# * 255
+	SetSpritePositionByOffset(id,x,y)
+	SetSpriteColorAlpha(id,alpha)
+	SetSpriteDepth(id,rdr.depth-2)
+	SetTextPosition(id,x-GetTextTotalWidth(id)/2,y-GetTextTotalHeight(id)/2)
+	SetTextColorAlpha(id,alpha)
+	SetTextDepth(id,rdr.depth-2)
 endfunction
 
 // ****************************************************************************************************************************************************************

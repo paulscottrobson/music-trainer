@@ -44,6 +44,7 @@
 #constant DEPTHBACKGROUND	99																		// Background position
 #constant PCSTRINGS 		75 																		// Percentage height of render box occupied by strum/pick
 #constant COLOUR_SET		"#00F#0F0#F00#0FF#FF0#F80#888#F0F#800#880#088#A33#8F0#FCD"				// Colours buttons/arrows can use
+#constant INVERTFRETBOARD 	1 																		// If non-zero then the A string is at the top of the fretboard
 
 // ****************************************************************************************************************************************************************
 //																  Setup constants

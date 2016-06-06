@@ -20,6 +20,7 @@ type Strum
 	chordName$ as string 																			// Name of chord in lower case
 	fretDesc$ as string 																			// Fret name in 0232 format, "" if not chordable (e.g. high frets)
 	direction as integer 																			// Strum direction (-1 = up, 1 = down)
+	displayChord as integer 																		// Non zero if should be displayed as chord.
 endtype
 
 type Bar 
@@ -142,11 +143,13 @@ function _Song_ProcessLine(song ref as Song,line$ as String)
 			song.bars[song.barCount].strums[pos].direction = 1
 			song.bars[song.barCount].strums[pos].time = beatPosition
 			song.bars[song.barCount].strums[pos].volume = 100
+			song.bars[song.barCount].strums[pos].displayChord = 0
 		endif
 		if left(line$,1) = "<"																		// Is it a chord annotation.
 			line$ = mid(line$,2,len(line$)-2)														// Remove <>
 			if lower(line$) = "x" then line$ = ""
 			song.bars[song.barCount].strums[pos].chordName$ = Lower(line$)
+			song.bars[song.barCount].strums[pos].displayChord = 1
 		else																						// It must be a strum 
 			if lower(mid(line$,1,1)) = "u" 															// First character is direction. If u
 				song.bars[song.barCount].strums[pos].direction = -1 								// set it to -1
