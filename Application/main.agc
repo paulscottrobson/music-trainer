@@ -34,12 +34,15 @@ Song_New(s)
 Song_Load(s,"music/When I'm Cleaning Windows.music")
 ChordBucket_New(cb)
 ChordBucket_Load(cb,s,128,256)
-BarRender_ProcessSongLyrics(s)
+SBarRender_ProcessSongLyrics(s)
 br as BarRender 
 for i = 1 to s.barCount
-	BarRender_New(br,s.bars[i],190,90,40,1000+i*100)
+	BarRender_New(br,s.bars[i],200,100,40,1000+i*100)
 	BarRender_Move(br,mod(i-1,5)*200+10,(i-1)/5*100+10)
+	//BarRender_Delete(br)
 next i
+
+//BarRender_New(br,s.bars[11],400,200,30,900)
 
 SetPrintSize(16)
 while GetRawKeyState(27) = 0   

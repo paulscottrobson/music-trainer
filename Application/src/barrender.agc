@@ -18,6 +18,8 @@ type BarRender
 	width,height,depth as integer 																	// width and height and depth
 	alpha# as float																					// Alpha setting
 	baseID as integer 																				// Base ID of graphics
+	positions as integer[1]																			// Positions of strums
+	stringCount as integer
 endtype
 
 global _BarRenderMaxWidth as integer																// Max Width for font size given.
@@ -34,14 +36,33 @@ function BarRender_New(rdr ref as BarRender,bar ref as bar,width as integer,heig
 	rdr.height = height
 	rdr.depth = depth
 	rdr.alpha# = 1.0
+	rdr.positions.length = bar.strumCount
+	rdr.stringCount = 0
 	CreateSprite(baseID,IDRECTANGLE)																// S+0 is the background frame for debuggin
 	SetSpriteSize(baseID,width,height)
-	SetSpriteColor(baseID,0,0,64,64)																// Alpha does not affect this object.
+	SetSpriteColor(baseID,Random(40,180),Random(40,180),Random(40,180),80)							// Alpha does not affect this object. Random helps adjacent stand out.
 	if bar.lyric$ <> ""																				// Does the bar lyric exist.
-		_BarRender_CreateLyric(rdr,bar)
+		_BarRender_CreateLyric(rdr,bar)																// The Lyric is T+0
 	endif
-	
-	BarRender_Move(rdr,100,100)
+	for i = 1 to bar.strumCount 																	// Look at all the strums
+		rdr.positions[i] = bar.strums[i].time														// Save the position
+		if bar.strums[i].chordName$ <> ""															// Is it a chord
+			_BarRender_CreateChord(rdr,bar.strums[i],rdr.baseID+i+10)								// S+strum T+strum is are the ids used.
+		else
+			rdr.stringCount = bar.strums[i].frets.length
+			for s = 1 to bar.strums[i].frets.length 												// For each fret
+				fret = bar.strums[i].frets[s]
+				if fret >= 0																		// If there render it using S/T = strum x 20 + string
+					_BarRender_CreatePick(rdr,bar.strums[i].time,fret,s,bar.strums[i].frets.length,rdr.baseID+i * 20 + s)
+				endif
+			next s
+		endif
+	next i
+	CreateSprite(baseID+1,IDFRET)																	// S+1 is the fret
+	scale# = height * PCSTRINGS / 100.0 / GetSpriteHeight(baseID+1)
+	SetSpriteScale(baseID+1,scale#,scale#)
+
+	BarRender_Move(rdr,100,100)																		// Move to an arbitrary position so it is drawn and positioned.
 endfunction
 
 // ****************************************************************************************************************************************************************
@@ -50,8 +71,25 @@ endfunction
 
 function BarRender_Delete(rdr ref as BarRender)
 	if GetSpriteExists(rdr.baseID) <> 0																// Check not already deleted
-		DeleteSprite(rdr.baseID)
-		if GetTextExists(rdr.baseID) <> 0 then DeleteText(rdr.baseID)
+		DeleteSprite(rdr.baseID)																	// S+0
+		if GetTextExists(rdr.baseID) <> 0 then DeleteText(rdr.baseID)								// T+0 if exists
+		
+		DeleteSprite(rdr.baseID+1)																	// S+1
+		
+		for i = 1 to rdr.positions.length 															// Look at all the strums
+			if GetSpriteExists(rdr.baseID+i+10) <> 0												// Is it a chord (e.g. S+10 exists)
+				DeleteSprite(rdr.baseID+i+10)														// Delete S/T + strum
+				DeleteText(rdr.baseID+i+10)		
+			else
+				for s = 1 to rdr.stringCount 														// For each string
+					n = rdr.baseID+i * 20 + s
+					if GetSpriteExists(n) <> 0														// If it was created, delete it.
+						DeleteSprite(n)
+						DeleteText(n)
+					endif
+				next s
+			endif
+		next i
 	endif
 endfunction
 
@@ -62,12 +100,33 @@ endfunction
 function BarRender_Move(rdr ref as BarRender,x as integer,y as integer)
 	rdr.x = x																						// Save new position
 	rdr.y = y
-	SetSpritePosition(rdr.baseID,x,y)																// +0 background
+	alpha = rdr.alpha# * 255 																		// Calculate actual alpha value
+	SetSpritePosition(rdr.baseID,x,y)																// S+0 background
 	SetSpriteDepth(rdr.baseID,rdr.depth)															// Note we don't change ALPHA here.
 	
 	if GetTextExists(rdr.baseID) <> 0																// Lyric T+0 may have no lyric.
 		SetTextPosition(rdr.baseID,x+rdr.width/2-GetTextTotalWidth(rdr.baseID)/2,y+rdr.height-GetTextTotalHeight(rdr.baseID))
+		SetTextDepth(rdr.baseID,rdr.depth-1)
+		SetTextColorAlpha(rdr.baseID,alpha)
 	endif
+	
+	SetSpritePosition(rdr.baseID+1,x,y)																// S+1 fret marker
+	SetSpriteDepth(rdr.baseID+1,rdr.depth-1)
+	SetSpriteColorAlpha(rdr.baseID+1,alpha)
+	
+	for i = 1 to rdr.positions.length 																// Look at all the strums
+		if GetSpriteExists(rdr.baseID+i+10) <> 0													// Is it a chord (e.g. S+10 exists)
+			// TODO:Move the sprite/text pair (this is an arrow)
+		else
+			for s = 1 to rdr.stringCount 															// For each string
+				n = rdr.baseID+i * 20 + s
+				if GetSpriteExists(n) <> 0														// If it was created, delete it.
+					// TODO:Move the sprite/text pair (this is a fingerpick marker)
+				endif
+			next s
+		endif
+	next i
+	
 endfunction
 
 // ****************************************************************************************************************************************************************
@@ -89,14 +148,41 @@ function _BarRender_CreateLyric(rdr ref as BarRender,bar ref as Bar)
 	if sx# > sy# then sx# = sy#																		// sx# is now smappest
 	CreateText(rdr.baseID,bar.lyric$)																// Create text object
 	SetTextSize(rdr.baseID,_BarRenderTestFontSize * sx#)											// Set the text size according to the scale
-	// TODO: % pad it out.
+	
+	lyric$ = bar.lyric$																				// Get lyric
+	if FindString(lyric$,"%") = 0 then lyric$ = ReplaceString(lyric$," ","%",9999)					// If no stretch point given, make them all stretch points
+	if FindString(lyric$,"%") = 0 then lyric$ = lyric$ + "%" 										// If no spaces left justify by default.
+	lyric$ = ReplaceString(lyric$,"%","|",9999)														// Use a bar rather than % as its nearer to the size of a space
+	lastLyric$ = lyric$
+	while GetTextTotalWidth(rdr.baseID) < rdr.width  												// While not overflowed and not word on its own
+		lastLyric$ = lyric$ 																		// Save old lyrics and increase padding
+		lyric$ = ReplaceString(lyric$,"|","| ",9999)
+		SetTextString(rdr.baseID,lyric$)															// Update so we can measure it.
+	endwhile
+	SetTextString(rdr.baseID,ReplaceString(lastLyric$,"|"," ",9999))								// Set text to last before fitting
+endfunction
+
+// ****************************************************************************************************************************************************************
+//																	Create in chord mode (e.g. arrow)
+// ****************************************************************************************************************************************************************
+
+function _BarRender_CreateChord(rdr ref as BarRender,strum ref as Strum,id as integer)
+	// TODO: Create arrow and associated text	
+endfunction
+
+// ****************************************************************************************************************************************************************
+//														Create a single fingerpick on one string
+// ****************************************************************************************************************************************************************
+
+function _BarRender_CreatePick(rdr ref as BarRender,pos as integer,fret as integer,stringNo as integer,stringCount as integer,id as integer)
+	// TODO: Create fingerpick and associated text
 endfunction
 
 // ****************************************************************************************************************************************************************
 //							Static method that measures all the lyrics at a given font size to see how big the biggest is
 // ****************************************************************************************************************************************************************
 
-function BarRender_ProcessSongLyrics(song ref as Song)
+function SBarRender_ProcessSongLyrics(song ref as Song)
 	CreateText(IDTEMP,"")																			// Create a text to measure
 	_BarRenderMaxWidth = 0
 	_BarRenderMaxHeight = 0
@@ -112,3 +198,4 @@ function BarRender_ProcessSongLyrics(song ref as Song)
 	DeleteText(IDTEMP)																				// Throw away the working text
 	//debug = debug + str(_BarRenderMaxWidth)+" x "+str(_BarRenderMaxHeight)
 endfunction
+

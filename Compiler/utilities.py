@@ -81,7 +81,7 @@ class Strum:
 		if self.chord is not None:														# render chord if present
 			render = render + pos + "<"+self.chord.lower()+">\n"
 		if len([x for x in self.frets if x is not None]) > 0:							# if there is any strummed strings
-			render = render + pos + "["
+			render = render + pos + self.direction + "["
 			if self.volume < 100:														# volume setting
 				render = render + "@"+str(self.volume)+","
 			render = render + ",".join(["X" if x is None else str(x) for x in self.frets])
@@ -94,10 +94,12 @@ class Strum:
 
 class UpStrum(Strum):
 	def __init__(self,position,strings,volume,pattern = None):
+		self.direction = 'u'
 		Strum.__init__(self,position,strings,volume,-1,pattern)
 
 class DownStrum(Strum):
 	def __init__(self,position,strings,volume,pattern = None):
+		self.direction = 'd'
 		Strum.__init__(self,position,strings,volume,1,pattern)
 
 ###########################################################################################################################
