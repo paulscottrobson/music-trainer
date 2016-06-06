@@ -38,8 +38,10 @@ SBarRender_ProcessSongLyrics(s)
 br as BarRender 
 for i = 1 to s.barCount
 	BarRender_New(br,s.bars[i],200,100,40,1000+i*100)
+	//br.alpha# = 0.1
 	BarRender_Move(br,mod(i-1,5)*200+10,(i-1)/5*100+10)
 	//BarRender_Delete(br)
+	//debug = debug + Song_BarToText(s,i)+";"
 next i
 
 //BarRender_New(br,s.bars[11],400,200,30,900)

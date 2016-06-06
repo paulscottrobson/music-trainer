@@ -27,6 +27,8 @@
 #constant 	IDREDCIRCLE 	104 																	// ID of red sphere
 #constant 	IDFONT 			105 																	// ID of font
 #constant 	IDTEMP 			106 																	// ID for font measuring
+#constant	IDARROW			107 																	// ID for chord arrow
+#constant 	IDFRAMEFONT 	108 																	// ID for framed font
 
 // ****************************************************************************************************************************************************************
 //																   Blocks of IDs

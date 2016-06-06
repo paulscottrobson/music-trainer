@@ -47,7 +47,7 @@ function BarRender_New(rdr ref as BarRender,bar ref as bar,width as integer,heig
 	for i = 1 to bar.strumCount 																	// Look at all the strums
 		rdr.positions[i] = bar.strums[i].time														// Save the position
 		if bar.strums[i].chordName$ <> ""															// Is it a chord
-			_BarRender_CreateChord(rdr,bar.strums[i],rdr.baseID+i+10)								// S+strum T+strum is are the ids used.
+			_BarRender_CreateChord(rdr,bar,bar.strums[i],rdr.baseID+i+10)							// S+strum T+strum is are the ids used.
 		else
 			rdr.stringCount = bar.strums[i].frets.length
 			for s = 1 to bar.strums[i].frets.length 												// For each fret
@@ -110,13 +110,14 @@ function BarRender_Move(rdr ref as BarRender,x as integer,y as integer)
 		SetTextColorAlpha(rdr.baseID,alpha)
 	endif
 	
-	SetSpritePosition(rdr.baseID+1,x,y)																// S+1 fret marker
+	SetSpritePosition(rdr.baseID+1,x-GetSpriteWidth(rdr.baseID+1)/2,y)								// S+1 fret marker
 	SetSpriteDepth(rdr.baseID+1,rdr.depth-1)
 	SetSpriteColorAlpha(rdr.baseID+1,alpha)
 	
 	for i = 1 to rdr.positions.length 																// Look at all the strums
+		xPos = x + rdr.width * rdr.positions[i] / 1000 												// Calculate x position
 		if GetSpriteExists(rdr.baseID+i+10) <> 0													// Is it a chord (e.g. S+10 exists)
-			// TODO:Move the sprite/text pair (this is an arrow)
+			_BarRender_MoveChord(rdr,xPos,y,rdr.baseID+i+10)
 		else
 			for s = 1 to rdr.stringCount 															// For each string
 				n = rdr.baseID+i * 20 + s
@@ -163,13 +164,32 @@ function _BarRender_CreateLyric(rdr ref as BarRender,bar ref as Bar)
 endfunction
 
 // ****************************************************************************************************************************************************************
-//																	Create in chord mode (e.g. arrow)
+//														Create/Move in chord mode (e.g. arrow)
 // ****************************************************************************************************************************************************************
 
-function _BarRender_CreateChord(rdr ref as BarRender,strum ref as Strum,id as integer)
-	// TODO: Create arrow and associated text	
+function _BarRender_CreateChord(rdr ref as BarRender,bar ref as bar,strum ref as Strum,id as integer)
+	CreateSprite(id,IDARROW)
+	SetSpriteSize(id,rdr.width / bar.beats / 2,rdr.height * PCSTRINGS / 100 * strum.volume / 100)
+	if strum.direction > 0 then SetSpriteFlip(id,0,1) else SetSpriteFlip(id,0,0)
+	a$ = strum.chordName$
+	a$ = Upper(left(a$,1))+Lower(mid(a$,2,99))
+	CreateText(id,a$)
+	SetTextSize(id,GetSpriteWidth(id)/1.4)
+	if len(a$) > 2 then SetTextSize(id,GetSpriteWidth(id)/2.8)
+	SetTextFontImage(id,IDFRAMEFONT)
 endfunction
 
+function _BarRender_MoveChord(rdr ref as BarRender,xPos as integer,yTop as integer,id as integer)
+	alpha = rdr.alpha# * 255
+	yc = yTop+rdr.height * PCSTRINGS / 100 / 2
+	SetSpritePositionByOffset(id,xPos,yc)
+	SetSpriteColorAlpha(id,alpha)
+	SetSpriteDepth(id,rdr.depth-2)
+	SetTextPosition(id,xPos-GetTextTotalWidth(id)/2,yc - GetTextTotalHeight(id)/2)
+	SetTextColorAlpha(id,alpha)
+	SetTextDepth(id,rdr.depth-3)
+endfunction
+	
 // ****************************************************************************************************************************************************************
 //														Create a single fingerpick on one string
 // ****************************************************************************************************************************************************************

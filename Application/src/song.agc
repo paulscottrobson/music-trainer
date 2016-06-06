@@ -148,7 +148,7 @@ function _Song_ProcessLine(song ref as Song,line$ as String)
 			if lower(line$) = "x" then line$ = ""
 			song.bars[song.barCount].strums[pos].chordName$ = Lower(line$)
 		else																						// It must be a strum 
-			if lower(mid(line$,2,1)) = "u" 															// First character is direction. If u
+			if lower(mid(line$,1,1)) = "u" 															// First character is direction. If u
 				song.bars[song.barCount].strums[pos].direction = -1 								// set it to -1
 			endif
 			line$ = mid(line$,3,len(line$)-3)														// Remove dir[]
@@ -176,7 +176,7 @@ endfunction
 //															Convert bar to string for debugging
 // ****************************************************************************************************************************************************************
 
-function _Song_BarToText(song ref as Song,n as integer)
+function Song_BarToText(song ref as Song,n as integer)
 	a$ = ""
 	for i = 1 to song.bars[n].strumCount
 		a$ = a$ + "@"+str(song.bars[n].strums[i].time)+":"+song.bars[n].strums[i].fretDesc$

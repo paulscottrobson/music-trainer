@@ -75,7 +75,7 @@ class StrumCompiler(Compiler):
 			syncopate = 60
 		pos = pos + 1000 / self.beats * syncopate / 100 								# upstroke position
 		pChar = pattern[self.beatPosition * 2+1]										# associated beat
-		vol = 100 if pChar == "d" or pChar == "u" else 50 								# du are loud others quiet.
+		vol = 80 if pChar == "d" or pChar == "u" else 40 								# du are loud others quiet.
 		if pChar != '-':																# strum there ?
 			self.music[self.barPosition].addStrum(UpStrum(pos,self.strings,vol,chordFrets).setChord(chordName))
 

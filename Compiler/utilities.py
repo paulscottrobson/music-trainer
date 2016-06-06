@@ -52,7 +52,7 @@ class Strum:
 	def __init__(self,position,strings,volume = 100,direction = 1,pattern = None):
 		self.beatSubPosition = position 												# position 0-999 in bar.
 		self.chord = None 																# No visual representation of a chord
-		self.volume = volume if direction > 0 else volume / 2							# save percentage volume
+		self.volume = volume 															# save percentage volume
 		self.strings = strings 															# Number of strings
 		self.frets = [ None ] * strings													# Fret positions (all no strum)
 		if pattern is not None:															# Set the strum if appropriate.
