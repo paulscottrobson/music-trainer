@@ -63,7 +63,9 @@ class StrumCompiler(Compiler):
 			lyrics = lyrics[chunkSize:]
 
 	def generateChords(self,chordName):
-		chordFrets = self.getChord(chordName)											# get the Fret pattern		
+		chordFrets = self.getChord(chordName)											# get the Fret pattern				
+		if chordFrets == "x":
+			chordName = None		
 		pattern = self.loader.ctrl("pattern"+str(self.pattern)).lower()					# get the pattern.
 		pos = 1000 * self.beatPosition / self.beats 									# position			
 		pChar = pattern[self.beatPosition * 2]											# associated beat

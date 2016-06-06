@@ -56,6 +56,7 @@ type _Constants
 	scWidth as integer 																				// Screen width
 	scHeight as integer 																			// Screen height
 	strings as integer 																				// Number of strings
+	showHelpers as integer 																			// Show debug helper boxes
 endtype
 
 global ctrl as _Constants 																			// This is the actual holder of semi-constants
@@ -64,6 +65,7 @@ function InitialiseConstants()
 	ctrl.scWidth = 1024																				// Physical and Logical Screen Size
 	ctrl.scHeight = 768
 	ctrl.strings = 4 																				// Number of instrument strings.
+	ctrl.showHelpers = 0
 endfunction
 
 // ****************************************************************************************************************************************************************

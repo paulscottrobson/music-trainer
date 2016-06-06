@@ -34,21 +34,33 @@ s as Song
 cb as ChordBucket
 rm as RenderManager
 
+a$ = "music/When I'm Cleaning Windows.music"
+a$ = "music/Dont Worry Be Happy.music"
 Song_New(s)
-Song_Load(s,"music/When I'm Cleaning Windows.music")
+Song_Load(s,a$)
 SBarRender_ProcessSongLyrics(s)
 
 ChordBucket_New(cb)
 ChordBucket_Load(cb,s,128,256)
 
+for i = 1 to s.barCount
+		for j = 1 to s.bars[i].strumCount
+			s.bars[i].strums[j].displayChord = 1
+		next j
+next i
+
 //BarTest(s)
-RenderManager_New(rm, 924,210,70, 280,8)
-RenderManager_Move(rm,50,400)
+RenderManager_New(rm, 924,300,70, 400,8)
+RenderManager_Move(rm,s,50,400)
+
 SetPrintSize(16)
+pos# = 0.0
 while GetRawKeyState(27) = 0   
 	for i = 1 to CountStringTokens(debug,";")
 		print(GetStringToken(debug,";",i))
 	next i
+	RenderManager_MoveScroll(rm,s,pos#)
+	pos# = pos# + 0.01
     Print(ScreenFPS())
     Sync()
 endwhile
@@ -56,9 +68,6 @@ endwhile
 function BarTest(s ref as Song)
 	br as BarRender 
 	for i = 1 to s.barCount
-		for j = 1 to s.bars[i].strumCount
-			s.bars[i].strums[j].displayChord = 1
-		next j
 		BarRender_New(br,s.bars[i],160,120,40,1000+i*200)
 		//br.alpha# = 0.3
 		BarRender_Move(br,mod(i-1,6)*160+10,(i-1)/6*160+10)
@@ -67,3 +76,5 @@ function BarTest(s ref as Song)
 	next i
 endfunction
 
+//  TODO: Backdrop
+// 	TODO: Bouncy Ball

@@ -44,6 +44,7 @@ function BarRender_New(rdr ref as BarRender,bar ref as bar,width as integer,heig
 	CreateSprite(baseID,IDRECTANGLE)																// S+0 is the background frame for debuggin
 	SetSpriteSize(baseID,width,height)
 	SetSpriteColor(baseID,Random(40,180),Random(40,180),Random(40,180),80)							// Alpha does not affect this object. Random helps adjacent stand out.
+	if ctrl.showHelpers = 0 then SetSpriteColorAlpha(baseID,0)
 	if bar.lyric$ <> ""																				// Does the bar lyric exist.
 		_BarRender_CreateLyric(rdr,bar)																// The Lyric is T+0
 	endif
@@ -139,17 +140,6 @@ function BarRender_Move(rdr ref as BarRender,x as integer,y as integer)
 endfunction
 
 // ****************************************************************************************************************************************************************
-//																Check to see if renderer off screen
-// ****************************************************************************************************************************************************************
-
-function BarRender_OffScreen(rdr ref as BarRender)
-	isOff = 0
-	if rdr.isRendered <> 0
-		isOff = (GetSpriteX(rdr.baseID) > ctrl.scWidth) or (GetSpriteX(rdr.baseID)+rdr.width < 0)	// Check off RHS and LHS using the bounding box.
-	endif
-endfunction isOff
-
-// ****************************************************************************************************************************************************************
 //																	Create the lyric
 // ****************************************************************************************************************************************************************
 
@@ -180,7 +170,8 @@ endfunction
 
 function _BarRender_CreateChord(rdr ref as BarRender,bar ref as bar,strum ref as Strum,id as integer)
 	CreateSprite(id,IDARROW)
-	SetSpriteSize(id,rdr.width / bar.beats / 2,rdr.height * PCSTRINGS / 100 * strum.volume / 100)	// Size of arrow
+	aSize = rdr.height * PCSTRINGS / 100 * strum.volume / 100 * 0.9
+	SetSpriteSize(id,rdr.width / bar.beats / 2,aSize)												// Size of arrow
 	if strum.direction > 0 then SetSpriteFlip(id,0,1) else SetSpriteFlip(id,0,0)					// Up or down strum
 	a$ = strum.chordName$																			// Get chord name and case it
 	a$ = Upper(left(a$,1))+Lower(mid(a$,2,99))
@@ -221,7 +212,6 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function _BarRender_CreatePick(rdr ref as BarRender,pos as integer,fret as integer,stringNo as integer,stringCount as integer,id as integer)
-	// TODO: Create fingerpick and associated text
 	CreateSprite(id,IDNOTEBUTTON)
 	sz#  = rdr.height * PCSTRINGS / 100.0 / stringCount * 0.94
 	SetSpriteSize(id,sz#,sz#)
