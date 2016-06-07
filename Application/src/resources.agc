@@ -21,5 +21,8 @@ function LoadResources()
 	LoadImage(IDARROW,GFXDIR+"arrow.png")
 	LoadImage(IDNOTEBUTTON,GFXDIR+"notebutton.png")
 	LoadImage(IDSINECURVE,GFXDIR+"sinecurve.png")
+	LoadImage(IDFRETBOARD,GFXDIR+"fretboard.png")
+	LoadImage(IDYELLOWCIRCLE,GFXDIR+"yellow.png")
+	LoadImage(IDORANGECIRCLE,GFXDIR+"orange.png")
 endfunction
 

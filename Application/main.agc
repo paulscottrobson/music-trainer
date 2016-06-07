@@ -17,6 +17,7 @@
 #include "src/chordbucket.agc"																		// Chord bucket object
 #include "src/barrender.agc" 																		// Bar Renderer
 #include "src/rendermanager.agc"																	// Render Manager
+#include "src/fretboard.agc" 																		// Fretboard
 
 InitialiseConstants()																				// Set up constants etc.
 LoadResources()																						// Load in resources
@@ -33,15 +34,15 @@ SetSpriteDepth(IDBACKGROUND,DEPTHBACKGROUND)
 s as Song
 cb as ChordBucket
 rm as RenderManager
+fb as FretBoard
 
 a$ = "music/When I'm Cleaning Windows.music"
 //a$ = "music/Dont Worry Be Happy.music"
 Song_New(s)
 Song_Load(s,a$)
 SBarRender_ProcessSongLyrics(s)
-
 ChordBucket_New(cb)
-ChordBucket_Load(cb,s,128,256)
+ChordBucket_Load(cb,s,110,220,95)
 
 for i = 1 to s.barCount
 		for j = 1 to s.bars[i].strumCount
@@ -50,9 +51,14 @@ for i = 1 to s.barCount
 next i
 
 //BarTest(s)
-RenderManager_New(rm, 824,350,60, 70, 400,8)
+RenderManager_New(rm, 824,350, 60,32, 70, 400,8)
+Fretboard_New(fb,350,80,s.strings)
 //rm.alpha# = 0.5
-RenderManager_Move(rm,s,190,400)
+RenderManager_Move(rm,s,190,350)
+Fretboard_Move(fb,350)
+
+ChordBucket_Move(cb,1,100,10)
+ChordBucket_Move(cb,2,230,10)
 
 SetPrintSize(16)
 pos# = 1.0
@@ -70,13 +76,14 @@ while GetRawKeyState(27) = 0
     Sync()
 endwhile
 RenderManager_Delete(rm)
+Fretboard_Delete(fb)
 while GetRawKeyState(27) <> 0
 	Sync()
 endwhile
 function BarTest(s ref as Song)
 	br as BarRender 
 	for i = 1 to s.barCount
-		BarRender_New(br,s.bars[i],160,120,60,40,1000+i*200)
+		BarRender_New(br,s.bars[i],160,120, 60,30, 40,1000+i*200)
 		//br.alpha# = 0.3
 		BarRender_Move(br,mod(i-1,6)*160+10,(i-1)/6*210+210)
 		//BarRender_Delete(br)
@@ -84,7 +91,6 @@ function BarTest(s ref as Song)
 	next i
 endfunction
 
-//  TODO: Backdrop
 //  TODO: Metronome
 // 	TODO: Player
 //  TODO: Position Panel

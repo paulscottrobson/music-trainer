@@ -30,6 +30,7 @@ type RenderManager
 	depth as integer 																				// Renderer depth.
 	rWidth as integer																				// Size of a single renderer.
 	bounceHeight as integer 																		// Bounce height
+	bounceOffset as integer 																		// Bounce offset
 	alpha# as float 																				// Alpha 0->1
 endtype
 
@@ -37,7 +38,7 @@ endtype
 //																Create the object
 // ****************************************************************************************************************************************************************
 
-function RenderManager_New(rm ref as RenderManager,width as integer,height as integer,bounceHeight as integer,depth as integer,rWidth as integer,renderCount as integer)
+function RenderManager_New(rm ref as RenderManager,width as integer,height as integer,bounceHeight as integer,bounceOffset as integer,depth as integer,rWidth as integer,renderCount as integer)
 	rm.x = 0																						// Initialise
 	rm.y = 0
 	rm.width = width
@@ -49,6 +50,7 @@ function RenderManager_New(rm ref as RenderManager,width as integer,height as in
 	rm.renders.length = renderCount 																// Size the rendered object array
 	rm.currentPos# = 999999.0 																		// When moving, this value forces a repaint rather than a move
 	rm.alpha# = 1.0
+	rm.bounceOffset = bounceOffset
 	for i = 1 to renderCount 
 		rm.renders[i].isUsed = 0																	// Mark as not in use
 		rm.renders[i].barNumber = -1																// Security - used as index will cause error
@@ -62,7 +64,7 @@ function RenderManager_New(rm ref as RenderManager,width as integer,height as in
 	SetSpriteDepth(IDB_RENDERS,depth+1)
 	if ctrl.showHelpers = 0 then SetSpriteColorAlpha(IDB_RENDERS,0)
 	if bounceHeight > 0																				// Create the bouncy ball.
-		CreateSprite(IDB_RENDERS+1,IDREDCIRCLE)	
+		CreateSprite(IDB_RENDERS+1,IDORANGECIRCLE)	
 		sz# = height / 10.0 / GetSpriteHeight(IDB_RENDERS+1)	
 		SetSpriteScale(IDB_RENDERS+1,sz#,sz#)														// Make it a sensible size
 	endif
@@ -179,7 +181,7 @@ function _RenderManager_addRendering(rm ref as RenderManager,song ref as Song,ba
 		ASSERT(rID > 0,"Out of renderers")															// This should not happen !
 		rm.renders[rID].isUsed = 1																	// Mark it used
 		rm.renders[rID].barNumber = barID 															// Save the bar number.
-		BarRender_New(rm.renders[rID].renderer,song.bars[barID],rm.rWidth,rm.height,rm.bounceHeight,rm.depth-5,rm.renders[rID].baseID)	
+		BarRender_New(rm.renders[rID].renderer,song.bars[barID],rm.rWidth,rm.height,rm.bounceHeight,rm.bounceOffset,rm.depth-5,rm.renders[rID].baseID)	
 		rm.renders[rID].renderer.alpha# = rm.alpha#													// Update alpha
 		BarRender_Move(rm.renders[rID].renderer,x,rm.y)												// Put it in the correct place
 	endif
@@ -218,7 +220,7 @@ function _RenderManager_moveBall(rm ref as RenderManager,bar ref as Bar,position
 	y = rm.y - sin(angle#) * rm.bounceHeight
 
 	
-	SetSpritePosition(IDB_RENDERS+1,rm.x-GetSpriteWidth(IDB_RENDERS+1)/2,y - GetSpriteHeight(IDB_RENDERS+1))
+	SetSpritePosition(IDB_RENDERS+1,rm.x-GetSpriteWidth(IDB_RENDERS+1)/2,y - GetSpriteHeight(IDB_RENDERS+1)-rm.bounceOffset)
 	SetSpriteDepth(IDB_RENDERS+1,rm.depth-7)
 	SetSpriteColorAlpha(IDB_RENDERS+1,rm.alpha# * 255)
 endfunction

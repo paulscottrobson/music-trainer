@@ -20,6 +20,7 @@ type BarRender
 	alpha# as float																					// Alpha setting
 	baseID as integer 																				// Base ID of graphics
 	bounceHeight as integer 																		// Height of ball bounce
+	bounceOffset as integer 																		// Height above fretboard
 	positions as integer[1]																			// Positions of strums
 	stringCount as integer
 endtype
@@ -33,7 +34,7 @@ global _BarRender_ChordList$ as string 																// List of known chords
 //																		Create Bar Renderer
 // ****************************************************************************************************************************************************************
 
-function BarRender_New(rdr ref as BarRender,bar ref as bar,width as integer,height as integer,bounceHeight as integer,depth as integer,baseID as integer)
+function BarRender_New(rdr ref as BarRender,bar ref as bar,width as integer,height as integer,bounceHeight as integer,bounceOffset as integer,depth as integer,baseID as integer)
 	rdr.isRendered = 1
 	rdr.baseID = baseID 																			// Set up structure
 	rdr.width = width
@@ -44,6 +45,7 @@ function BarRender_New(rdr ref as BarRender,bar ref as bar,width as integer,heig
 	rdr.positions[0] = 0 																			// This is used in the curve
 	rdr.stringCount = 0
 	rdr.bounceHeight = bounceHeight
+	rdr.bounceOffset = bounceOffset
 	CreateSprite(baseID,IDRECTANGLE)																// S+0 is the background frame for debuggin
 	SetSpriteSize(baseID,width,height)
 	SetSpriteColor(baseID,Random(40,180),Random(40,180),Random(40,180),80)							// Alpha does not affect this object. Random helps adjacent stand out.
@@ -162,7 +164,7 @@ function BarRender_Move(rdr ref as BarRender,x as integer,y as integer)
 		
 		for i = 0 to rdr.positions.length 
 			if GetSpriteExists(rdr.baseID+i+40) <> 0 
-				SetSpritePosition(rdr.baseID+i+40,x + rdr.width * rdr.positions[i] / 1000,y-GetSpriteHeight(rdr.baseID+40))
+				SetSpritePosition(rdr.baseID+i+40,x + rdr.width * rdr.positions[i] / 1000,y-GetSpriteHeight(rdr.baseID+40)-rdr.bounceOffset)
 				SetSpriteColorAlpha(rdr.baseID+i+40,alpha)
 				SetSpriteDepth(rdr.baseID+i+40,rdr.depth-1)
 			endif
@@ -218,11 +220,7 @@ function _BarRender_CreateChord(rdr ref as BarRender,bar ref as bar,strum ref as
 	endif
 	for i = 1 to CountStringTokens(_BarRender_ChordList$,",")										// Find it
 		if GetStringToken(_BarRender_ChordList$,",",i) = a$											// If found, i is the base for the colour.
-			col$ = COLOUR_SET																		// List of possible colours
-			p = mod(i-1,len(col$)/4) * 4 + 2														// Work out which to use
-			SetSpriteColorRed(id,Val(mid(col$,p+0,1),16)*15+15)										// And colour the sprite
-			SetSpriteColorGreen(id,Val(mid(col$,p+1,1),16)*15+15)
-			SetSpriteColorBlue(id,Val(mid(col$,p+2,1),16)*15+15)
+			_BarRender_ColourSprite(rdr,id,i-1)
 		endif
 	next i
 endfunction
@@ -244,13 +242,9 @@ endfunction
 
 function _BarRender_CreatePick(rdr ref as BarRender,pos as integer,fret as integer,stringNo as integer,stringCount as integer,id as integer)
 	CreateSprite(id,IDNOTEBUTTON)
-	sz#  = rdr.height * PCSTRINGS / 100.0 / stringCount * 0.94
+	sz#  = rdr.height * PCSTRINGS / 100.0 / stringCount * 0.9
 	SetSpriteSize(id,sz#,sz#)
-	col$ = COLOUR_SET																		// List of possible colours
-	p = mod(fret-1,len(col$)/4) * 4 + 2														// Work out which to use
-	SetSpriteColorRed(id,Val(mid(col$,p+0,1),16)*15+15)										// And colour the sprite
-	SetSpriteColorGreen(id,Val(mid(col$,p+1,1),16)*15+15)
-	SetSpriteColorBlue(id,Val(mid(col$,p+2,1),16)*15+15)
+	_BarRender_ColourSprite(rdr,id,fret)
 	CreateText(id,str(fret))
 	SetTextSize(id,sz#)
 endfunction
@@ -263,6 +257,18 @@ function BarRender_MovePick(rdr ref as BarRender,x as integer,y as integer,id as
 	SetTextPosition(id,x-GetTextTotalWidth(id)/2,y-GetTextTotalHeight(id)/2)
 	SetTextColorAlpha(id,alpha)
 	SetTextDepth(id,rdr.depth-2)
+endfunction
+
+// ****************************************************************************************************************************************************************
+//													Colour a sprite from the set of colours
+// ****************************************************************************************************************************************************************
+
+function _BarRender_ColourSprite(rdr ref as BarRender,id as integer,colour as integer)
+	col$ = COLOUR_SET																		// List of possible colours
+	p = mod(colour,len(col$)/4) * 4 + 2														// Work out which to use
+	SetSpriteColorRed(id,Val(mid(col$,p+0,1),16)*15+15)										// And colour the sprite
+	SetSpriteColorGreen(id,Val(mid(col$,p+1,1),16)*15+15)
+	SetSpriteColorBlue(id,Val(mid(col$,p+2,1),16)*15+15)
 endfunction
 
 // ****************************************************************************************************************************************************************

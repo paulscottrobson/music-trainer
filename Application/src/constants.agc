@@ -31,13 +31,17 @@
 #constant 	IDFRAMEFONT 	108 																	// ID for framed font
 #constant 	IDNOTEBUTTON 	109 																	// ID for button for single string pluck
 #constant 	IDSINECURVE 	110 																	// ID for sine curve.
+#constant 	IDFRETBOARD 	111 																	// ID for fretboard
+#constant 	IDYELLOWCIRCLE 	112 																	// ID of yellow sphere
+#constant 	IDORANGECIRCLE	113 																	// ID of orange sphere
 
 // ****************************************************************************************************************************************************************
 //																   Blocks of IDs
 // ****************************************************************************************************************************************************************
 
+#constant 	IDB_FRETBOARD 	900																		// 900+ Fretboards
+#constant 	IDB_RENDERS 	1000																	// 1000+ ID renders
 #constant 	IDB_CHORDBUCKET	28000 																	// 28000-31000 spaces for 60 chords 
-#constant 	IDB_RENDERS 	1000																	// 1000 ID renders
 #constant 	IDB_PERRENDER 	500 																	// each renderer needs 500 space of IDs
 
 // ****************************************************************************************************************************************************************

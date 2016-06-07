@@ -59,7 +59,7 @@ endfunction
 //																Load Song into ChordBucket
 // ****************************************************************************************************************************************************************
 
-function ChordBucket_Load(cb ref as ChordBucket,song ref as song,width as integer,height as integer)
+function ChordBucket_Load(cb ref as ChordBucket,song ref as song,width as integer,height as integer,depth as integer)
 	ChordBucket_Clear(cb)																			// Clear chord array.
 	for bar = 1 to song.barCount																	// Work through bars and strums
 		for strum = 1 to song.bars[bar].strumCount
@@ -77,7 +77,7 @@ function ChordBucket_Load(cb ref as ChordBucket,song ref as song,width as intege
 	cb.display.length = cb.chordCount 																// Set display object size and create them.
 	for c = 1 to cb.chordCount
 		//debug = debug + cb.chords[c].name$+" "+cb.chords[c].fret$+";"
-		ChordDisplay_New(cb.display[c],cb.chords[c].name$,cb.chords[c].fret$,IDB_CHORDBUCKET+c*50,width,height)
+		ChordDisplay_New(cb.display[c],cb.chords[c].name$,cb.chords[c].fret$,IDB_CHORDBUCKET+c*50,width,height,depth)
 		ChordDisplay_Move(cb.display[c],-1000,-1000)												// Move it off screen
 	next c
 endfunction

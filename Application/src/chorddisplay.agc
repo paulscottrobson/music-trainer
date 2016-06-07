@@ -29,10 +29,10 @@ endtype
 //														Create new Chord Display Object
 // ****************************************************************************************************************************************************************
 
-function ChordDisplay_New(cd ref as ChordDisplay,name$ as String,fretting$ as String,baseID as integer,width as integer,height as integer)
+function ChordDisplay_New(cd ref as ChordDisplay,name$ as String,fretting$ as String,baseID as integer,width as integer,height as integer,depth as integer)
 	ASSERT(GetSpriteExists(baseID) = 0,"CD1")
 	cd.baseID = baseID																				// Save parameters, initialise others
-	cd.depth = 90
+	cd.depth = depth
 	cd.alpha# = 1.0
 	cd.height = height
 	cd.width = width
