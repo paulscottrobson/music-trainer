@@ -9,7 +9,6 @@
 // ****************************************************************************************************************************************************************
 // ****************************************************************************************************************************************************************
 
-#include "src/types.agc"																			// Type structures
 #include "src/constants.agc"																		// Constant items
 #include "src/resources.agc"																		// Resource loader									
 #include "src/chorddisplay.agc"																		// Chord Display Object
@@ -19,6 +18,7 @@
 #include "src/rendermanager.agc"																	// Render Manager
 #include "src/fretboard.agc" 																		// Fretboard
 #include "src/metronome.agc" 																		// Metronome
+#include "src/player.agc" 																			// Sound player object
 
 InitialiseConstants()																				// Set up constants etc.
 LoadResources()																						// Load in resources
@@ -37,6 +37,7 @@ cb as ChordBucket
 rm as RenderManager
 fb as FretBoard
 mt as Metronome
+pl as Player
 
 a$ = "music/When I'm Cleaning Windows.music"
 //a$ = "music/Dont Worry Be Happy.music"
@@ -45,10 +46,11 @@ Song_Load(s,a$)
 SBarRender_ProcessSongLyrics(s)
 ChordBucket_New(cb)
 ChordBucket_Load(cb,s,110,220,95)
+Player_New(pl,"20,13,17,22",10,0)
 
 for i = 1 to s.barCount
 		for j = 1 to s.bars[i].strumCount
-			s.bars[i].strums[j].displayChord = 1
+			s.bars[i].strums[j].displayChord = 0
 		next j
 next i
 
@@ -72,6 +74,7 @@ while GetRawKeyState(27) = 0
 	next i
 	print(pos#)
 	RenderManager_MoveScroll(rm,s,pos#)
+	Player_Update(pl,s,pos#)
 	Metronome_Update(mt,pos#,s.beats)
 	pos# = pos# + 0.01
 	if GetRawKeyPressed(32) <> 0 then pos# = pos# - 4
@@ -80,6 +83,7 @@ while GetRawKeyState(27) = 0
     Print(ScreenFPS())
     Sync()
 endwhile
+
 RenderManager_Delete(rm)
 Fretboard_Delete(fb)
 Metronome_Delete(mt)
@@ -88,16 +92,6 @@ ChordBucket_Delete(cb)
 while GetRawKeyState(27) <> 0
 	Sync()
 endwhile
-function BarTest(s ref as Song)
-	br as BarRender 
-	for i = 1 to s.barCount
-		BarRender_New(br,s.bars[i],160,120, 60,30, 40,1000+i*200)
-		//br.alpha# = 0.3
-		BarRender_Move(br,mod(i-1,6)*160+10,(i-1)/6*210+210)
-		//BarRender_Delete(br)
-		//debug = debug + Song_BarToText(s,i)+";"
-	next i
-endfunction
 
 // 	TODO: Player
 //  TODO: Position Panel
