@@ -18,6 +18,7 @@
 #include "src/barrender.agc" 																		// Bar Renderer
 #include "src/rendermanager.agc"																	// Render Manager
 #include "src/fretboard.agc" 																		// Fretboard
+#include "src/metronome.agc" 																		// Metronome
 
 InitialiseConstants()																				// Set up constants etc.
 LoadResources()																						// Load in resources
@@ -35,6 +36,7 @@ s as Song
 cb as ChordBucket
 rm as RenderManager
 fb as FretBoard
+mt as Metronome
 
 a$ = "music/When I'm Cleaning Windows.music"
 //a$ = "music/Dont Worry Be Happy.music"
@@ -56,6 +58,8 @@ Fretboard_New(fb,350,80,s.strings)
 //rm.alpha# = 0.5
 RenderManager_Move(rm,s,190,350)
 Fretboard_Move(fb,350)
+Metronome_New(mt,160,60,IDB_METRONOME)
+Metronome_Move(mt,900,160)
 
 ChordBucket_Move(cb,1,100,10)
 ChordBucket_Move(cb,2,230,10)
@@ -68,6 +72,7 @@ while GetRawKeyState(27) = 0
 	next i
 	print(pos#)
 	RenderManager_MoveScroll(rm,s,pos#)
+	Metronome_Update(mt,pos#,s.beats)
 	pos# = pos# + 0.01
 	if GetRawKeyPressed(32) <> 0 then pos# = pos# - 4
 	if pos# < 1.0 then pos# = 1.0
@@ -77,6 +82,9 @@ while GetRawKeyState(27) = 0
 endwhile
 RenderManager_Delete(rm)
 Fretboard_Delete(fb)
+Metronome_Delete(mt)
+ChordBucket_Delete(cb)
+
 while GetRawKeyState(27) <> 0
 	Sync()
 endwhile
@@ -91,7 +99,6 @@ function BarTest(s ref as Song)
 	next i
 endfunction
 
-//  TODO: Metronome
 // 	TODO: Player
 //  TODO: Position Panel
 // 	TODO: Control Panel
