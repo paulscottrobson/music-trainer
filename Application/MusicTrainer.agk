@@ -13,17 +13,17 @@ FILE_9=src%2Fmetronome.agc;-1
 FILE_10=src%2Fplayer.agc;-1
 
 [files]
-FILE_NAME_0=0;main.agc;2461;0
-FILE_NAME_1=1;src%2Fconstants.agc;3489;1
+FILE_NAME_0=1;main.agc;3434;0
+FILE_NAME_1=0;src%2Fconstants.agc;3489;1
 FILE_NAME_2=0;src%2Fresources.agc;1593;2
 FILE_NAME_3=0;src%2Fchorddisplay.agc;2436;3
-FILE_NAME_4=0;src%2Fsong.agc;0;5
-FILE_NAME_5=0;src%2Fchordbucket.agc;6146;6
-FILE_NAME_6=0;src%2Fbarrender.agc;8781;7
-FILE_NAME_7=0;src%2Frendermanager.agc;3055;8
-FILE_NAME_8=0;src%2Ffretboard.agc;1497;9
-FILE_NAME_9=0;src%2Fmetronome.agc;52;10
-FILE_NAME_10=0;src%2Fplayer.agc;3985;11
+FILE_NAME_4=0;src%2Fsong.agc;0;4
+FILE_NAME_5=0;src%2Fchordbucket.agc;6146;5
+FILE_NAME_6=0;src%2Fbarrender.agc;8781;6
+FILE_NAME_7=0;src%2Frendermanager.agc;3055;7
+FILE_NAME_8=0;src%2Ffretboard.agc;1497;8
+FILE_NAME_9=0;src%2Fmetronome.agc;52;9
+FILE_NAME_10=0;src%2Fplayer.agc;4367;10
 
 [project]
 description=

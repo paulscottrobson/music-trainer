@@ -50,7 +50,7 @@ Player_New(pl,"20,13,17,22",10,0)
 
 for i = 1 to s.barCount
 		for j = 1 to s.bars[i].strumCount
-			s.bars[i].strums[j].displayChord = 0
+			s.bars[i].strums[j].displayChord = 1
 		next j
 next i
 
@@ -93,7 +93,7 @@ while GetRawKeyState(27) <> 0
 	Sync()
 endwhile
 
-// 	TODO: Player
+//  TODO: Chord helper.
 //  TODO: Position Panel
 // 	TODO: Control Panel
 
