@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg1878"
+   inkscape:export-ydpi="50.003246"
+   inkscape:export-filename="C:\Strumplay\Graphics\arrow.png"
+   viewBox="0 0 27.777 36.514"
+   sodipodi:version="0.32"
+   inkscape:export-xdpi="50.003246"
+   version="1.0"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="sinecurve.svg"
+   width="100%"
+   height="100%">
+  <defs
+     id="defs3">
+    <linearGradient
+       id="linearGradient7614"
+       y2="541.27002"
+       gradientUnits="userSpaceOnUse"
+       x2="-171.94"
+       gradientTransform="matrix(0,-15.022431,4.2414192,0,-1932.1265,-2458.8867)"
+       y1="558.79999"
+       x1="-155.74001">
+      <stop
+         id="stop11464"
+         style="stop-color:#808080;stop-opacity:1;"
+         offset="0" />
+      <stop
+         id="stop11466"
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient7614-1"
+       y2="541.27002"
+       gradientUnits="userSpaceOnUse"
+       x2="-171.94"
+       gradientTransform="matrix(0,-15.022431,4.2414192,0,-1932.1265,-2458.8867)"
+       y1="558.79999"
+       x1="-155.74001">
+      <stop
+         id="stop11464-7"
+         style="stop-color:#808080;stop-opacity:1;"
+         offset="0" />
+      <stop
+         id="stop11466-4"
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       y2="541.27002"
+       x2="-171.94"
+       y1="558.79999"
+       x1="-155.74001"
+       gradientTransform="matrix(0,-15.022431,4.2414192,0,-2278.215,-2306.683)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3002"
+       xlink:href="#linearGradient7614-1"
+       inkscape:collect="always" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     bordercolor="#666666"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     pagecolor="#ffffff"
+     width="283.23425px"
+     inkscape:zoom="12.395604"
+     inkscape:pageshadow="2"
+     borderopacity="1.0"
+     inkscape:current-layer="layer1"
+     inkscape:cx="-14.576024"
+     inkscape:cy="23.105275"
+     inkscape:window-width="1920"
+     height="200px"
+     inkscape:pageopacity="0.0"
+     inkscape:window-height="1017"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:window-maximized="1"
+     inkscape:snap-global="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2993" />
+  </sodipodi:namedview>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     transform="translate(-347.89 -131.64)">
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3006"
+       sodipodi:cx="4.5"
+       sodipodi:cy="3.0139999"
+       sodipodi:rx="0.5"
+       sodipodi:ry="0.5"
+       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
+       transform="matrix(2.0000056,0,0,2.0000056,344.09926,151.11)"
+       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
+       inkscape:export-xdpi="499.75058"
+       inkscape:export-ydpi="499.75058" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3006-1"
+       sodipodi:cx="4.5"
+       sodipodi:cy="3.0139999"
+       sodipodi:rx="0.5"
+       sodipodi:ry="0.5"
+       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
+       transform="matrix(2.0000056,0,0,2.0000056,345.52783,145.11)"
+       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
+       inkscape:export-xdpi="499.75058"
+       inkscape:export-ydpi="499.75058" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3006-1-7"
+       sodipodi:cx="4.5"
+       sodipodi:cy="3.0139999"
+       sodipodi:rx="0.5"
+       sodipodi:ry="0.5"
+       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
+       transform="matrix(2.0000056,0,0,2.0000056,354.96988,123.75536)"
+       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
+       inkscape:export-xdpi="499.75058"
+       inkscape:export-ydpi="499.75058" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3006-1-7-4"
+       sodipodi:cx="4.5"
+       sodipodi:cy="3.0139999"
+       sodipodi:rx="0.5"
+       sodipodi:ry="0.5"
+       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
+       transform="matrix(2.0000056,0,0,2.0000056,352.67069,124.3033)"
+       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
+       inkscape:export-xdpi="499.75058"
+       inkscape:export-ydpi="499.75058" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3006-1-7-4-0"
+       sodipodi:cx="4.5"
+       sodipodi:cy="3.0139999"
+       sodipodi:rx="0.5"
+       sodipodi:ry="0.5"
+       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
+       transform="matrix(2.0000056,0,0,2.0000056,349.81355,130.54531)"
+       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
+       inkscape:export-xdpi="499.75058"
+       inkscape:export-ydpi="499.75058" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3006-1-7-4-0-9"
+       sodipodi:cx="4.5"
+       sodipodi:cy="3.0139999"
+       sodipodi:rx="0.5"
+       sodipodi:ry="0.5"
+       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
+       transform="matrix(2.0000056,0,0,2.0000056,348.38497,134.86799)"
+       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
+       inkscape:export-xdpi="499.75058"
+       inkscape:export-ydpi="499.75058" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3006-1-7-4-0-4"
+       sodipodi:cx="4.5"
+       sodipodi:cy="3.0139999"
+       sodipodi:rx="0.5"
+       sodipodi:ry="0.5"
+       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
+       transform="matrix(2.0000056,0,0,2.0000056,351.24212,126.94866)"
+       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
+       inkscape:export-xdpi="499.75058"
+       inkscape:export-ydpi="499.75058" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3006-1-7-4-0-4-8"
+       sodipodi:cx="4.5"
+       sodipodi:cy="3.0139999"
+       sodipodi:rx="0.5"
+       sodipodi:ry="0.5"
+       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
+       transform="matrix(2.0000056,0,0,2.0000056,346.9564,139.43268)"
+       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
+       inkscape:export-xdpi="499.75058"
+       inkscape:export-ydpi="499.75058" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3006-2"
+       sodipodi:cx="4.5"
+       sodipodi:cy="3.0139999"
+       sodipodi:rx="0.5"
+       sodipodi:ry="0.5"
+       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
+       transform="matrix(-2.0000056,0,0,2.0000056,383.664,151.07809)"
+       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
+       inkscape:export-xdpi="499.75058"
+       inkscape:export-ydpi="499.75058" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3006-1-4"
+       sodipodi:cx="4.5"
+       sodipodi:cy="3.0139999"
+       sodipodi:rx="0.5"
+       sodipodi:ry="0.5"
+       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
+       transform="matrix(-2.0000056,0,0,2.0000056,382.23543,145.07809)"
+       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
+       inkscape:export-xdpi="499.75058"
+       inkscape:export-ydpi="499.75058" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3006-1-7-4-5"
+       sodipodi:cx="4.5"
+       sodipodi:cy="3.0139999"
+       sodipodi:rx="0.5"
+       sodipodi:ry="0.5"
+       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
+       transform="matrix(-2.0000056,0,0,2.0000056,375.09257,124.27139)"
+       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
+       inkscape:export-xdpi="499.75058"
+       inkscape:export-ydpi="499.75058" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3006-1-7-4-0-1"
+       sodipodi:cx="4.5"
+       sodipodi:cy="3.0139999"
+       sodipodi:rx="0.5"
+       sodipodi:ry="0.5"
+       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
+       transform="matrix(-2.0000056,0,0,2.0000056,377.94971,130.5134)"
+       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
+       inkscape:export-xdpi="499.75058"
+       inkscape:export-ydpi="499.75058" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3006-1-7-4-0-9-7"
+       sodipodi:cx="4.5"
+       sodipodi:cy="3.0139999"
+       sodipodi:rx="0.5"
+       sodipodi:ry="0.5"
+       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
+       transform="matrix(-2.0000056,0,0,2.0000056,379.37829,134.83608)"
+       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
+       inkscape:export-xdpi="499.75058"
+       inkscape:export-ydpi="499.75058" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3006-1-7-4-0-4-1"
+       sodipodi:cx="4.5"
+       sodipodi:cy="3.0139999"
+       sodipodi:rx="0.5"
+       sodipodi:ry="0.5"
+       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
+       transform="matrix(-2.0000056,0,0,2.0000056,376.52114,126.91675)"
+       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
+       inkscape:export-xdpi="499.75058"
+       inkscape:export-ydpi="499.75058" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3006-1-7-4-0-4-8-1"
+       sodipodi:cx="4.5"
+       sodipodi:cy="3.0139999"
+       sodipodi:rx="0.5"
+       sodipodi:ry="0.5"
+       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
+       transform="matrix(-2.0000056,0,0,2.0000056,380.80686,139.40077)"
+       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
+       inkscape:export-xdpi="499.75058"
+       inkscape:export-ydpi="499.75058" />
+  </g>
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title></dc:title>
+        <dc:date>2008-01-29T13:03:25</dc:date>
+        <dc:description>Kuba's green arrows set, put into separate files.</dc:description>
+        <dc:source>https://openclipart.org/detail/12139/green-arrows-set-by-pitr-12139</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>pitr</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>arrow</rdf:li>
+            <rdf:li>collection</rdf:li>
+            <rdf:li>glossy</rdf:li>
+            <rdf:li>green</rdf:li>
+            <rdf:li>icon</rdf:li>
+            <rdf:li>remix</rdf:li>
+            <rdf:li>set</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

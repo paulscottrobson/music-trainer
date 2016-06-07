@@ -19,6 +19,7 @@ type BarRender
 	width,height,depth as integer 																	// width and height and depth
 	alpha# as float																					// Alpha setting
 	baseID as integer 																				// Base ID of graphics
+	bounceHeight as integer 																		// Height of ball bounce
 	positions as integer[1]																			// Positions of strums
 	stringCount as integer
 endtype
@@ -32,7 +33,7 @@ global _BarRender_ChordList$ as string 																// List of known chords
 //																		Create Bar Renderer
 // ****************************************************************************************************************************************************************
 
-function BarRender_New(rdr ref as BarRender,bar ref as bar,width as integer,height as integer,depth as integer,baseID as integer)
+function BarRender_New(rdr ref as BarRender,bar ref as bar,width as integer,height as integer,bounceHeight as integer,depth as integer,baseID as integer)
 	rdr.isRendered = 1
 	rdr.baseID = baseID 																			// Set up structure
 	rdr.width = width
@@ -40,31 +41,48 @@ function BarRender_New(rdr ref as BarRender,bar ref as bar,width as integer,heig
 	rdr.depth = depth
 	rdr.alpha# = 1.0
 	rdr.positions.length = bar.strumCount
+	rdr.positions[0] = 0 																			// This is used in the curve
 	rdr.stringCount = 0
+	rdr.bounceHeight = bounceHeight
 	CreateSprite(baseID,IDRECTANGLE)																// S+0 is the background frame for debuggin
 	SetSpriteSize(baseID,width,height)
 	SetSpriteColor(baseID,Random(40,180),Random(40,180),Random(40,180),80)							// Alpha does not affect this object. Random helps adjacent stand out.
 	if ctrl.showHelpers = 0 then SetSpriteColorAlpha(baseID,0)
+
 	if bar.lyric$ <> ""																				// Does the bar lyric exist.
 		_BarRender_CreateLyric(rdr,bar)																// The Lyric is T+0
 	endif
+
 	for i = 1 to bar.strumCount 																	// Look at all the strums
 		rdr.positions[i] = bar.strums[i].time														// Save the position
 		if bar.strums[i].displayChord <> 0															// Is it a chord
-			_BarRender_CreateChord(rdr,bar,bar.strums[i],rdr.baseID+i+10)							// S+strum T+strum is are the ids used.
+			_BarRender_CreateChord(rdr,bar,bar.strums[i],rdr.baseID+i+110)							// S+strum T+strum is are the ids used.
 		else
 			rdr.stringCount = bar.strums[i].frets.length
 			for s = 1 to bar.strums[i].frets.length 												// For each fret
 				fret = bar.strums[i].frets[s]
 				if fret >= 0																		// If there render it using S/T = strum x 20 + string
-					_BarRender_CreatePick(rdr,bar.strums[i].time,fret,s,bar.strums[i].frets.length,rdr.baseID+i * 20 + s)
+					_BarRender_CreatePick(rdr,bar.strums[i].time,fret,s,bar.strums[i].frets.length,rdr.baseID+i * 20 + s+100)
 				endif
 			next s
 		endif
 	next i
+	
+	if rdr.bounceHeight > 0																			// Create curves on top, if required
+		for i = 0 to bar.strumCount 
+			current = rdr.positions[i] 																// When the curve starts
+			if i = bar.strumCount then nextS = 1000 else nextS = rdr.positions[i+1] 				// When the curve for this strum ends
+			if nextS - current < 350
+				CreateSprite(baseID+40+i,IDSINECURVE)													// Sine curve.
+				SetSpriteSize(baseID+40+i,(nextS - current) * rdr.width / 1000,rdr.bounceHeight)
+			endif
+		next i
+	endif
+	
 	CreateSprite(baseID+1,IDFRET)																	// S+1 is the fret
 	scale# = height * PCSTRINGS / 100.0 / GetSpriteHeight(baseID+1)
 	SetSpriteScale(baseID+1,scale#,scale#)
+
 
 	BarRender_Move(rdr,100,100)																		// Move to an arbitrary position so it is drawn and positioned.
 endfunction
@@ -82,12 +100,12 @@ function BarRender_Delete(rdr ref as BarRender)
 		DeleteSprite(rdr.baseID+1)																	// S+1
 		
 		for i = 1 to rdr.positions.length 															// Look at all the strums
-			if GetSpriteExists(rdr.baseID+i+10) <> 0												// Is it a chord (e.g. S+10 exists)
-				DeleteSprite(rdr.baseID+i+10)														// Delete S/T + strum
-				DeleteText(rdr.baseID+i+10)		
+			if GetSpriteExists(rdr.baseID+i+110) <> 0												// Is it a chord (e.g. S+10 exists)
+				DeleteSprite(rdr.baseID+i+110)														// Delete S/T + strum
+				DeleteText(rdr.baseID+i+110)		
 			else
 				for s = 1 to rdr.stringCount 														// For each string
-					n = rdr.baseID+i * 20 + s
+					n = rdr.baseID+i * 20 + s + 100
 					if GetSpriteExists(n) <> 0														// If it was created, delete it.
 						DeleteSprite(n)
 						DeleteText(n)
@@ -95,6 +113,11 @@ function BarRender_Delete(rdr ref as BarRender)
 				next s
 			endif
 		next i
+		
+		for i = 0 to rdr.positions.length															// Delete curves if drawn.
+			if GetSpriteExists(rdr.baseID+40+i) then DeleteSprite(rdr.baseID+40+i)
+		next i
+
 	endif
 endfunction
 
@@ -123,17 +146,25 @@ function BarRender_Move(rdr ref as BarRender,x as integer,y as integer)
 	
 		for i = 1 to rdr.positions.length 															// Look at all the strums
 			xPos = x + rdr.width * rdr.positions[i] / 1000 											// Calculate x position
-			if GetSpriteExists(rdr.baseID+i+10) <> 0												// Is it a chord (e.g. S+10 exists)
-				_BarRender_MoveChord(rdr,xPos,y,rdr.baseID+i+10)
+			if GetSpriteExists(rdr.baseID+i+110) <> 0												// Is it a chord (e.g. S+110 exists)
+				_BarRender_MoveChord(rdr,xPos,y,rdr.baseID+i+110)
 			else
 				for s = 1 to rdr.stringCount 														// For each string
-					n = rdr.baseID+i * 20 + s
+					n = rdr.baseID+i * 20 + s + 100
 					if GetSpriteExists(n) <> 0														// If it was created, delete it.
 						if INVERTFRETBOARD <> 0 then p = rdr.stringCount+1-s else p = s
 						yPos = y + rdr.height * PCSTRINGS / 100.0 * (p - 0.5) / rdr.stringCount
 						BarRender_MovePick(rdr,xPos,yPos,n)
 					endif
 				next s
+			endif
+		next i
+		
+		for i = 0 to rdr.positions.length 
+			if GetSpriteExists(rdr.baseID+i+40) <> 0 
+				SetSpritePosition(rdr.baseID+i+40,x + rdr.width * rdr.positions[i] / 1000,y-GetSpriteHeight(rdr.baseID+40))
+				SetSpriteColorAlpha(rdr.baseID+40,alpha)
+				SetSpriteDepth(rdr.baseID+40,rdr.depth-1)
 			endif
 		next i
 	endif

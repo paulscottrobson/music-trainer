@@ -29,19 +29,21 @@ type RenderManager
 	width,height as integer 																		// The renderer group size
 	depth as integer 																				// Renderer depth.
 	rWidth as integer																				// Size of a single renderer.
+	bounceHeight as integer 																		// Bounce height
 endtype
 
 // ****************************************************************************************************************************************************************
 //																Create the object
 // ****************************************************************************************************************************************************************
 
-function RenderManager_New(rm ref as RenderManager,width as integer,height as integer,depth as integer,rWidth as integer,renderCount as integer)
+function RenderManager_New(rm ref as RenderManager,width as integer,height as integer,bounceHeight as integer,depth as integer,rWidth as integer,renderCount as integer)
 	rm.x = 0																						// Initialise
 	rm.y = 0
 	rm.width = width
 	rm.height = height
 	rm.depth = depth
 	rm.rWidth = rWidth
+	rm.bounceHeight = bounceHeight
 	rm.renderCount = renderCount
 	rm.renders.length = renderCount 																// Size the rendered object array
 	rm.currentPos# = 999999.0 																		// When moving, this value forces a repaint rather than a move
@@ -113,7 +115,10 @@ endfunction
 	
 function RenderManager_MoveScroll(rm ref as RenderManager,song ref as Song,barOffset# as float)
 	offset# = barOffset# - rm.currentPos# 															// This is how much it shifts by.
+																									// If it is physically the same place don't move it.
+	if _RenderManager_getBarPosition(rm,1,barOffset#) = _RenderManager_getBarPosition(rm,1,rm.currentPos#) then offset# = 0
 	if offset# = 0 then exitfunction 																// Not moving.
+	
 	if offset# > 0.0 and offset# < 0.5																// Can we scroll it.
 		furthestX = 0 																				// Keep track of furthest X position so we can see if we need a new one.
 		highestBar = -1 																			// Keep track of the highest bar.
@@ -163,7 +168,7 @@ function _RenderManager_addRendering(rm ref as RenderManager,song ref as Song,ba
 		ASSERT(rID > 0,"Out of renderers")															// This should not happen !
 		rm.renders[rID].isUsed = 1																	// Mark it used
 		rm.renders[rID].barNumber = barID 															// Save the bar number.
-		BarRender_New(rm.renders[rID].renderer,song.bars[barID],rm.rWidth,rm.height,rm.depth-5,rm.renders[rID].baseID)	
+		BarRender_New(rm.renders[rID].renderer,song.bars[barID],rm.rWidth,rm.height,rm.bounceHeight,rm.depth-5,rm.renders[rID].baseID)	
 		BarRender_Move(rm.renders[rID].renderer,x,rm.y)												// Put it in the correct place
 	endif
 endfunction rID

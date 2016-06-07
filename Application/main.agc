@@ -50,7 +50,7 @@ for i = 1 to s.barCount
 next i
 
 //BarTest(s)
-RenderManager_New(rm, 824,350,70, 400,8)
+RenderManager_New(rm, 824,350,100, 70, 400,8)
 RenderManager_Move(rm,s,190,400)
 
 SetPrintSize(16)
@@ -70,9 +70,9 @@ endwhile
 function BarTest(s ref as Song)
 	br as BarRender 
 	for i = 1 to s.barCount
-		BarRender_New(br,s.bars[i],160,120,40,1000+i*200)
+		BarRender_New(br,s.bars[i],160,120,60,40,1000+i*200)
 		//br.alpha# = 0.3
-		BarRender_Move(br,mod(i-1,6)*160+10,(i-1)/6*160+10)
+		BarRender_Move(br,mod(i-1,6)*160+10,(i-1)/6*210+210)
 		//BarRender_Delete(br)
 		//debug = debug + Song_BarToText(s,i)+";"
 	next i

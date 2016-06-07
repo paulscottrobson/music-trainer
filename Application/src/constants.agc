@@ -30,6 +30,7 @@
 #constant	IDARROW			107 																	// ID for chord arrow
 #constant 	IDFRAMEFONT 	108 																	// ID for framed font
 #constant 	IDNOTEBUTTON 	109 																	// ID for button for single string pluck
+#constant 	IDSINECURVE 	110 																	// ID for sine curve.
 
 // ****************************************************************************************************************************************************************
 //																   Blocks of IDs
