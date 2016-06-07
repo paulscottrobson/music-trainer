@@ -163,8 +163,8 @@ function BarRender_Move(rdr ref as BarRender,x as integer,y as integer)
 		for i = 0 to rdr.positions.length 
 			if GetSpriteExists(rdr.baseID+i+40) <> 0 
 				SetSpritePosition(rdr.baseID+i+40,x + rdr.width * rdr.positions[i] / 1000,y-GetSpriteHeight(rdr.baseID+40))
-				SetSpriteColorAlpha(rdr.baseID+40,alpha)
-				SetSpriteDepth(rdr.baseID+40,rdr.depth-1)
+				SetSpriteColorAlpha(rdr.baseID+i+40,alpha)
+				SetSpriteDepth(rdr.baseID+i+40,rdr.depth-1)
 			endif
 		next i
 	endif

@@ -30,6 +30,7 @@ type RenderManager
 	depth as integer 																				// Renderer depth.
 	rWidth as integer																				// Size of a single renderer.
 	bounceHeight as integer 																		// Bounce height
+	alpha# as float 																				// Alpha 0->1
 endtype
 
 // ****************************************************************************************************************************************************************
@@ -47,10 +48,11 @@ function RenderManager_New(rm ref as RenderManager,width as integer,height as in
 	rm.renderCount = renderCount
 	rm.renders.length = renderCount 																// Size the rendered object array
 	rm.currentPos# = 999999.0 																		// When moving, this value forces a repaint rather than a move
+	rm.alpha# = 1.0
 	for i = 1 to renderCount 
 		rm.renders[i].isUsed = 0																	// Mark as not in use
 		rm.renders[i].barNumber = -1																// Security - used as index will cause error
-		rm.renders[i].baseID = IDB_RENDERS + (i - 1) * IDB_PERRENDER + 1 							// Allocate an ID space for them.
+		rm.renders[i].baseID = IDB_RENDERS + (i - 1) * IDB_PERRENDER + 10 							// Allocate an ID space for them.
 	next i
 	rm.isInitialised = 1																			// Is initialised.
 	
@@ -59,7 +61,11 @@ function RenderManager_New(rm ref as RenderManager,width as integer,height as in
 	SetSpriteColorAlpha(IDB_RENDERS,128)
 	SetSpriteDepth(IDB_RENDERS,depth+1)
 	if ctrl.showHelpers = 0 then SetSpriteColorAlpha(IDB_RENDERS,0)
-	
+	if bounceHeight > 0																				// Create the bouncy ball.
+		CreateSprite(IDB_RENDERS+1,IDREDCIRCLE)	
+		sz# = height / 10.0 / GetSpriteHeight(IDB_RENDERS+1)	
+		SetSpriteScale(IDB_RENDERS+1,sz#,sz#)														// Make it a sensible size
+	endif
 endfunction
 
 // ****************************************************************************************************************************************************************
@@ -69,6 +75,7 @@ endfunction
 function RenderManager_Delete(rm ref as RenderManager)
 	if rm.isInitialised <> 0 then RenderManager_Clear(rm)											// Erase any current renders
 	if GetSpriteExists(IDB_RENDERS) <> 0 then DeleteSprite(IDB_RENDERS)								// Remove the debug sprite if it exists
+	if rm.bounceHeight > 0 then Deletesprite(IDB_RENDERS+1)											// Delete bouncy ball.
 	rm.isInitialised = 0		
 endfunction
 
@@ -124,6 +131,7 @@ function RenderManager_MoveScroll(rm ref as RenderManager,song ref as Song,barOf
 		highestBar = -1 																			// Keep track of the highest bar.
 		for i = 1 to rm.renderCount																	// Look at all current renders.			
 			if rm.renders[i].isUsed <> 0 
+				rm.renders[i].renderer.alpha# = rm.alpha#											// Update alpha
 				x = _RenderManager_getBarPosition(rm,rm.renders[i].barNumber,barOffset#)			// This is where it should go.
 				if x >= rm.x-rm.rWidth*2 															// If not off to the left so far it should be deleted 
 					BarRender_Move(rm.renders[i].renderer,x,rm.y)									// Move it there
@@ -151,6 +159,9 @@ function RenderManager_MoveScroll(rm ref as RenderManager,song ref as Song,barOf
 		endwhile
 	endif
 	rm.currentPos# = barOffset#																		// Save the current position.
+	if rm.bounceHeight > 0 and barOffset# < song.barCount + 1										// Update ball position if required 
+		_RenderManager_moveBall(rm,song.bars[floor(barOffset#)],(barOffset#-floor(barOffset#)) * 1000)
+	endif
 endfunction
 
 // ****************************************************************************************************************************************************************
@@ -169,6 +180,7 @@ function _RenderManager_addRendering(rm ref as RenderManager,song ref as Song,ba
 		rm.renders[rID].isUsed = 1																	// Mark it used
 		rm.renders[rID].barNumber = barID 															// Save the bar number.
 		BarRender_New(rm.renders[rID].renderer,song.bars[barID],rm.rWidth,rm.height,rm.bounceHeight,rm.depth-5,rm.renders[rID].baseID)	
+		rm.renders[rID].renderer.alpha# = rm.alpha#													// Update alpha
 		BarRender_Move(rm.renders[rID].renderer,x,rm.y)												// Put it in the correct place
 	endif
 endfunction rID
@@ -182,3 +194,31 @@ function _RenderManager_getBarPosition(rm ref as RenderManager,barPosition# as f
 	pos# = rm.x + rm.rWidth * pos#  																// Convert into a pixel position
 	//debug = debug + str(barPosition#)+" "+str(offsetInSong#)+" "+str(pos#)+" "+str(rm.x)+" "+str(rm.rWidth)+";"
 endfunction pos#
+
+// ****************************************************************************************************************************************************************
+//														Position the ball
+// ****************************************************************************************************************************************************************
+
+function _RenderManager_moveBall(rm ref as RenderManager,bar ref as Bar,position as integer)
+	firstPos = 0																					// Initialise it to do the whole thing.
+	lastPos = 1000
+	if bar.strumCount > 0 																			// Are there strums in this bar.
+		for i = 1 to bar.strumCount 																// Look at each strum
+			if i < bar.strumCount then thisEnd = bar.strums[i+1].time else thisEnd = 1000
+			if position > bar.strums[i].time and position <= thisEnd 								// Found the "slot"
+				firstPos = bar.strums[i].time														// Work out first and last
+				lastPos = thisEnd
+				found = 1
+			endif
+		next i
+	endif
+	angle# = 180 * (position - firstPos) / (lastPos - firstPos)  
+	//debug = debug + str(firstPos)+" "+str(lastPos)+" "+str(position)+" "+str(angle#)+";"
+	
+	y = rm.y - sin(angle#) * rm.bounceHeight
+
+	
+	SetSpritePosition(IDB_RENDERS+1,rm.x-GetSpriteWidth(IDB_RENDERS+1)/2,y - GetSpriteHeight(IDB_RENDERS+1))
+	SetSpriteDepth(IDB_RENDERS+1,rm.depth-7)
+	SetSpriteColorAlpha(IDB_RENDERS+1,rm.alpha# * 255)
+endfunction

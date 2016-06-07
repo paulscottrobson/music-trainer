@@ -50,7 +50,8 @@ for i = 1 to s.barCount
 next i
 
 //BarTest(s)
-RenderManager_New(rm, 824,350,100, 70, 400,8)
+RenderManager_New(rm, 824,350,60, 70, 400,8)
+//rm.alpha# = 0.5
 RenderManager_Move(rm,s,190,400)
 
 SetPrintSize(16)
@@ -61,12 +62,17 @@ while GetRawKeyState(27) = 0
 	next i
 	print(pos#)
 	RenderManager_MoveScroll(rm,s,pos#)
-	pos# = pos# + 0.02
+	pos# = pos# + 0.01
+	if GetRawKeyPressed(32) <> 0 then pos# = pos# - 4
+	if pos# < 1.0 then pos# = 1.0
 	if pos# > s.barCount+1 then pos# = s.barCount+1
     Print(ScreenFPS())
     Sync()
 endwhile
-
+RenderManager_Delete(rm)
+while GetRawKeyState(27) <> 0
+	Sync()
+endwhile
 function BarTest(s ref as Song)
 	br as BarRender 
 	for i = 1 to s.barCount
@@ -79,4 +85,8 @@ function BarTest(s ref as Song)
 endfunction
 
 //  TODO: Backdrop
-// 	TODO: Bouncy Ball
+//  TODO: Metronome
+// 	TODO: Player
+//  TODO: Position Panel
+// 	TODO: Control Panel
+

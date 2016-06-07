@@ -11,15 +11,15 @@ FILE_7=src%2Fbarrender.agc;-1
 FILE_8=src%2Frendermanager.agc;-1
 
 [files]
-FILE_NAME_0=0;main.agc;2988;0
+FILE_NAME_0=1;main.agc;2313;0
 FILE_NAME_1=0;src%2Fconstants.agc;2323;1
 FILE_NAME_2=0;src%2Fresources.agc;1247;2
 FILE_NAME_3=0;src%2Ftypes.agc;1170;4
 FILE_NAME_4=0;src%2Fchorddisplay.agc;5933;3
 FILE_NAME_5=0;src%2Fsong.agc;0;5
 FILE_NAME_6=0;src%2Fchordbucket.agc;6241;6
-FILE_NAME_7=1;src%2Fbarrender.agc;3582;7
-FILE_NAME_8=0;src%2Frendermanager.agc;10559;8
+FILE_NAME_7=0;src%2Fbarrender.agc;8676;7
+FILE_NAME_8=0;src%2Frendermanager.agc;11543;8
 
 [project]
 description=
