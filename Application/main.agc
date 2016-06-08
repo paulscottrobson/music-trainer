@@ -29,7 +29,9 @@ SetWindowTitle("MusicTrainer")																		// Set up the display
 SetWindowSize(ctrl.scWidth,ctrl.scHeight,0)
 SetVirtualResolution(ctrl.scWidth,ctrl.scHeight)
 SetOrientationAllowed(0,0,1,1)																		// Landscape only
-
+CreateSprite(1,IDTGF)
+SetSpriteSize(1,64,64)
+SetSpritePosition(1,ctrl.scWidth-64-4,ctrl.scHeight-64-4)
 CreateSprite(IDBACKGROUND,IDBACKGROUND)																// Create the background
 SetSpriteSize(IDBACKGROUND,ctrl.scWidth,ctrl.scHeight)												
 SetSpriteDepth(IDBACKGROUND,DEPTHBACKGROUND)
@@ -58,11 +60,15 @@ for i = 1 to sng.barCount
 		next j
 next i
 
-ChordHelper_New(cHelp,sng,110,220,95,IDB_CHORDHELPER)
-ChordHelper_Move(cHelp,64,32)
+type ClickInfo
+	x,y as integer
+endtype
 
-Positioner_New(posn,sng,900,50,50,IDB_POSITIONER)
-Positioner_Move(posn,-1,730)
+ChordHelper_New(cHelp,sng,110,220,95,IDB_CHORDHELPER)
+ChordHelper_Move(cHelp,32,16)
+
+Positioner_New(posn,sng,888,50,50,IDB_POSITIONER)
+Positioner_Move(posn,32,730)
 
 RenderManager_New(rMgr, 824,350, 60,32, 70, 400,8,IDB_RMANAGER)
 RenderManager_Move(rMgr,sng,190,350)
@@ -70,16 +76,25 @@ RenderManager_Move(rMgr,sng,190,350)
 Fretboard_New(frBrd,350,80,sng.strings,IDB_FRETBRD)
 Fretboard_Move(frBrd,350)
 
-Metronome_New(mtNm,160,60,IDB_METRONOME)
-Metronome_Move(mtNm,900,160)
+Metronome_New(mtNm,190,60,IDB_METRONOME)
+Metronome_Move(mtNm,900,180)
 
 SetPrintSize(16)
 pos# = 0.0
 while GetRawKeyState(27) = 0   
     Print(ScreenFPS())
+    
+    if GetPointerPressed() 
+		ci as ClickInfo
+		ci.x = GetPointerX()
+		ci.y = GetPointerY()
+		Metronome_ClickHandler(mtNm,ci)
+    endif
+    
 	for i = 1 to CountStringTokens(debug,";")
 		print(GetStringToken(debug,";",i))
 	next i
+		
 	RenderManager_MoveScroll(rMgr,sng,pos#)
 	Player_Update(plyr,sng,pos#)
 	Metronome_Update(mtNm,pos#,sng.beats)
@@ -101,5 +116,5 @@ while GetRawKeyState(27) <> 0
 endwhile
 
 //  TODO: Position Panel drag handler
-// 	TODO: Control Panel
+// 	TODO: Speedo tempo controller.
 

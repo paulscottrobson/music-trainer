@@ -38,7 +38,7 @@
 #constant 	IDMETRONOMEARM	115 																	// ID of metronome arm
 #constant 	IDBLUECIRCLE 	116 																	// ID of Blue circle
 #constant 	IDGREENCIRCLE 	117 																	// ID of Green circle
-
+#constant	IDTGF 			118 																	// ID of TGF Logo
 #constant 	ISMETRONOME 	1 																		// ID of metronome SFX
 
 // ****************************************************************************************************************************************************************

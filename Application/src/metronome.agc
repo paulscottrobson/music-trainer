@@ -99,3 +99,11 @@ endfunction
 function Metronome_SetSound(mt ref as Metronome,isOn as integer)
 	mt.isTickOn = isOn
 endfunction
+
+// ****************************************************************************************************************************************************************
+//															Handle clicks for metronome
+// ****************************************************************************************************************************************************************
+
+function Metronome_ClickHandler(mt ref as Metronome,ci ref as ClickInfo)
+	if GetSpriteHitTest(mt.baseID,ci.x,ci.y) <> 0 then mt.isTickOn = (mt.isTickOn = 0)
+endfunction

@@ -15,19 +15,19 @@ FILE_11=src%2Fchordhelper.agc;-1
 FILE_12=src%2Fpositioner.agc;-1
 
 [files]
-FILE_NAME_0=0;main.agc;3632;0
-FILE_NAME_1=0;src%2Fconstants.agc;3393;1
-FILE_NAME_2=0;src%2Fresources.agc;1626;2
+FILE_NAME_0=1;main.agc;4119;0
+FILE_NAME_1=0;src%2Fconstants.agc;2864;1
+FILE_NAME_2=0;src%2Fresources.agc;1668;2
 FILE_NAME_3=0;src%2Fchorddisplay.agc;5620;3
 FILE_NAME_4=0;src%2Fsong.agc;12462;4
-FILE_NAME_5=0;src%2Fchordbucket.agc;2088;5
+FILE_NAME_5=0;src%2Fchordbucket.agc;6831;5
 FILE_NAME_6=0;src%2Fbarrender.agc;8781;6
 FILE_NAME_7=0;src%2Frendermanager.agc;3079;7
 FILE_NAME_8=0;src%2Ffretboard.agc;3687;8
-FILE_NAME_9=0;src%2Fmetronome.agc;52;9
+FILE_NAME_9=0;src%2Fmetronome.agc;6149;9
 FILE_NAME_10=0;src%2Fplayer.agc;6060;10
 FILE_NAME_11=0;src%2Fchordhelper.agc;2540;11
-FILE_NAME_12=1;src%2Fpositioner.agc;2256;12
+FILE_NAME_12=0;src%2Fpositioner.agc;2256;12
 
 [project]
 description=

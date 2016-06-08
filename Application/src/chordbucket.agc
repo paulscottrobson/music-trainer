@@ -19,6 +19,7 @@ type _Chord
 endtype
 
 type ChordBucket
+	isInitialised as integer 																		// Non zero if initialised
 	chordCount as integer																			// Cords in bucket
 	display as ChordDisplay[1]																		// Display element for chords
 	chords as _Chord[1]																				// Chord Info
@@ -30,6 +31,7 @@ endtype
 // ****************************************************************************************************************************************************************
 
 function ChordBucket_New(cb ref as ChordBucket,baseID as integer)
+	cb.isInitialised = 1
 	cb.chordCount = 0
 	cb.display.length = 0
 	cb.chords.length = 0	
@@ -41,12 +43,14 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function ChordBucket_Clear(cb ref as ChordBucket)
-	for i = 1 to cb.chordCount
-		ChordDisplay_Delete(cb.display[i])
-	next i
-	cb.chordCount = 0
-	cb.display.length = 0
-	cb.chords.length = 0	
+	if cb.isInitialised <> 0
+		for i = 1 to cb.chordCount
+			ChordDisplay_Delete(cb.display[i])
+		next i
+		cb.chordCount = 0
+		cb.display.length = 0
+		cb.chords.length = 0	
+	endif
 endfunction
 
 // ****************************************************************************************************************************************************************
@@ -54,7 +58,8 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function ChordBucket_Delete(cb ref as ChordBucket)
-	ChordBucket_Clear(cb)
+	if cb.isInitialised <> 0 then ChordBucket_Clear(cb)
+	cb.isInitialised = 0
 endfunction
 
 // ****************************************************************************************************************************************************************
@@ -62,6 +67,7 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function ChordBucket_Load(cb ref as ChordBucket,song ref as song,width as integer,height as integer,depth as integer)
+	ASSERT(cb.isInitialised <> 0,"CBLA")
 	ChordBucket_Clear(cb)																			// Clear chord array.
 	for bar = 1 to song.barCount																	// Work through bars and strums
 		for strum = 1 to song.bars[bar].strumCount
@@ -89,6 +95,7 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function ChordBucket_Find(cb ref as ChordBucket,chord$ as string)
+	ASSERT(cb.isInitialised <> 0,"CBLF")
 	pos = 0
 	chord$ = Lower(chord$)
 	for i = 1 to cb.chordCount
@@ -101,6 +108,7 @@ endfunction pos
 // ****************************************************************************************************************************************************************
 
 function ChordBucket_Move(cb ref as ChordBucket,id as integer,x as integer,y as integer)
+	ASSERT(cb.isInitialised <> 0,"CBLM")
 	if id > 0 then ChordDisplay_Move(cb.display[id],x,y)
 endfunction
 
@@ -109,6 +117,7 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function ChordBucket_SetAlpha(cb ref as ChordBucket,id as integer,alpha# as float)
+	ASSERT(cb.isInitialised <> 0,"CBLSA")
 	if id > 0 
 		cb.display[id].alpha# = alpha#
 		ChordDisplay_Move(cb.display[id],cb.display[id].x,cb.display[id].y)

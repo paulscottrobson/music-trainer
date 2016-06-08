@@ -28,7 +28,7 @@ function LoadResources()
 	LoadImage(IDMETRONOMEARM,GFXDIR+"metronome_bar.png")
 	LoadImage(IDBLUECIRCLE,GFXDIR+"blue.png")
 	LoadImage(IDGREENCIRCLE,GFXDIR+"green.png")
-
+	LoadImage(IDTGF,GFXDIR+"logo.png")
 	LoadSound(ISMETRONOME,SFXDIR+"metronome.wav")
 endfunction
 
