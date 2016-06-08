@@ -103,6 +103,7 @@ function ChordDisplay_Move(cd ref as ChordDisplay,x as integer,y as integer)
 	cd.x = x 																						// Save new position
 	cd.y = y 
 	alpha = cd.alpha# * 255 																		// Alpha in range 0-255
+		
 	SetSpritePosition(cd.baseID,x,y)																// Frame (S+0)													
 	SetSpriteColorAlpha(cd.baseID,alpha)
 	SetSpriteDepth(cd.baseID,cd.depth)

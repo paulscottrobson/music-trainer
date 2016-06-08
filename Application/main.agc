@@ -20,6 +20,7 @@
 #include "src/metronome.agc" 																		// Metronome
 #include "src/player.agc" 																			// Sound player object
 #include "src/chordhelper.agc" 																		// Chord Helper
+#include "src/positioner.agc" 																		// Positioner
 
 InitialiseConstants()																				// Set up constants etc.
 LoadResources()																						// Load in resources
@@ -40,8 +41,8 @@ mt as Metronome
 pl as Player
 ch as ChordHelper
 a$ = "music/When I'm Cleaning Windows.music"
-//a$ = "music/Dont Worry Be Happy.music"
-//a$ = "music/Ukulele Buddy/19 Intro to 2 chords.music"
+a$ = "music/Dont Worry Be Happy.music"
+//a$ = "music/Ukulele Buddy/20 Hokey Pokey Warm Up.music"
 Song_New(s)
 Song_Load(s,a$)
 SBarRender_ProcessSongLyrics(s)

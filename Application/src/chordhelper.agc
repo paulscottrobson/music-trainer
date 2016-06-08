@@ -17,7 +17,7 @@ type ChordHelper
 	currentChord$ as string 																		// Current chord
 	lastPos# as float 																				// Last position checked.
 	spacing as integer 																				// Horizontal gap between chords
-	chords as integer[3]																			// ID of chords in current/next/previous
+	chords as integer[2]																			// ID of chords in current/next/previous
 	startTime,endTime as integer 																	// ms surrounding fade in/out move etc.
 endtype
 
@@ -35,10 +35,20 @@ function ChordHelper_New(ch ref as ChordHelper,song ref as Song,cWidth as intege
 	ch.spacing = cWidth / 10
 	ch.chords[1] = 0
 	ch.chords[2] = 0
-	ch.chords[3] = 0
 	ch.startTime = GetMilliseconds()+99999999 														// Long way into future.
 	ChordBucket_New(ch.bucket)																		// Create a bucket
 	ChordBucket_Load(ch.bucket,song,cWidth,cHeight,depth)											// Load a song into it	
+	firstChord$ = "" 																				// Get the first chord.
+	for b = 1 to song.barCount
+		for s = 1 to song.bars[b].strumCount 
+			if firstChord$="" and song.bars[b].strums[s].chordName$ <> ""
+				firstChord$ = song.bars[b].strums[s].chordName$
+			endif
+		next s
+	next b
+	
+	id = ChordBucket_Find(ch.bucket,firstChord$)													// Set up as first chord.
+	if id > 0 then _ChordHelper_ChangeDisplay(ch,0,id)
 endfunction
 
 // ****************************************************************************************************************************************************************
@@ -58,6 +68,11 @@ endfunction
 
 function ChordHelper_Move(ch ref as ChordHelper,x as integer,y as integer)
 	if ch.isInitialised <> 0
+		if ch.chords[1] <> 0 
+			xOffset = ch.bucket.display[ch.chords[1]].x - ch.x
+			ChordBucket_Move(ch.bucket,ch.chords[2],x+xOffset,y)
+		endif
+		if ch.chords[2] <> 0 then ChordBucket_Move(ch.bucket,ch.chords[2],x+ch.cWidth+ch.spacing,y)
 		ch.x = x																					// Update position
 		ch.y = y
 	endif
@@ -92,11 +107,11 @@ function ChordHelper_Update(ch ref as ChordHelper,song ref as Song,pos# as float
 				pos# = 1.0																			// Final position.
 				ch.startTime = GetMilliseconds()+9999999											// Move start way into the future
 			endif
-			if ch.chords[1] <> 0 then ChordBucket_Move(ch.bucket,ch.chords[1],ch.x+(1-pos#)*(ch.cWidth+ch.spacing),ch.y)
+			if ch.chords[1] <> 0 then ChordBucket_Move(ch.bucket,ch.chords[1],ch.x+(1-pos#)*(ch.cWidth+ch.spacing),ch.y)			
 			if ch.chords[2] <> 0 then ChordBucket_SetAlpha(ch.bucket,ch.chords[2],pos#)
-			if ch.chords[3] <> 0 then ChordBucket_SetAlpha(ch.bucket,ch.chords[3],1-pos#)
 		endif
 	endif
+
 endfunction
 
 // ****************************************************************************************************************************************************************
@@ -104,18 +119,16 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function _ChordHelper_ChangeDisplay(ch ref as ChordHelper,chordID as integer,nextChordID as integer)
-	for i = 1 to 3
+	for i = 1 to 2
 		if ch.chords[i] > 0 then ChordBucket_Move(ch.bucket,ch.chords[i],-1000,-1000)
 	next i
-	ch.chords[3] = ch.chords[1]																		// Previous = current
 	ch.chords[1] = chordID
 	ch.chords[2] = nextChordID
 	ch.startTime = GetMilliseconds()
 	ch.endTime = GetMilliseconds()+300
 	ChordBucket_Move(ch.bucket,ch.chords[1],ch.x,ch.y)
 	if ch.chords[2] <> 0 then ChordBucket_Move(ch.bucket,ch.chords[2],ch.x+ch.cWidth+ch.spacing,ch.y)
-	ChordBucket_Move(ch.bucket,ch.chords[3],ch.x,ch.y)
-	for i = 1 to 3
-		if ch.chords[i] <> 0 then ChordBucket_SetAlpha(ch.bucket,i,1.0)
+	for i = 1 to 2
+		if ch.chords[i] <> 0 then ChordBucket_SetAlpha(ch.bucket,ch.chords[i],1.0)
 	next i
 endfunction
