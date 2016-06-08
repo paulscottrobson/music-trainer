@@ -21,6 +21,7 @@ type Strum
 	fretDesc$ as string 																			// Fret name in 0232 format, "" if not chordable (e.g. high frets)
 	direction as integer 																			// Strum direction (-1 = up, 1 = down)
 	displayChord as integer 																		// Non zero if should be displayed as chord.
+	_nextChord$ as string 																			// Name of next chord.
 endtype
 
 type Bar 
@@ -87,6 +88,7 @@ function Song_Load(song ref as Song,fileName as String)
 		endif
 	endwhile
 	CloseFile(handle)																				// Close file.
+	_Song_SetupNextChord(song)																		// Set up next chord elements
 endfunction
 
 // ****************************************************************************************************************************************************************
@@ -188,4 +190,32 @@ function Song_BarToText(song ref as Song,n as integer)
 		a$ = a$ + " "
 	next i
 	a$ = a$ + "'"+song.bars[n].lyric$+"'"
-	endfunction a$
+endfunction a$
+
+// ****************************************************************************************************************************************************************
+//												Set up the _nextChord$ fields which is used in the chord helper
+// ****************************************************************************************************************************************************************
+
+function _Song_SetupNextChord(song ref as Song)
+	current$ = ""
+	nextCurrent$ = ""
+	for bar = song.barCount to 1 step -1 															// Work backwards through the song.
+		for strum = song.bars[bar].strumCount to 1 step -1											// Work backwards through the strum.
+			chord$ = lower(song.bars[bar].strums[strum].chordName$)									// Get current
+			if chord$ = "x" then chord$ = ""														// Handle cancel chord.
+			if chord$ <> current$ 																	// Have we reached a chord change.
+				nextCurrent$ = current$ 															// Next chord becomes what this was.
+				current$ = chord$
+			endif
+			song.bars[bar].strums[strum]._nextChord$ = nextCurrent$ 								// Set next chord
+		next
+	next
+/*	
+	for b = 1 to song.barCount
+		for s = 1 to song.bars[b].strumCount
+			a$ = song.bars[b].strums[s].chordName$
+			debug = debug + a$ + " -> "+song.bars[b].strums[s]._nextChord$+";"
+		next s
+	next b
+*/		
+endfunction

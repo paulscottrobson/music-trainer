@@ -40,7 +40,8 @@ mt as Metronome
 pl as Player
 
 a$ = "music/When I'm Cleaning Windows.music"
-//a$ = "music/Dont Worry Be Happy.music"
+a$ = "music/Dont Worry Be Happy.music"
+//a$ = "music/Ukulele Buddy/19 Intro to 2 chords.music"
 Song_New(s)
 Song_Load(s,a$)
 SBarRender_ProcessSongLyrics(s)

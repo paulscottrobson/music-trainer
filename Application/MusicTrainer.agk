@@ -13,11 +13,11 @@ FILE_9=src%2Fmetronome.agc;-1
 FILE_10=src%2Fplayer.agc;-1
 
 [files]
-FILE_NAME_0=1;main.agc;3434;0
+FILE_NAME_0=1;main.agc;3115;0
 FILE_NAME_1=0;src%2Fconstants.agc;3489;1
 FILE_NAME_2=0;src%2Fresources.agc;1593;2
 FILE_NAME_3=0;src%2Fchorddisplay.agc;2436;3
-FILE_NAME_4=0;src%2Fsong.agc;0;4
+FILE_NAME_4=0;src%2Fsong.agc;12462;4
 FILE_NAME_5=0;src%2Fchordbucket.agc;6146;5
 FILE_NAME_6=0;src%2Fbarrender.agc;8781;6
 FILE_NAME_7=0;src%2Frendermanager.agc;3055;7
