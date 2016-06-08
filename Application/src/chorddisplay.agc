@@ -44,7 +44,7 @@ function ChordDisplay_New(cd ref as ChordDisplay,name$ as String,fretting$ as St
 	SetSpriteSize(baseID,width,height)
 	SetSpriteColor(baseID,255,255,255,255)															// Make it white (frame)
 	CreateSprite(baseID+9,IDRECTANGLE)																// Background (S+1)
-	SetSpriteSize(baseID+9,width-4,height-4)
+	SetSpriteSize(baseID+9,width-8,height-8)
 	SetSpriteColor(baseID+9,0,0,0,255)
 	
 	for i = 1 to cd.strings																			// Create strings (S+1..S+8)
@@ -106,8 +106,9 @@ function ChordDisplay_Move(cd ref as ChordDisplay,x as integer,y as integer)
 	SetSpritePosition(cd.baseID,x,y)																// Frame (S+0)													
 	SetSpriteColorAlpha(cd.baseID,alpha)
 	SetSpriteDepth(cd.baseID,cd.depth)
-	SetSpritePosition(cd.baseID+9,x+2,y+2)																// Background rectangle (S+9)													
-	SetSpriteColorAlpha(cd.baseID+9,alpha)
+	
+	SetSpritePosition(cd.baseID+9,x+4,y+4)															// Background rectangle (S+9)													
+	SetSpriteColorAlpha(cd.baseID+9,255)
 	SetSpriteDepth(cd.baseID+9,cd.depth-1)
 	
 	xSpace = cd.width * 6 / 10

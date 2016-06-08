@@ -104,6 +104,5 @@ function Player_Update(pl ref as Player,song ref as Song,pos# as float)
 			endif
 		next s		
 		pl.lastPos# = pos#																			// Save the current position as the last
-	endif
-	
+	endif	
 endfunction

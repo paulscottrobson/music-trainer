@@ -19,6 +19,7 @@
 #include "src/fretboard.agc" 																		// Fretboard
 #include "src/metronome.agc" 																		// Metronome
 #include "src/player.agc" 																			// Sound player object
+#include "src/chordhelper.agc" 																		// Chord Helper
 
 InitialiseConstants()																				// Set up constants etc.
 LoadResources()																						// Load in resources
@@ -33,20 +34,20 @@ SetSpriteSize(IDBACKGROUND,ctrl.scWidth,ctrl.scHeight)
 SetSpriteDepth(IDBACKGROUND,DEPTHBACKGROUND)
 
 s as Song
-cb as ChordBucket
 rm as RenderManager
 fb as FretBoard
 mt as Metronome
 pl as Player
-
+ch as ChordHelper
 a$ = "music/When I'm Cleaning Windows.music"
-a$ = "music/Dont Worry Be Happy.music"
+//a$ = "music/Dont Worry Be Happy.music"
 //a$ = "music/Ukulele Buddy/19 Intro to 2 chords.music"
 Song_New(s)
 Song_Load(s,a$)
 SBarRender_ProcessSongLyrics(s)
-ChordBucket_New(cb)
-ChordBucket_Load(cb,s,110,220,95)
+ChordHelper_New(ch,s,110,220,95)
+ChordHelper_Move(ch,64,32)
+
 Player_New(pl,"20,13,17,22",10,0)
 
 for i = 1 to s.barCount
@@ -64,11 +65,8 @@ Fretboard_Move(fb,350)
 Metronome_New(mt,160,60,IDB_METRONOME)
 Metronome_Move(mt,900,160)
 
-ChordBucket_Move(cb,1,100,10)
-ChordBucket_Move(cb,2,230,10)
-
 SetPrintSize(16)
-pos# = 1.0
+pos# = 0.0
 while GetRawKeyState(27) = 0   
 	for i = 1 to CountStringTokens(debug,";")
 		print(GetStringToken(debug,";",i))
@@ -77,6 +75,7 @@ while GetRawKeyState(27) = 0
 	RenderManager_MoveScroll(rm,s,pos#)
 	Player_Update(pl,s,pos#)
 	Metronome_Update(mt,pos#,s.beats)
+	ChordHelper_Update(ch,s,pos#)
 	pos# = pos# + 0.01
 	if GetRawKeyPressed(32) <> 0 then pos# = pos# - 4
 	if pos# < 1.0 then pos# = 1.0
@@ -88,13 +87,12 @@ endwhile
 RenderManager_Delete(rm)
 Fretboard_Delete(fb)
 Metronome_Delete(mt)
-ChordBucket_Delete(cb)
+ChordHelper_Delete(ch)
 
 while GetRawKeyState(27) <> 0
 	Sync()
 endwhile
 
-//  TODO: Chord helper.
 //  TODO: Position Panel
 // 	TODO: Control Panel
 
