@@ -14,6 +14,7 @@ type Positioner
 	x,y,width,height,depth as integer																// Basic positional stuff
 	alpha# as Float
 	pos# as Float[3]																				// Positions of the 'balls'
+	overridePos# as Float 																			// Override position with this.
 	barCount as integer 																			// Number of bars
 	baseID as integer 																				// Base ID
 endtype
@@ -31,6 +32,7 @@ function Positioner_New(po ref as Positioner,song ref as Song,width as integer,h
 	po.width = width 																				// Set up
 	po.height = height
 	po.depth = depth 
+	po.overridePos# = -1 																			// No override
 	po.pos#[PO_LEFT] = 0.0
 	po.pos#[PO_POS] = 0.0
 	po.pos#[PO_RIGHT] = song.barCount + 1.0
@@ -94,7 +96,13 @@ endfunction
 
 function Positioner_Update(po ref as Positioner,pos# as float)
 	if po.isInitialised <> 0
-		if pos# > po.pos#[PO_RIGHT] then pos# = po.pos#[PO_LEFT]
+		if po.overridePos# >= 0
+			pos# = po.overridePos#
+			po.overridePos# = -1
+		endif
+		if pos# >= po.pos#[PO_RIGHT] 
+			if po.pos#[PO_RIGHT] <> po.barCount+1 then pos# = po.pos#[PO_LEFT] else pos# = po.barCount+1
+		endif
 		po.pos#[PO_POS] = pos#
 		for i = 1 to 3
 			x = po.x + po.width * po.pos#[i] / (po.barCount+1)
@@ -102,4 +110,44 @@ function Positioner_Update(po ref as Positioner,pos# as float)
 		next i
 	endif
 endfunction pos#
+
+// ****************************************************************************************************************************************************************
+//															  Handle Clicks (and drags)
+// ****************************************************************************************************************************************************************
+
+function Position_ClickHandler(po ref as Positioner,rm ref as RenderManager,song ref as Song,ci ref as ClickInfo)
+	if po.isInitialised <> 0																		// If initialised and clicked
+		bRadius = GetSpriteWidth(po.baseID+1)/2
+		if ci.x >= po.x-bRadius and ci.x <= po.x+po.width+bRadius and ci.y >= po.y-po.height/2 and ci.y <= po.y+po.height/2 		
+			hitTest = 0																				// Hit one of the circles
+			for i = 1 to 3 
+				if GetSpriteHitTest(po.baseID+i,ci.x,ci.y) <> 0 then hitTest = i
+			next i
+			if hitTest = 0 																			// Not hit a circle, just move
+				pos# = (ci.x - po.x)  * (po.barCount+1.0) / po.width
+				po.overridePos# = pos#
+				PlaySound(ISPING)
+			else
+				min# = 0.0																			// Range allowed
+				max# = po.barCount+1.0
+				if hitTest = PO_LEFT then max# = po.pos#[PO_RIGHT]									// Stops min/max being swapped
+				if hitTest = PO_RIGHT then min# = po.pos#[PO_LEFT]
+				while GetPointerState() <> 0														// Wait for release
+					pos# = (GetPointerX() - po.x)  * (po.barCount+1.0) / po.width					// Calc new position
+					if pos# < min# then pos# = min#													// Put in range
+					if pos# > max# then pos# = max#
+					po.pos#[hitTest] = pos#															// Save value
+					x = po.x + po.width * po.pos#[hitTest] / (po.barCount+1)						// Move ball sprite
+					SetSpritePositionByOffset(po.baseID+hitTest,x,po.y)		
+					if hitTest = PO_POS																// If position
+						po.overridePos# = pos#														// Will be the new position
+						RenderManager_MoveScroll(rm,song,pos#)										// Scroll image to suit
+					endif			
+					Sync()																			// Update display
+				endwhile																			
+				PlaySound(ISPING)
+			endif
+		endif
+	endif
+endfunction
 

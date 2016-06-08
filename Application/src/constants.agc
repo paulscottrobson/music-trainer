@@ -39,12 +39,16 @@
 #constant 	IDBLUECIRCLE 	116 																	// ID of Blue circle
 #constant 	IDGREENCIRCLE 	117 																	// ID of Green circle
 #constant	IDTGF 			118 																	// ID of TGF Logo
+#constant 	IDSPEAKER 		119 																	// ID of Speaker
+
 #constant 	ISMETRONOME 	1 																		// ID of metronome SFX
+#constant	ISPING 			2 																		// ID of action SFX
 
 // ****************************************************************************************************************************************************************
 //																   Blocks of IDs
 // ****************************************************************************************************************************************************************
 
+#constant	IDB_PLAYER 		870																		// 870+ Player
 #constant 	IDB_POSITIONER 	880 																	// 880+ Positioner
 #constant 	IDB_METRONOME	890																		// 890+ Metronome
 #constant 	IDB_FRETBRD 	900																		// 900+ Fretboards

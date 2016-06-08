@@ -24,13 +24,15 @@ type Player
 	nextVolume as integer 																			// Volume of next strum
 	nextDirection as integer 																		// Direction of next strum
 	lastPos# as float 																				// Time of previous update
+	depth as integer																					// Sprite depth
+	spriteID as integer 																			// ID of sprite
 endtype
 
 // ****************************************************************************************************************************************************************
 //																Create a player object
 // ****************************************************************************************************************************************************************
 
-function Player_New(pl ref as Player,tuning$ as string,fretMax as integer,isDiatonic as integer)
+function Player_New(pl ref as Player,tuning$ as string,fretMax as integer,isDiatonic as integer,size as integer,depth as integer,spriteID as integer)
 	pl.isInstantiated = 1 																			// Setup object
 	pl.isSoundOn = 1
 	pl.fretMax = fretMax
@@ -39,6 +41,8 @@ function Player_New(pl ref as Player,tuning$ as string,fretMax as integer,isDiat
 	pl.baseSoundID.length = pl.strings 																// Set up arrays
 	pl.nextStrum.length = pl.strings
 	pl.nextStrumTime.length = pl.strings
+	pl.spriteID = spriteID
+	pl.depth = depth
 	currentID = ISB_PLAYERBASE																		// IDs to load.
 	for i = 1 to pl.strings		
 		pl.nextStrumTime[i] = 0																		// Zero all strum time		
@@ -50,6 +54,9 @@ function Player_New(pl ref as Player,tuning$ as string,fretMax as integer,isDiat
 			inc currentID																			// Next ID
 		next j			
 	next i	
+	CreateSprite(spriteID,IDSPEAKER)																// Create sprite
+	SetSpriteSize(spriteID,size,size)
+	SetSpriteDepth(spriteID,depth)
 endfunction
 
 // ****************************************************************************************************************************************************************
@@ -64,6 +71,7 @@ function Player_Delete(pl ref as Player)
 				DeleteSound(pl.baseSoundID[i]+j)
 			next j
 		next i
+		DeleteSprite(pl.spriteID)
 	endif
 endfunction
 
@@ -105,4 +113,31 @@ function Player_Update(pl ref as Player,song ref as Song,pos# as float)
 		next s		
 		pl.lastPos# = pos#																			// Save the current position as the last
 	endif	
+endfunction
+
+// ****************************************************************************************************************************************************************
+//																	Handle Player Moves
+// ****************************************************************************************************************************************************************
+
+function Player_Move(pl ref as Player,x as integer,y as integer)
+	if pl.isInstantiated <> 0 
+		if x<>0 or y <> 0 then SetSpritePositionByOffset(pl.spriteID,x,y)
+		if pl.isSoundOn <> 0
+			SetSpriteColor(pl.spriteID,255,255,255,255)
+		else
+			SetSpriteColor(pl.spriteID,255,64,64,255)
+		endif
+	endif
+endfunction
+
+// ****************************************************************************************************************************************************************
+//															Handle clicks for player
+// ****************************************************************************************************************************************************************
+
+function Player_ClickHandler(pl ref as Player,ci ref as ClickInfo)
+	if GetSpriteHitTest(pl.spriteID,ci.x,ci.y) <> 0 
+		pl.isSoundOn = (pl.isSoundOn = 0)
+		Player_Move(pl,0,0)
+		PlaySound(ISPING)
+	endif
 endfunction

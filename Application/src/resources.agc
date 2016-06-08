@@ -29,6 +29,8 @@ function LoadResources()
 	LoadImage(IDBLUECIRCLE,GFXDIR+"blue.png")
 	LoadImage(IDGREENCIRCLE,GFXDIR+"green.png")
 	LoadImage(IDTGF,GFXDIR+"logo.png")
+	LoadImage(IDSPEAKER,GFXDIR+"speaker.png")
 	LoadSound(ISMETRONOME,SFXDIR+"metronome.wav")
+	LoadSound(ISPING,SFXDIR+"ping.wav")
 endfunction
 

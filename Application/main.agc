@@ -29,9 +29,6 @@ SetWindowTitle("MusicTrainer")																		// Set up the display
 SetWindowSize(ctrl.scWidth,ctrl.scHeight,0)
 SetVirtualResolution(ctrl.scWidth,ctrl.scHeight)
 SetOrientationAllowed(0,0,1,1)																		// Landscape only
-CreateSprite(1,IDTGF)
-SetSpriteSize(1,64,64)
-SetSpritePosition(1,ctrl.scWidth-64-4,ctrl.scHeight-64-4)
 CreateSprite(IDBACKGROUND,IDBACKGROUND)																// Create the background
 SetSpriteSize(IDBACKGROUND,ctrl.scWidth,ctrl.scHeight)												
 SetSpriteDepth(IDBACKGROUND,DEPTHBACKGROUND)
@@ -52,7 +49,6 @@ a$ = "music/When I'm Cleaning Windows.music"
 Song_New(sng)
 Song_Load(sng,a$)
 SBarRender_ProcessSongLyrics(sng)
-Player_New(plyr,"20,13,17,22",10,0)
 
 for i = 1 to sng.barCount
 		for j = 1 to sng.bars[i].strumCount
@@ -64,8 +60,11 @@ type ClickInfo
 	x,y as integer
 endtype
 
+Player_New(plyr,"20,13,17,22",10,0,64,80,IDB_PLAYER)
+Player_Move(plyr,ctrl.scWidth-32-4,ctrl.scHeight-32-4)
+
 ChordHelper_New(cHelp,sng,110,220,95,IDB_CHORDHELPER)
-ChordHelper_Move(cHelp,32,16)
+ChordHelper_Move(cHelp,128+32,16)
 
 Positioner_New(posn,sng,888,50,50,IDB_POSITIONER)
 Positioner_Move(posn,32,730)
@@ -77,18 +76,25 @@ Fretboard_New(frBrd,350,80,sng.strings,IDB_FRETBRD)
 Fretboard_Move(frBrd,350)
 
 Metronome_New(mtNm,190,60,IDB_METRONOME)
-Metronome_Move(mtNm,900,180)
+Metronome_Move(mtNm,780,180)
+
+CreateSprite(1,IDTGF)
+SetSpritePosition(1,ctrl.scWidth-128-16,105)
+SetSpriteDepth(1,98)
 
 SetPrintSize(16)
 pos# = 0.0
 while GetRawKeyState(27) = 0   
     Print(ScreenFPS())
+    Print(pos#)
     
     if GetPointerPressed() 
 		ci as ClickInfo
 		ci.x = GetPointerX()
 		ci.y = GetPointerY()
 		Metronome_ClickHandler(mtNm,ci)
+		Position_ClickHandler(posn,rMgr,sng,ci)
+		Player_ClickHandler(plyr,ci)
     endif
     
 	for i = 1 to CountStringTokens(debug,";")
@@ -110,11 +116,11 @@ Fretboard_Delete(frBrd)
 Metronome_Delete(mtNm)
 ChordHelper_Delete(cHelp)
 Positioner_Delete(posn)
+Player_Delete(plyr)
 
 while GetRawKeyState(27) <> 0
 	Sync()
 endwhile
 
-//  TODO: Position Panel drag handler
 // 	TODO: Speedo tempo controller.
-
+//	TODO: Main object

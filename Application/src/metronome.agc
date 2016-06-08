@@ -105,5 +105,8 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function Metronome_ClickHandler(mt ref as Metronome,ci ref as ClickInfo)
-	if GetSpriteHitTest(mt.baseID,ci.x,ci.y) <> 0 then mt.isTickOn = (mt.isTickOn = 0)
+	if GetSpriteHitTest(mt.baseID,ci.x,ci.y) <> 0 
+		mt.isTickOn = (mt.isTickOn = 0)
+		PlaySound(ISPING)
+	endif
 endfunction
