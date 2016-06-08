@@ -62,6 +62,7 @@ ChordHelper_New(cHelp,sng,110,220,95,IDB_CHORDHELPER)
 ChordHelper_Move(cHelp,64,32)
 
 Positioner_New(posn,sng,900,50,50,IDB_POSITIONER)
+Positioner_Move(posn,-1,730)
 
 RenderManager_New(rMgr, 824,350, 60,32, 70, 400,8,IDB_RMANAGER)
 RenderManager_Move(rMgr,sng,190,350)
@@ -85,8 +86,7 @@ while GetRawKeyState(27) = 0
 	ChordHelper_Update(cHelp,sng,pos#)
 	pos# = pos# + 0.01
 	if GetRawKeyPressed(32) <> 0 then pos# = pos# - 4
-	if pos# < 0.0 then pos# = 0.0
-	if pos# > sng.barCount+1 then pos# = sng.barCount+1
+	pos# = Positioner_Update(posn,pos#)
     Sync()
 endwhile
 
@@ -94,11 +94,12 @@ RenderManager_Delete(rMgr)
 Fretboard_Delete(frBrd)
 Metronome_Delete(mtNm)
 ChordHelper_Delete(cHelp)
+Positioner_Delete(posn)
 
 while GetRawKeyState(27) <> 0
 	Sync()
 endwhile
 
-//  TODO: Position Panel
+//  TODO: Position Panel drag handler
 // 	TODO: Control Panel
 
