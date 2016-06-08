@@ -64,7 +64,7 @@ Player_New(plyr,"20,13,17,22",10,0,64,80,IDB_PLAYER)
 Player_Move(plyr,ctrl.scWidth-32-4,ctrl.scHeight-32-4)
 
 ChordHelper_New(cHelp,sng,110,220,95,IDB_CHORDHELPER)
-ChordHelper_Move(cHelp,128+32,16)
+ChordHelper_Move(cHelp,328+32,16)
 
 Positioner_New(posn,sng,888,50,50,IDB_POSITIONER)
 Positioner_Move(posn,32,730)
@@ -78,16 +78,21 @@ Fretboard_Move(frBrd,350)
 Metronome_New(mtNm,190,60,IDB_METRONOME)
 Metronome_Move(mtNm,780,180)
 
-CreateSprite(1,IDTGF)
-SetSpritePosition(1,ctrl.scWidth-128-16,105)
-SetSpriteDepth(1,98)
+CreateSprite(IDB_AGK,IDTGF)
+SetSpritePosition(IDB_AGK,ctrl.scWidth-128-16,105)
+SetSpriteDepth(IDB_AGK,98)
 
+CreateSprite(IDB_EXIT,IDEXIT)
+SetSpriteSize(IDB_EXIT,64,64)
+SetSpritePosition(IDB_EXIT,ctrl.scWidth-GetSpriteWidth(IDB_EXIT)-4,4)
 SetPrintSize(16)
 pos# = 0.0
-while GetRawKeyState(27) = 0   
+endPlay = 0
+while endPlay = 0
     Print(ScreenFPS())
     Print(pos#)
-    
+
+    if GetRawKeyPressed(27) <> 0 then endPlay = 1
     if GetPointerPressed() 
 		ci as ClickInfo
 		ci.x = GetPointerX()
@@ -95,11 +100,15 @@ while GetRawKeyState(27) = 0
 		Metronome_ClickHandler(mtNm,ci)
 		Position_ClickHandler(posn,rMgr,sng,ci)
 		Player_ClickHandler(plyr,ci)
+		if GetSpriteHitTest(IDB_EXIT,ci.x,ci.y) <> 0
+			endPlay = 1
+			PlaySound(ISPING)
+		endif
     endif
     
-	for i = 1 to CountStringTokens(debug,";")
-		print(GetStringToken(debug,";",i))
-	next i
+	//for i = 1 to CountStringTokens(debug,";")
+		//print(GetStringToken(debug,";",i))
+	//next i
 		
 	RenderManager_MoveScroll(rMgr,sng,pos#)
 	Player_Update(plyr,sng,pos#)
@@ -117,6 +126,8 @@ Metronome_Delete(mtNm)
 ChordHelper_Delete(cHelp)
 Positioner_Delete(posn)
 Player_Delete(plyr)
+DeleteSprite(IDB_AGK)
+DeleteSprite(IDB_EXIT)
 
 while GetRawKeyState(27) <> 0
 	Sync()

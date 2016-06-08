@@ -95,15 +95,15 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function Positioner_Update(po ref as Positioner,pos# as float)
-	if po.isInitialised <> 0
-		if po.overridePos# >= 0
+	if po.isInitialised <> 0																		// If intialised
+		if po.overridePos# >= 0																		// If set by drag/click use that
 			pos# = po.overridePos#
 			po.overridePos# = -1
 		endif
-		if pos# >= po.pos#[PO_RIGHT] 
+		if pos# >= po.pos#[PO_RIGHT] 																// Limit at RHS, if RHS at end stop else back to left
 			if po.pos#[PO_RIGHT] <> po.barCount+1 then pos# = po.pos#[PO_LEFT] else pos# = po.barCount+1
 		endif
-		po.pos#[PO_POS] = pos#
+		po.pos#[PO_POS] = pos#																		// Update position and the sprites
 		for i = 1 to 3
 			x = po.x + po.width * po.pos#[i] / (po.barCount+1)
 			SetSpritePositionByOffset(po.baseID+i,x,po.y)

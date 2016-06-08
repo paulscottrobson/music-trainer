@@ -40,6 +40,7 @@
 #constant 	IDGREENCIRCLE 	117 																	// ID of Green circle
 #constant	IDTGF 			118 																	// ID of TGF Logo
 #constant 	IDSPEAKER 		119 																	// ID of Speaker
+#constant	IDEXIT 			120																		// ID of exit icon
 
 #constant 	ISMETRONOME 	1 																		// ID of metronome SFX
 #constant	ISPING 			2 																		// ID of action SFX
@@ -48,6 +49,8 @@
 //																   Blocks of IDs
 // ****************************************************************************************************************************************************************
 
+#constant	IDB_EXIT 		850 																	// 850 Exit Button
+#constant 	IDB_AGK 		860 																	// 860 AGK Icon
 #constant	IDB_PLAYER 		870																		// 870+ Player
 #constant 	IDB_POSITIONER 	880 																	// 880+ Positioner
 #constant 	IDB_METRONOME	890																		// 890+ Metronome
