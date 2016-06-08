@@ -12,6 +12,7 @@
 type Positioner
 	isInitialised as integer																		// Non zero when iniialised
 	x,y,width,height,depth as integer																// Basic positional stuff
+	alpha# as Float
 	songStart#,songEnd# as float 																	// Song positions
 	barCount as integer 																			// Number of bars
 	baseID as integer 																				// Base ID
@@ -23,6 +24,15 @@ endtype
 
 function Positioner_New(po ref as Positioner,song ref as Song,width as integer,height as integer,depth as integer,baseID as integer)
 	po.isInitialised = 1																			// Mark initialised
+	po.width = width 																				// Set up
+	po.height = height
+	po.depth = depth 
+	po.songStart# = 0.0
+	po.songEnd# = song.barCount+1.0
+	po.barCount = song.barCount
+	po.baseID = baseID
+	po.alpha# = 1.0
+	Positioner_Move(po,100,100)
 endfunction
 
 // ****************************************************************************************************************************************************************

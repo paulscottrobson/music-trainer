@@ -19,19 +19,21 @@ type _Chord
 endtype
 
 type ChordBucket
-	chordCount as integer
-	display as ChordDisplay[1]
-	chords as _Chord[1]
+	chordCount as integer																			// Cords in bucket
+	display as ChordDisplay[1]																		// Display element for chords
+	chords as _Chord[1]																				// Chord Info
+	baseID as integer																				// Base GFX ID
 endtype
 
 // ****************************************************************************************************************************************************************
 //																	Create chordbucket object
 // ****************************************************************************************************************************************************************
 
-function ChordBucket_New(cb ref as ChordBucket)
+function ChordBucket_New(cb ref as ChordBucket,baseID as integer)
 	cb.chordCount = 0
 	cb.display.length = 0
 	cb.chords.length = 0	
+	cb.baseID = baseID
 endfunction
 
 // ****************************************************************************************************************************************************************
@@ -77,7 +79,7 @@ function ChordBucket_Load(cb ref as ChordBucket,song ref as song,width as intege
 	cb.display.length = cb.chordCount 																// Set display object size and create them.
 	for c = 1 to cb.chordCount
 		//debug = debug + cb.chords[c].name$+" "+cb.chords[c].fret$+";"
-		ChordDisplay_New(cb.display[c],cb.chords[c].name$,cb.chords[c].fret$,IDB_CHORDBUCKET+c*50,width,height,depth)
+		ChordDisplay_New(cb.display[c],cb.chords[c].name$,cb.chords[c].fret$,cb.baseID+c*50,width,height,depth)
 		ChordDisplay_Move(cb.display[c],-1000,-1000)												// Move it off screen
 	next c
 endfunction

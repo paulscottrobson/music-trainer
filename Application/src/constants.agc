@@ -45,10 +45,11 @@
 //																   Blocks of IDs
 // ****************************************************************************************************************************************************************
 
+#constant 	IDB_POSITIONER 	880 																	// 880+ Positioner
 #constant 	IDB_METRONOME	890																		// 890+ Metronome
-#constant 	IDB_FRETBOARD 	900																		// 900+ Fretboards
-#constant 	IDB_RENDERS 	1000																	// 1000+ ID renders
-#constant 	IDB_CHORDBUCKET	28000 																	// 28000-31000 spaces for 60 chords 
+#constant 	IDB_FRETBRD 	900																		// 900+ Fretboards
+#constant 	IDB_RMANAGER 	1000																	// 1000+ Render Manager IDs
+#constant 	IDB_CHORDHELPER	28000 																	// 28000-31000 spaces for 60 chords 
 #constant 	IDB_PERRENDER 	500 																	// each renderer needs 500 space of IDs
 
 #constant 	ISB_PLAYERBASE 	10 																		// IDs from 10+ allocated to the player

@@ -15,7 +15,7 @@
 #include "src/song.agc" 																			// Song manager
 #include "src/chordbucket.agc"																		// Chord bucket object
 #include "src/barrender.agc" 																		// Bar Renderer
-#include "src/rendermanager.agc"																	// Render Manager
+#include "src/renderManager.agc"																	// Render Manager
 #include "src/fretboard.agc" 																		// Fretboard
 #include "src/metronome.agc" 																		// Metronome
 #include "src/player.agc" 																			// Sound player object
@@ -34,61 +34,66 @@ CreateSprite(IDBACKGROUND,IDBACKGROUND)																// Create the background
 SetSpriteSize(IDBACKGROUND,ctrl.scWidth,ctrl.scHeight)												
 SetSpriteDepth(IDBACKGROUND,DEPTHBACKGROUND)
 
-s as Song
-rm as RenderManager
-fb as FretBoard
-mt as Metronome
-pl as Player
-ch as ChordHelper
+sng as Song
+rMgr as RenderManager
+frBrd as FretBoard
+mtNm as Metronome
+plyr as Player
+cHelp as ChordHelper
+posn as Positioner
+
 a$ = "music/When I'm Cleaning Windows.music"
-a$ = "music/Dont Worry Be Happy.music"
-//a$ = "music/Ukulele Buddy/20 Hokey Pokey Warm Up.music"
-Song_New(s)
-Song_Load(s,a$)
-SBarRender_ProcessSongLyrics(s)
-ChordHelper_New(ch,s,110,220,95)
-ChordHelper_Move(ch,64,32)
 
-Player_New(pl,"20,13,17,22",10,0)
+//a$ = "music/Dont Worry Be Happy.music"
+//a$ = "music/Ukulele Buddy/20 Hokey Pokey WarMgr Up.music"
 
-for i = 1 to s.barCount
-		for j = 1 to s.bars[i].strumCount
-			s.bars[i].strums[j].displayChord = 1
+Song_New(sng)
+Song_Load(sng,a$)
+SBarRender_ProcessSongLyrics(sng)
+Player_New(plyr,"20,13,17,22",10,0)
+
+for i = 1 to sng.barCount
+		for j = 1 to sng.bars[i].strumCount
+			sng.bars[i].strums[j].displayChord = 1
 		next j
 next i
 
-//BarTest(s)
-RenderManager_New(rm, 824,350, 60,32, 70, 400,8)
-Fretboard_New(fb,350,80,s.strings)
-//rm.alpha# = 0.5
-RenderManager_Move(rm,s,190,350)
-Fretboard_Move(fb,350)
-Metronome_New(mt,160,60,IDB_METRONOME)
-Metronome_Move(mt,900,160)
+ChordHelper_New(cHelp,sng,110,220,95,IDB_CHORDHELPER)
+ChordHelper_Move(cHelp,64,32)
+
+Positioner_New(posn,sng,900,50,50,IDB_POSITIONER)
+
+RenderManager_New(rMgr, 824,350, 60,32, 70, 400,8,IDB_RMANAGER)
+RenderManager_Move(rMgr,sng,190,350)
+
+Fretboard_New(frBrd,350,80,sng.strings,IDB_FRETBRD)
+Fretboard_Move(frBrd,350)
+
+Metronome_New(mtNm,160,60,IDB_METRONOME)
+Metronome_Move(mtNm,900,160)
 
 SetPrintSize(16)
 pos# = 0.0
 while GetRawKeyState(27) = 0   
+    Print(ScreenFPS())
 	for i = 1 to CountStringTokens(debug,";")
 		print(GetStringToken(debug,";",i))
 	next i
-	print(pos#)
-	RenderManager_MoveScroll(rm,s,pos#)
-	Player_Update(pl,s,pos#)
-	Metronome_Update(mt,pos#,s.beats)
-	ChordHelper_Update(ch,s,pos#)
+	RenderManager_MoveScroll(rMgr,sng,pos#)
+	Player_Update(plyr,sng,pos#)
+	Metronome_Update(mtNm,pos#,sng.beats)
+	ChordHelper_Update(cHelp,sng,pos#)
 	pos# = pos# + 0.01
 	if GetRawKeyPressed(32) <> 0 then pos# = pos# - 4
-	if pos# < 1.0 then pos# = 1.0
-	if pos# > s.barCount+1 then pos# = s.barCount+1
-    Print(ScreenFPS())
+	if pos# < 0.0 then pos# = 0.0
+	if pos# > sng.barCount+1 then pos# = sng.barCount+1
     Sync()
 endwhile
 
-RenderManager_Delete(rm)
-Fretboard_Delete(fb)
-Metronome_Delete(mt)
-ChordHelper_Delete(ch)
+RenderManager_Delete(rMgr)
+Fretboard_Delete(frBrd)
+Metronome_Delete(mtNm)
+ChordHelper_Delete(cHelp)
 
 while GetRawKeyState(27) <> 0
 	Sync()

@@ -19,13 +19,14 @@ type ChordHelper
 	spacing as integer 																				// Horizontal gap between chords
 	chords as integer[2]																			// ID of chords in current/next/previous
 	startTime,endTime as integer 																	// ms surrounding fade in/out move etc.
+	baseID as integer 																				// base ID
 endtype
 
 // ****************************************************************************************************************************************************************
 //																	Create new Chord Helper
 // ****************************************************************************************************************************************************************
 
-function ChordHelper_New(ch ref as ChordHelper,song ref as Song,cWidth as integer,cHeight as integer,depth as integer)
+function ChordHelper_New(ch ref as ChordHelper,song ref as Song,cWidth as integer,cHeight as integer,depth as integer,baseID as integer)
 	ch.isInitialised = 1																			// Mark initialised
 	ch.depth = depth 																				// Save values
 	ch.cWidth = cWidth
@@ -36,7 +37,8 @@ function ChordHelper_New(ch ref as ChordHelper,song ref as Song,cWidth as intege
 	ch.chords[1] = 0
 	ch.chords[2] = 0
 	ch.startTime = GetMilliseconds()+99999999 														// Long way into future.
-	ChordBucket_New(ch.bucket)																		// Create a bucket
+	ch.baseID = baseID
+	ChordBucket_New(ch.bucket,ch.baseID)															// Create a bucket
 	ChordBucket_Load(ch.bucket,song,cWidth,cHeight,depth)											// Load a song into it	
 	firstChord$ = "" 																				// Get the first chord.
 	for b = 1 to song.barCount
