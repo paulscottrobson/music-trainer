@@ -1,0 +1,22 @@
+#
+#       Ukulele Buddy exercise 21 (Hokey Pokey)
+#
+Tempo:=140
+Beats:=4
+Swing := No
+Pattern1 := e-d-e-d-
+
+@1
+
+X///          C///                       C///           
+%You put your right hand in you put your right hand out you put your 
+ 
+C///                       G///                    
+right hand in and you      shake it all about, you 
+
+G///                       G///
+do the hokey pokey and you turn around%
+
+G///                  C///
+Thats what its all a- bout%
+

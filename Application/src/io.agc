@@ -14,7 +14,23 @@
 // ****************************************************************************************************************************************************************
 
 function IOAccessFile(filename as string)
-	filename = ReplaceString(filename,".","/",9999)													// We use . as seperators
-	filename = "music/"+filename																	// Put in music directory
-	if right(filename,6) = "/music" then filename = left(filename,len(filename)-6)+".music"			// Fix up the final .
+	filename = ReplaceString(filename,":","/",9999)													// We use . as seperators
+	filename = "music/"+filename																	// Put in music directory	
 endfunction filename
+
+// ****************************************************************************************************************************************************************
+//								Load directory contents (using index.txt) semicolon seperated, directories in brackets
+// ****************************************************************************************************************************************************************
+
+function IOLoadDirectory(directoryRoot as string)
+	if directoryRoot <> "" then directoryRoot = directoryRoot + ":" 								// index.txt or <tree>.<index.txt>
+	indexFile$ = IOAccessFile(directoryRoot+"index.txt")											// This is the index file.
+	ASSERT(GetFileExists(indexFile$) <> 0,"Index file missing "+indexFile$)
+	itemList$ = ""																					// List of ; seperated items.
+	OpenToRead(1,indexFile$)																		// Open file to read
+	while FileEOF(1) = 0																			// Read in ; seperate them
+		itemList$ = itemList$ + ";"+ReadLine(1)
+	endwhile
+	CloseFile(1)
+	itemList$ = mid(itemList$,2,99999)																// Drop first semicolon.	
+endfunction itemList$

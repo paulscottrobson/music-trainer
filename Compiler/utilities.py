@@ -151,7 +151,12 @@ class Compiler:
 		stringMapper = { "ukulele":4, "merlin":3 }
 		self.strings = stringMapper[self.loader.ctrl("instrument").lower()]				# work out how many strings
 		self.dictionary = UkuleleDictionary()											# working dictionary.
+		self.missing = {}																# list of missing chords
 		self.compile()																	# compile the tune.
+		failChords = self.missing.keys()
+		if len(failChords) > 0:
+			failChords = [x[0].upper()+x[1:].lower() for x in failChords]
+			print("        Warning : missing "+" ".join(failChords))
 
 	def render(self):
 		render = ""																		# build up the rendered song.
@@ -168,8 +173,13 @@ class Compiler:
 		return Strum.toPosition(100,id)+key.lower()+" := "+self.loader.ctrl(key.lower())+"\n"
 
 	def getChord(self,chordName):
+		hasWarned = False
 		chordName = chordName.lower()													# lower case.
 		fretting = self.getChordAbsolute(chordName)										# get absolute fretting.
+		if fretting == "" and not hasWarned:
+			self.missing[chordName] = True												# add to warning list if missing
+			hasWarned = True
+
 		for chop in self.stripList:
 			if fretting == "" and chordName[-len(chop):] == chop:						# if not found and choppable
 				chordName = chordName[:-len(chop)]										# chop the chord

@@ -44,7 +44,7 @@ class StrumCompiler(Compiler):
 				self.pattern = int(m.group(1))											# switch pattern
 				chunkSize = len(m.group(0))												# amount to remove
 			else:
-				m = re.match("^([a-gx][\\#b]?[a-z79]*)([\\s*\\/\\.]*)",chords)			# match against a chord
+				m = re.match("^([a-gx][\\#b]?[a-z079]*)([\\s*\\/\\.]*)",chords)			# match against a chord
 				assert m is not None,"Cannot process "+chords							# check okay.
 				chunkSize = len(m.group(0))												# amount to remove
 				self.music[self.barPosition].addLyric(lyrics[:chunkSize].strip())		# add lyrics if any.
@@ -65,7 +65,7 @@ class StrumCompiler(Compiler):
 	def generateChords(self,chordName):
 		chordFrets = self.getChord(chordName)											# get the Fret pattern				
 		if chordFrets == "x":
-			chordName = None		
+			chordName = None
 		pattern = self.loader.ctrl("pattern"+str(self.pattern)).lower()					# get the pattern.
 		pos = 1000 * self.beatPosition / self.beats 									# position			
 		pChar = pattern[self.beatPosition * 2]											# associated beat
