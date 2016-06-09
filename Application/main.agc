@@ -21,6 +21,7 @@
 #include "src/player.agc" 																			// Sound player object
 #include "src/chordhelper.agc" 																		// Chord Helper
 #include "src/positioner.agc" 																		// Positioner
+#include "src/tempometer.agc" 																		// Tempo meter/controller
 
 InitialiseConstants()																				// Set up constants etc.
 LoadResources()																						// Load in resources
@@ -58,6 +59,7 @@ next i
 
 type ClickInfo
 	x,y as integer
+	key$ as string
 endtype
 
 Player_New(plyr,"20,13,17,22",10,0,64,80,IDB_PLAYER)
@@ -93,6 +95,7 @@ while endPlay = 0
     Print(pos#)
 
     if GetRawKeyPressed(27) <> 0 then endPlay = 1
+
     if GetPointerPressed() 
 		ci as ClickInfo
 		ci.x = GetPointerX()
@@ -115,7 +118,6 @@ while endPlay = 0
 	Metronome_Update(mtNm,pos#,sng.beats)
 	ChordHelper_Update(cHelp,sng,pos#)
 	pos# = pos# + 0.01
-	if GetRawKeyPressed(32) <> 0 then pos# = pos# - 4
 	pos# = Positioner_Update(posn,pos#)
     Sync()
 endwhile
@@ -133,5 +135,7 @@ while GetRawKeyState(27) <> 0
 	Sync()
 endwhile
 
-// 	TODO: Speedo tempo controller.
+// 	TODO: Speedo tempo controller complete
+// 	TODO: Long bounce graphic (75% ?)
+//	TODO: Keys (?)
 //	TODO: Main object

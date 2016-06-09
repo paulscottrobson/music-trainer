@@ -41,6 +41,8 @@
 #constant	IDTGF 			118 																	// ID of TGF Logo
 #constant 	IDSPEAKER 		119 																	// ID of Speaker
 #constant	IDEXIT 			120																		// ID of exit icon
+#constant	IDMETER 		121 																	// ID of meter body
+#constant 	IDMETERNEEDLE 	122 																	// ID of meter needle
 
 #constant 	ISMETRONOME 	1 																		// ID of metronome SFX
 #constant	ISPING 			2 																		// ID of action SFX
@@ -49,6 +51,7 @@
 //																   Blocks of IDs
 // ****************************************************************************************************************************************************************
 
+#constant	IDB_METER		840 																	// 840 Tempo Meter
 #constant	IDB_EXIT 		850 																	// 850 Exit Button
 #constant 	IDB_AGK 		860 																	// 860 AGK Icon
 #constant	IDB_PLAYER 		870																		// 870+ Player

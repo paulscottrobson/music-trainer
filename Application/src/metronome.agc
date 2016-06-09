@@ -79,17 +79,19 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function Metronome_Update(mt ref as Metronome,bar# as float,beats as integer)
-	beat# = bar# * beats 																			// Beat position
-	bar# = bar# * beats / 2 																		// Scale up to beats (2 beats per cycle)
-	bar# = bar# - floor(bar#)																		// Offset in beat 0->1
-	if bar# > 0.5 then bar# = 1.0-bar# 																// Back and forth.
-	SetSpriteAngle(mt.baseID+1,-45+180*bar#)														// Update the graphic
+	if mt.isVisible <> 0 and mt.isTickOn <> 0 
+		beat# = bar# * beats 																		// Beat position
+		bar# = bar# * beats / 2 																	// Scale up to beats (2 beats per cycle)
+		bar# = bar# - floor(bar#)																	// Offset in beat 0->1
+		if bar# > 0.5 then bar# = 1.0-bar# 															// Back and forth.
+		SetSpriteAngle(mt.baseID+1,-45+180*bar#)													// Update the graphic
 
-	if floor(mt.lastBeat#) <> floor(beat#) and mt.isTickOn <> 0										// New beat and sound on
-		if mod(floor(beat#),beats) = 0 then vol = 100 else vol = 40									// Accentuate first beat of bar
-		PlaySound(ISMETRONOME,vol)
+		if floor(mt.lastBeat#) <> floor(beat#) and mt.isTickOn <> 0									// New beat and sound on
+			if mod(floor(beat#),beats) = 0 then vol = 100 else vol = 40								// Accentuate first beat of bar
+			PlaySound(ISMETRONOME,vol)
+		endif
+		mt.lastBeat# = beat#	
 	endif
-	mt.lastBeat# = beat#	
 endfunction
 
 // ****************************************************************************************************************************************************************
@@ -105,8 +107,11 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function Metronome_ClickHandler(mt ref as Metronome,ci ref as ClickInfo)
-	if GetSpriteHitTest(mt.baseID,ci.x,ci.y) <> 0 
-		mt.isTickOn = (mt.isTickOn = 0)
-		PlaySound(ISPING)
+	if mt.isVisible <> 0
+		if GetSpriteHitTest(mt.baseID,ci.x,ci.y) <> 0 
+			mt.isTickOn = (mt.isTickOn = 0)
+			PlaySound(ISPING)
+		endif
 	endif
 endfunction
+
