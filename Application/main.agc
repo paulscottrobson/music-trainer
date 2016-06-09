@@ -131,15 +131,15 @@ while endPlay = 0
 		PlaySound(ISPING)
 	endif
 	
-	//for i = 1 to CountStringTokens(debug,";")
-		//print(GetStringToken(debug,";",i))
-	//next i
+	for i = 1 to CountStringTokens(debug,";")
+		print(GetStringToken(debug,";",i))
+	next i
 		
 	RenderManager_MoveScroll(rMgr,sng,pos#)
 	Player_Update(plyr,sng,pos#)
 	Metronome_Update(mtNm,pos#,sng.beats)
 	ChordHelper_Update(cHelp,sng,pos#)
-	pos# = pos# + 0.01
+	pos# = pos# + TempoMeter_ScalePositionAdjustment(tmtr,0.01)
 	pos# = Positioner_Update(posn,pos#)
     Sync()
 endwhile
@@ -159,7 +159,6 @@ while GetRawKeyState(27) <> 0
 	Sync()
 endwhile
 
-// 	TODO: Speedo tempo controller complete
 //	TODO: Main object
 
 //	X exit

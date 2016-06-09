@@ -24,8 +24,8 @@ type TempoMeter
 	alpha# as float																					// Alpha
 endtype
 
-#constant TEMPO_MAX		6
-#constant TEMPO_ANGLE 	118
+#constant TEMPO_MAX		7
+#constant TEMPO_ANGLE 	112.5
 
 // ****************************************************************************************************************************************************************
 //															Create a tempometer object
@@ -85,5 +85,37 @@ endfunction
 
 function TempoMeter_ClickHandler(tm ref as TempoMeter,ci ref as ClickInfo)
 	if tm.isVisible <> 0 
+		if GetSpriteHitTest(IDB_METER,ci.x,ci.y) <> 0 or (FindString("PFSR",ci.key$) > 0 and ci.key$ <> "")
+			bottomZone = ci.y > GetSpriteY(IDB_METER) + GetSpriteHeight(IDB_METER)*0.55
+			if bottomZone <> 0 or ci.key$ = "S" or ci.key$ = "F" or ci.key$ = "R"
+				dir = 1																				// Which way/
+				if ci.x < GetSpriteX(IDB_METER)+GetSpriteWidth(IDB_METER)/2 then dir = -1
+				if ci.key$ = "S" then dir = -1														// Keyboard
+				if ci.key$ = "F" then dir = 1
+				tm.tempoPos# = tm.tempoPos# + dir 													// Adjust position.
+				if ci.key$ = "R" then tm.tempoPos# = 0
+				if abs(tm.tempoPos#) > TEMPO_MAX then tm.tempoPos# = TEMPO_MAX * dir 				// Max out
+				SetSpriteAngle(IDB_METER+1,TEMPO_ANGLE * tm.tempoPos# / TEMPO_MAX)					// Set the angle
+			else
+				PlaySound(ISPING)
+				tm.isPaused = (tm.isPaused = 0)
+				if tm.isPaused
+					SetSpriteColor(IDB_METER,255,64,64,255)
+				else
+					SetSpriteColor(IDB_METER,255,255,255,255)
+				endif
+			endif
+		endif
 	endif
 endfunction
+
+// ****************************************************************************************************************************************************************
+//																	Scale a positional offset
+// ****************************************************************************************************************************************************************
+
+function TempoMeter_ScalePositionAdjustment(tm ref as TempoMeter,offset# as float)
+	move# = 0.0																						// result adjustment
+	if tm.isPaused = 0 																				// if not paused
+		move# = offset# + offset# * tm.tempoPos# / 10.0												// Adjust by 10% of adjustment for evert tempo position
+	endif
+endfunction move#
