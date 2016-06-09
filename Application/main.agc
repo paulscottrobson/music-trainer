@@ -41,6 +41,7 @@ mtNm as Metronome
 plyr as Player
 cHelp as ChordHelper
 posn as Positioner
+tmtr as TempoMeter
 
 a$ = "music/When I'm Cleaning Windows.music"
 
@@ -66,7 +67,7 @@ Player_New(plyr,"20,13,17,22",10,0,64,80,IDB_PLAYER)
 Player_Move(plyr,ctrl.scWidth-32-4,ctrl.scHeight-32-4)
 
 ChordHelper_New(cHelp,sng,110,220,95,IDB_CHORDHELPER)
-ChordHelper_Move(cHelp,328+32,16)
+ChordHelper_Move(cHelp,340,16)
 
 Positioner_New(posn,sng,888,50,50,IDB_POSITIONER)
 Positioner_Move(posn,32,730)
@@ -79,6 +80,9 @@ Fretboard_Move(frBrd,350)
 
 Metronome_New(mtNm,190,60,IDB_METRONOME)
 Metronome_Move(mtNm,780,180)
+
+TempoMeter_New(tmtr,230,80,IDB_METER)
+TempoMeter_Move(tmtr,120,105)
 
 CreateSprite(IDB_AGK,IDTGF)
 SetSpritePosition(IDB_AGK,ctrl.scWidth-128-16,105)
@@ -94,7 +98,6 @@ endPlay = 0
 while endPlay = 0
     Print(ScreenFPS())
     Print(pos#)
-
     if GetRawKeyPressed(27) <> 0 then endPlay = 1
 
 	for i = 1 to len(CMDKEYS)
@@ -105,6 +108,7 @@ while endPlay = 0
 			Metronome_ClickHandler(mtNm,ci)
 			Position_ClickHandler(posn,rMgr,sng,ci)
 			Player_ClickHandler(plyr,ci)
+			TempoMeter_ClickHandler(tmtr,ci)
 		endif
 	next i
 	
@@ -115,6 +119,7 @@ while endPlay = 0
 		Metronome_ClickHandler(mtNm,ci)
 		Position_ClickHandler(posn,rMgr,sng,ci)
 		Player_ClickHandler(plyr,ci)
+		TempoMeter_ClickHandler(tmtr,ci)
 		if GetSpriteHitTest(IDB_EXIT,ci.x,ci.y) <> 0 
 			endPlay = 1
 			PlaySound(ISPING)
@@ -145,6 +150,8 @@ Metronome_Delete(mtNm)
 ChordHelper_Delete(cHelp)
 Positioner_Delete(posn)
 Player_Delete(plyr)
+TempoMeter_Delete(tmtr)
+
 DeleteSprite(IDB_AGK)
 DeleteSprite(IDB_EXIT)
 
