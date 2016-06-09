@@ -80,7 +80,7 @@
      inkscape:pageshadow="2"
      borderopacity="1.0"
      inkscape:current-layer="layer1"
-     inkscape:cx="-14.576024"
+     inkscape:cx="-24.216538"
      inkscape:cy="23.105275"
      inkscape:window-width="1920"
      height="200px"
@@ -100,200 +100,90 @@
      inkscape:groupmode="layer"
      transform="translate(-347.89 -131.64)">
     <path
-       sodipodi:type="arc"
-       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="opacity:0.97000002;color:#000000;fill:#00ffff;fill-opacity:1;stroke:none;stroke-width:0.2499993;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 393.04625,144.37275 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z m 2.09375,0.5 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z m -4.40625,0.0312 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z m 5.84375,2.625 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z m -7.28125,0.0312 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z m 8.71875,3.5625 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z m -10.125,0.0312 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z m 11.5625,4.28125 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z m -13,0.0312 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z m 14.40625,4.53125 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z M 385.015,160.029 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z m 17.28125,5.65625 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z m -18.71875,0.0312 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z m 20.15625,5.96875 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z m -21.5625,0.0312 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
        id="path3006"
-       sodipodi:cx="4.5"
-       sodipodi:cy="3.0139999"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
-       transform="matrix(2.0000056,0,0,2.0000056,344.09926,151.11)"
-       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
-       inkscape:export-xdpi="499.75058"
-       inkscape:export-ydpi="499.75058" />
-    <path
-       sodipodi:type="arc"
-       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3006-1"
-       sodipodi:cx="4.5"
-       sodipodi:cy="3.0139999"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
-       transform="matrix(2.0000056,0,0,2.0000056,345.52783,145.11)"
-       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
-       inkscape:export-xdpi="499.75058"
-       inkscape:export-ydpi="499.75058" />
-    <path
-       sodipodi:type="arc"
-       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3006-1-7"
-       sodipodi:cx="4.5"
-       sodipodi:cy="3.0139999"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
-       transform="matrix(2.0000056,0,0,2.0000056,354.96988,123.75536)"
-       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
-       inkscape:export-xdpi="499.75058"
-       inkscape:export-ydpi="499.75058" />
-    <path
-       sodipodi:type="arc"
-       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3006-1-7-4"
-       sodipodi:cx="4.5"
-       sodipodi:cy="3.0139999"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
-       transform="matrix(2.0000056,0,0,2.0000056,352.67069,124.3033)"
-       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
-       inkscape:export-xdpi="499.75058"
-       inkscape:export-ydpi="499.75058" />
-    <path
-       sodipodi:type="arc"
-       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3006-1-7-4-0"
-       sodipodi:cx="4.5"
-       sodipodi:cy="3.0139999"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
-       transform="matrix(2.0000056,0,0,2.0000056,349.81355,130.54531)"
-       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
-       inkscape:export-xdpi="499.75058"
-       inkscape:export-ydpi="499.75058" />
-    <path
-       sodipodi:type="arc"
-       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3006-1-7-4-0-9"
-       sodipodi:cx="4.5"
-       sodipodi:cy="3.0139999"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
-       transform="matrix(2.0000056,0,0,2.0000056,348.38497,134.86799)"
-       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
-       inkscape:export-xdpi="499.75058"
-       inkscape:export-ydpi="499.75058" />
-    <path
-       sodipodi:type="arc"
-       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3006-1-7-4-0-4"
-       sodipodi:cx="4.5"
-       sodipodi:cy="3.0139999"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
-       transform="matrix(2.0000056,0,0,2.0000056,351.24212,126.94866)"
-       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
-       inkscape:export-xdpi="499.75058"
-       inkscape:export-ydpi="499.75058" />
-    <path
-       sodipodi:type="arc"
-       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3006-1-7-4-0-4-8"
-       sodipodi:cx="4.5"
-       sodipodi:cy="3.0139999"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
-       transform="matrix(2.0000056,0,0,2.0000056,346.9564,139.43268)"
-       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
-       inkscape:export-xdpi="499.75058"
-       inkscape:export-ydpi="499.75058" />
-    <path
-       sodipodi:type="arc"
-       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3006-2"
-       sodipodi:cx="4.5"
-       sodipodi:cy="3.0139999"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
-       transform="matrix(-2.0000056,0,0,2.0000056,383.664,151.07809)"
-       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
-       inkscape:export-xdpi="499.75058"
-       inkscape:export-ydpi="499.75058" />
-    <path
-       sodipodi:type="arc"
-       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3006-1-4"
-       sodipodi:cx="4.5"
-       sodipodi:cy="3.0139999"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
-       transform="matrix(-2.0000056,0,0,2.0000056,382.23543,145.07809)"
-       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
-       inkscape:export-xdpi="499.75058"
-       inkscape:export-ydpi="499.75058" />
-    <path
-       sodipodi:type="arc"
-       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3006-1-7-4-5"
-       sodipodi:cx="4.5"
-       sodipodi:cy="3.0139999"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
-       transform="matrix(-2.0000056,0,0,2.0000056,375.09257,124.27139)"
-       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
-       inkscape:export-xdpi="499.75058"
-       inkscape:export-ydpi="499.75058" />
-    <path
-       sodipodi:type="arc"
-       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3006-1-7-4-0-1"
-       sodipodi:cx="4.5"
-       sodipodi:cy="3.0139999"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
-       transform="matrix(-2.0000056,0,0,2.0000056,377.94971,130.5134)"
-       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
-       inkscape:export-xdpi="499.75058"
-       inkscape:export-ydpi="499.75058" />
-    <path
-       sodipodi:type="arc"
-       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3006-1-7-4-0-9-7"
-       sodipodi:cx="4.5"
-       sodipodi:cy="3.0139999"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
-       transform="matrix(-2.0000056,0,0,2.0000056,379.37829,134.83608)"
-       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
-       inkscape:export-xdpi="499.75058"
-       inkscape:export-ydpi="499.75058" />
-    <path
-       sodipodi:type="arc"
-       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3006-1-7-4-0-4-1"
-       sodipodi:cx="4.5"
-       sodipodi:cy="3.0139999"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
-       transform="matrix(-2.0000056,0,0,2.0000056,376.52114,126.91675)"
-       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
-       inkscape:export-xdpi="499.75058"
-       inkscape:export-ydpi="499.75058" />
-    <path
-       sodipodi:type="arc"
-       style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3006-1-7-4-0-4-8-1"
-       sodipodi:cx="4.5"
-       sodipodi:cy="3.0139999"
-       sodipodi:rx="0.5"
-       sodipodi:ry="0.5"
-       d="m 5,3.0139999 a 0.5,0.5 0 1 1 -1,0 0.5,0.5 0 1 1 1,0 z"
-       transform="matrix(-2.0000056,0,0,2.0000056,380.80686,139.40077)"
-       inkscape:export-filename="C:\music-trainer\Graphics\sinecurve.png"
-       inkscape:export-xdpi="499.75058"
-       inkscape:export-ydpi="499.75058" />
+       inkscape:connector-curvature="0" />
+    <g
+       id="g3091"
+       style="fill:#ffffff;fill-opacity:1"
+       inkscape:export-xdpi="199.36339"
+       inkscape:export-ydpi="199.36339">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3089"
+         d="m 307.39,126.06045 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
+         style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3087"
+         d="m 313.07304,126.56045 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
+         style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3085"
+         d="m 301.70697,126.59165 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
+         style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3083"
+         d="m 318.75607,129.21665 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
+         style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3081"
+         d="m 296.02393,129.24785 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
+         style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3079"
+         d="m 324.43911,132.81035 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
+         style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3077"
+         d="m 290.34089,132.84155 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
+         style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3075"
+         d="m 330.12214,137.1228 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
+         style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3073"
+         d="m 284.65786,137.154 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
+         style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3071"
+         d="m 335.80518,141.68525 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
+         style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3069"
+         d="m 278.97482,141.71645 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
+         style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3067"
+         d="m 341.48822,147.3727 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
+         style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3065"
+         d="m 273.29179,147.4039 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
+         style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3063"
+         d="m 347.17125,153.37265 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
+         style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         id="path3006-7"
+         d="m 267.60875,153.40385 c -0.55229,0 -1,0.44771 -1,1 0,0.55229 0.44771,1 1,1 0.55229,0 1,-0.44771 1,-1 0,-0.55229 -0.44771,-1 -1,-1 z"
+         style="opacity:0.97000001999999996;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24999930000000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
   </g>
   <metadata
      id="metadata10">

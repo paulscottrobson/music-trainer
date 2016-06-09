@@ -135,7 +135,7 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function Player_ClickHandler(pl ref as Player,ci ref as ClickInfo)
-	if GetSpriteHitTest(pl.spriteID,ci.x,ci.y) <> 0 
+	if GetSpriteHitTest(pl.spriteID,ci.x,ci.y) <> 0 or ci.key$ = "Q"
 		pl.isSoundOn = (pl.isSoundOn = 0)
 		Player_Move(pl,0,0)
 		PlaySound(ISPING)

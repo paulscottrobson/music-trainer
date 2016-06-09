@@ -75,16 +75,17 @@ function BarRender_New(rdr ref as BarRender,bar ref as bar,width as integer,heig
 			current = rdr.positions[i] 																// When the curve starts
 			if i = bar.strumCount then nextS = 1000 else nextS = rdr.positions[i+1] 				// When the curve for this strum ends
 			if nextS - current < 350
-				CreateSprite(baseID+40+i,IDSINECURVE)													// Sine curve.
-				SetSpriteSize(baseID+40+i,(nextS - current) * rdr.width / 1000,rdr.bounceHeight)
+				CreateSprite(baseID+40+i,IDSINECURVE)												// Sine curve.
+			else
+				CreateSprite(baseID+40+i,IDSINECURVEWIDE)												// Sine curve.
 			endif
+			SetSpriteSize(baseID+40+i,(nextS - current) * rdr.width / 1000,rdr.bounceHeight)
 		next i
 	endif
 	
 	CreateSprite(baseID+1,IDFRET)																	// S+1 is the fret
 	scale# = height * PCSTRINGS / 100.0 / GetSpriteHeight(baseID+1)
 	SetSpriteScale(baseID+1,scale#,scale#)
-
 
 	BarRender_Move(rdr,100,100)																		// Move to an arbitrary position so it is drawn and positioned.
 endfunction

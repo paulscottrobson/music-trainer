@@ -88,6 +88,7 @@ CreateSprite(IDB_EXIT,IDEXIT)
 SetSpriteSize(IDB_EXIT,64,64)
 SetSpritePosition(IDB_EXIT,ctrl.scWidth-GetSpriteWidth(IDB_EXIT)-4,4)
 SetPrintSize(16)
+
 pos# = 0.0
 endPlay = 0
 while endPlay = 0
@@ -96,6 +97,17 @@ while endPlay = 0
 
     if GetRawKeyPressed(27) <> 0 then endPlay = 1
 
+	for i = 1 to len(CMDKEYS)
+		if GetRawKeyPressed(asc(mid(CMDKEYS,i,1))) <> 0
+			ci.x = -1000
+			ci.y = -1000
+			ci.key$ = mid(CMDKEYS,i,1)
+			Metronome_ClickHandler(mtNm,ci)
+			Position_ClickHandler(posn,rMgr,sng,ci)
+			Player_ClickHandler(plyr,ci)
+		endif
+	next i
+	
     if GetPointerPressed() 
 		ci as ClickInfo
 		ci.x = GetPointerX()
@@ -103,12 +115,17 @@ while endPlay = 0
 		Metronome_ClickHandler(mtNm,ci)
 		Position_ClickHandler(posn,rMgr,sng,ci)
 		Player_ClickHandler(plyr,ci)
-		if GetSpriteHitTest(IDB_EXIT,ci.x,ci.y) <> 0
+		if GetSpriteHitTest(IDB_EXIT,ci.x,ci.y) <> 0 
 			endPlay = 1
 			PlaySound(ISPING)
 		endif
     endif
     
+    if GetRawKeyPressed(asc("X")) <> 0
+		endPlay = 1
+		PlaySound(ISPING)
+	endif
+	
 	//for i = 1 to CountStringTokens(debug,";")
 		//print(GetStringToken(debug,";",i))
 	//next i
@@ -136,6 +153,10 @@ while GetRawKeyState(27) <> 0
 endwhile
 
 // 	TODO: Speedo tempo controller complete
-// 	TODO: Long bounce graphic (75% ?)
-//	TODO: Keys (?)
 //	TODO: Main object
+
+//	X exit
+//	M metronome
+//	Q quiet
+
+//	FSRP Fast/Slow/Reset tempo Pause

@@ -43,6 +43,7 @@
 #constant	IDEXIT 			120																		// ID of exit icon
 #constant	IDMETER 		121 																	// ID of meter body
 #constant 	IDMETERNEEDLE 	122 																	// ID of meter needle
+#constant 	IDSINECURVEWIDE 123 																	// ID for sine curve (wide version)
 
 #constant 	ISMETRONOME 	1 																		// ID of metronome SFX
 #constant	ISPING 			2 																		// ID of action SFX
@@ -72,6 +73,7 @@
 #constant PCSTRINGS 		75 																		// Percentage height of render box occupied by strum/pick
 #constant COLOUR_SET		"#00F#0F0#F00#0FF#FF0#F80#888#F0F#800#880#088#A33#8F0#FCD"				// Colours buttons/arrows can use
 #constant INVERTFRETBOARD 	1 																		// If non-zero then the A string is at the top of the fretboard
+#constant CMDKEYS 			"XMQSFRP"																// Command Keys eXit Metronome Quiet Slower Faster Resettempo Pause
 
 // ****************************************************************************************************************************************************************
 //																  Setup constants
