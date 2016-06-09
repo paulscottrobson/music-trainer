@@ -15,13 +15,14 @@ FILE_11=src%2Fchordhelper.agc;-1
 FILE_12=src%2Fpositioner.agc;-1
 FILE_13=src%2Ftempometer.agc;-1
 FILE_14=src%2Fgame.agc;-1
+FILE_15=src%2Fio.agc;-1
 
 [files]
-FILE_NAME_0=1;main.agc;2326;0
+FILE_NAME_0=1;main.agc;2747;0
 FILE_NAME_1=0;src%2Fconstants.agc;3328;1
 FILE_NAME_2=0;src%2Fresources.agc;1343;2
 FILE_NAME_3=0;src%2Fchorddisplay.agc;5620;3
-FILE_NAME_4=0;src%2Fsong.agc;12462;4
+FILE_NAME_4=0;src%2Fsong.agc;4235;4
 FILE_NAME_5=0;src%2Fchordbucket.agc;6831;5
 FILE_NAME_6=0;src%2Fbarrender.agc;8329;6
 FILE_NAME_7=0;src%2Frendermanager.agc;3079;7
@@ -29,9 +30,10 @@ FILE_NAME_8=0;src%2Ffretboard.agc;3687;8
 FILE_NAME_9=0;src%2Fmetronome.agc;6176;9
 FILE_NAME_10=0;src%2Fplayer.agc;7624;10
 FILE_NAME_11=0;src%2Fchordhelper.agc;2585;11
-FILE_NAME_12=0;src%2Fpositioner.agc;134;12
+FILE_NAME_12=0;src%2Fpositioner.agc;6268;12
 FILE_NAME_13=0;src%2Ftempometer.agc;1004;13
 FILE_NAME_14=0;src%2Fgame.agc;7600;14
+FILE_NAME_15=0;src%2Fio.agc;1515;15
 
 [project]
 description=

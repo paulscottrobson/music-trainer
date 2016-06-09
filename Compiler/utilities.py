@@ -187,6 +187,10 @@ class Compiler:
 	def save(self):
 		render = self.render()															# get result
 		targetFile = ".".join(self.srcFile.split(".")[:-1])+".music"					# create object file name
+		targetFile = targetFile.lower().replace("&","and").replace(":"," ")				# tidy up name for URL/Filename
+		targetFile = targetFile.replace("'","")
 		handle = open(targetFile,"w")													# write to file.
 		handle.write(render)
 		handle.close()
+		return targetFile
+		

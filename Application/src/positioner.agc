@@ -121,7 +121,7 @@ function Position_ClickHandler(po ref as Positioner,rm ref as RenderManager,song
 		if ci.x >= po.x-bRadius and ci.x <= po.x+po.width+bRadius and ci.y >= po.y-po.height/2 and ci.y <= po.y+po.height/2 		
 			hitTest = 0																				// Hit one of the circles
 			for i = 1 to 3 
-				if GetSpriteHitTest(po.baseID+i,ci.x,ci.y) <> 0 then hitTest = i
+				if GetSpriteHitTest(po.baseID+i,ci.x,ci.y) <> 0 and hitTest <> 2 then hitTest = i
 			next i
 			if hitTest = 0 																			// Not hit a circle, just move
 				pos# = (ci.x - po.x)  * (po.barCount+1.0) / po.width

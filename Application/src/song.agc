@@ -65,7 +65,8 @@ endfunction
 // ****************************************************************************************************************************************************************
 
 function Song_Load(song ref as Song,fileName as String)
-	ASSERT(GetFileExists(fileName),"SLD:NoFile")													// File exists ?
+	fileName = IOAccessFile(fileName)																// Access the file name
+	ASSERT(GetFileExists(fileName),"SLD:NoFile"+fileName)											// File exists ?
 	handle = OpenToRead(fileName) 																	// Open file to read.
 	currentBar = 0 																					// Number of current bar (last one in the bars list)
 	while FileEOF(handle) = 0																		// Keep reading lines.

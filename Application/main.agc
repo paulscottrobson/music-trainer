@@ -11,6 +11,7 @@
 
 #include "src/constants.agc"																		// Constant items
 #include "src/resources.agc"																		// Resource loader									
+#include "src/io.agc" 																				// I/O Stuff
 #include "src/chorddisplay.agc"																		// Chord Display Object
 #include "src/song.agc" 																			// Song manager
 #include "src/chordbucket.agc"																		// Chord bucket object
@@ -34,10 +35,11 @@ SetOrientationAllowed(0,0,1,1)																		// Landscape only
 CreateSprite(IDBACKGROUND,IDBACKGROUND)																// Create the background
 SetSpriteSize(IDBACKGROUND,ctrl.scWidth,ctrl.scHeight)												
 SetSpriteDepth(IDBACKGROUND,DEPTHBACKGROUND)
+SetPrintSize(16)
 
-a$ = "music/When I'm Cleaning Windows.music"
-//a$ = "music/Dont Worry Be Happy.music"
-//a$ = "music/Ukulele Buddy/20 Hokey Pokey WarMgr Up.music"
+a$ = "when im cleaning windows.music"
+rem a$ = "dont worry be happy.music"
+rem a$ = "ukulele buddy.20 hokey pokey warm up.music"
 
 game as Game
 Game_New(game,a$)
@@ -52,3 +54,5 @@ endwhile
 //	M metronome
 //	Q quiet
 //	FSRP Fast/Slow/Reset tempo Pause
+
+//	Think about directory loader.
