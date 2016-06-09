@@ -1,0 +1,5 @@
+1 - chords g em c d7.music
+2 - chords g g0 am7 d7.music
+3 - chords g g7 c cm6.music
+4 - chords g em a7 d7.music
+5 - chords b7 em a7 d7 g.music

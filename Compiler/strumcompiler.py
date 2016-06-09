@@ -44,7 +44,7 @@ class StrumCompiler(Compiler):
 				self.pattern = int(m.group(1))											# switch pattern
 				chunkSize = len(m.group(0))												# amount to remove
 			else:
-				m = re.match("^([a-gx][\\#b]?[a-z079]*)([\\s*\\/\\.]*)",chords)			# match against a chord
+				m = re.match("^([a-gx][\\#b]?[a-z0679]*)([\\s*\\/\\.]*)",chords)			# match against a chord
 				assert m is not None,"Cannot process "+chords							# check okay.
 				chunkSize = len(m.group(0))												# amount to remove
 				self.music[self.barPosition].addLyric(lyrics[:chunkSize].strip())		# add lyrics if any.
@@ -52,7 +52,7 @@ class StrumCompiler(Compiler):
 				assert self.beatPosition + len(strums) <= self.beats,"Bar overflow"		# check that the strums fit in this bar
 				for s in strums:														# do each strum pair.
 					if s == "/":														# if doing a strum here.
-						self.generateChords(m.group(1).strip())							# generate the chords.
+						self.generateChords(m.group(1).strip())							# generate the chords.						
 					self.beatPosition += 1 												# advance one beat position.
 				if self.beatPosition == self.beats:										# reached end of bar
 					self.barPosition += 1												# next bar.

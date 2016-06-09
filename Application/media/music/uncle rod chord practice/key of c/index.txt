@@ -1,0 +1,6 @@
+1 - chords c am f g7.music
+2 - chords c c0 dm7 g7.music
+3 - chords c c7 f fm6.music
+4 - chords c am d7 g7.music
+5 - chords e7 am d7 g7.music
+6 - chords e7 am d7 g7 c.music

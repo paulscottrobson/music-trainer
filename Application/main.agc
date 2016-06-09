@@ -40,6 +40,7 @@ SetPrintSize(16)
 a$ = "when im cleaning windows.music"
 rem a$ = "dont worry be happy.music"
 rem a$ = "ukulele buddy:21 hokey pokey.music"
+rem a$ = "uncle rod chord practice:key of d:2 - chords d d0 em7 a7.music"
 
 game as Game
 Game_New(game,a$)
@@ -56,4 +57,3 @@ endwhile
 //	FSRP Fast/Slow/Reset tempo Pause
 
 //	Think about directory loader.
-// Generate Uncle Rods practice

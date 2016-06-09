@@ -27,3 +27,5 @@ def compileTree(directory):
 			open(root+os.sep+"index.txt","w").write("\n".join(indexFile))
 
 compileTree("..\\Application\\media\\music")
+
+#StrumCompiler("..\\Application\\media\\music\\test.strum").save()

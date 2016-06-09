@@ -18,7 +18,7 @@ FILE_14=src%2Fgame.agc;-1
 FILE_15=src%2Fio.agc;-1
 
 [files]
-FILE_NAME_0=1;main.agc;2770;0
+FILE_NAME_0=1;main.agc;2813;0
 FILE_NAME_1=0;src%2Fconstants.agc;3328;1
 FILE_NAME_2=0;src%2Fresources.agc;1343;2
 FILE_NAME_3=0;src%2Fsong.agc;4235;3

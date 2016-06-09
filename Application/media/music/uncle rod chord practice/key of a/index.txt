@@ -1,0 +1,5 @@
+1 - chords a f#m d e7.music
+2 - chords a a0 bm7 e7.music
+3 - chords a a7 d dm6.music
+4 - chords a f#m b7 e7.music
+5 - chords c#7 f#m b7 e7 a.music
