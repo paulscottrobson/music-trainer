@@ -75,5 +75,4 @@ endwhile
 //	FSRP Fast/Slow/Reset tempo Pause
 
 
-// TODO: Mouse click to select
-// TODO: Mouse click to scroll
+// TODO: Couple selector to file system

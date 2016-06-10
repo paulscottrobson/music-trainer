@@ -71,6 +71,10 @@ function MusicSelector_Delete(mse ref as MusicSelector)
 		for i = 1 to mse.vCount
 			SelectorItem_Delete(mse.vItems[i])
 		next i
+		if mse.hasScrollBar <> 0
+			DeleteSprite(mse.baseID)
+			DeleteSprite(mse.baseID+1)
+		endif
 	endif
 endfunction
 
@@ -115,6 +119,8 @@ function _MusicSelector_UpdateText(mse ref as MusicSelector)
 		endif
 		if right(item$,6) = ".music" then item$ = left(item$,len(item$)-6)
 		SelectorItem_SetText(mse.vItems[i],item$)
+		sel = (i+mse.scrollPosition) = mse.selected
+		SelectorItem_SetSelected(mse.vItems[i],sel)
 	next i
 endfunction
 
@@ -149,9 +155,26 @@ function MusicSelector_Select(mse as MusicSelector)
 			endif
 		endif
 		
+		if GetPointerPressed() <> 0 																// Mouse click
+			x = GetPointerX()
+			y = GetPointerY()
+			for i = 1 to mse.vCount																	// Check if any boxes clicked
+				if GetSpriteHitTest(mse.baseID+i+10,x,y) <> 0
+					selectResult$ = GetStringToken(mse.itemList$,";",i+mse.scrollPosition)			// If so set result allowing for scroll position
+					hasSelected = 1																	// And exit					
+				endif				
+			next i
+			y = y - GetSpriteY(mse.baseID)+GetSpriteWidth(mse.baseID)/2								// Offset from top of scroll bar, calculate if hit
+			x = x - (mse.x+mse.iWidth/2+mse.scrollWidth/2)
+			if y >= 0 and y < GetSpriteWidth(mse.baseID) and abs(x) < mse.scrollWidth/2
+				pos = y * (mse.totalCount - mse.vCount) / GetSpriteWidth(mse.baseID)
+				_MusicSelector_ScrollTo(mse,pos)
+			endif			
+		endif
 		if GetRawKeyPressed(27) <> 0 then End
 		Sync()
 	endwhile
+	PlaySound(ISPING)
 	
 endfunction selectResult$
 
@@ -160,8 +183,9 @@ endfunction selectResult$
 // ****************************************************************************************************************************************************************
 
 function _MusicSelector_ScrollTo(mse ref as MusicSelector,newScroll as integer)
-	debug = debug + str(newScroll)+";"
+	//debug = debug + str(newScroll)+";"
 	mse.scrollPosition = newScroll
 	_MusicSelector_UpdateText(mse)
 	MusicSelector_Move(mse,mse.x,mse.y)
 endfunction
+	

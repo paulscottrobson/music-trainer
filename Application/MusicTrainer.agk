@@ -20,7 +20,7 @@ FILE_16=src%2Fselectoritem.agc;-1
 FILE_17=src%2Fmusicselector.agc;-1
 
 [files]
-FILE_NAME_0=0;main.agc;2647;0
+FILE_NAME_0=1;main.agc;3434;0
 FILE_NAME_1=0;src%2Fconstants.agc;3785;1
 FILE_NAME_2=0;src%2Fresources.agc;1937;2
 FILE_NAME_3=0;src%2Fchorddisplay.agc;6670;7
@@ -28,7 +28,7 @@ FILE_NAME_4=0;src%2Fsong.agc;4235;3
 FILE_NAME_5=0;src%2Fgame.agc;7600;4
 FILE_NAME_6=0;src%2Fio.agc;2332;5
 FILE_NAME_7=0;src%2Fselectoritem.agc;164;6
-FILE_NAME_8=1;src%2Fmusicselector.agc;4804;8
+FILE_NAME_8=0;src%2Fmusicselector.agc;4482;8
 
 [project]
 description=
