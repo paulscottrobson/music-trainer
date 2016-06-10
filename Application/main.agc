@@ -39,10 +39,14 @@ SetSpriteSize(IDBACKGROUND,ctrl.scWidth,ctrl.scHeight)
 SetSpriteDepth(IDBACKGROUND,DEPTHBACKGROUND)
 SetPrintSize(16)
 
-item$ = IOLoadDirectory("uncle rod chord practice:key of c")
+d$ = "uncle rod chord practice:key of c"
+//d$ = "uncle rod chord practice"
+item$ = IOLoadDirectory(d$)
 ms as MusicSelector
-MusicSelector_New(ms,item$,880,70,10,8,20,300)
-//MusicSelector_Delete(ms)
+MusicSelector_New(ms,item$,900,70,10,8,20,300)
+
+debug = MusicSelector_Select(ms)
+MusicSelector_Delete(ms)
 
 a$ = "when im cleaning windows.music"
 rem a$ = "dont worry be happy.music"
@@ -70,4 +74,6 @@ endwhile
 //	Q quiet
 //	FSRP Fast/Slow/Reset tempo Pause
 
-//	Think about directory loader.
+
+// TODO: Mouse click to select
+// TODO: Mouse click to scroll

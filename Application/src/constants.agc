@@ -53,9 +53,10 @@
 //																   Blocks of IDs
 // ****************************************************************************************************************************************************************
 
-#constant	IDB_METER		840 																	// 840 Tempo Meter
-#constant	IDB_EXIT 		850 																	// 850 Exit Button
-#constant 	IDB_AGK 		860 																	// 860 AGK Icon
+#constant 	IDB_SELECTOR 	800 																	// 800+ Selector IDs
+#constant	IDB_METER		840 																	// 840+ Tempo Meter
+#constant	IDB_EXIT 		850 																	// 850+ Exit Button
+#constant 	IDB_AGK 		860 																	// 860+ AGK Icon
 #constant	IDB_PLAYER 		870																		// 870+ Player
 #constant 	IDB_POSITIONER 	880 																	// 880+ Positioner
 #constant 	IDB_METRONOME	890																		// 890+ Metronome
@@ -65,6 +66,19 @@
 #constant 	IDB_PERRENDER 	500 																	// each renderer needs 500 space of IDs
 
 #constant 	ISB_PLAYERBASE 	10 																		// IDs from 10+ allocated to the player
+
+// ****************************************************************************************************************************************************************
+//																	Scan Codes
+// ****************************************************************************************************************************************************************
+
+#constant KEY_ENTER		   13
+#constant KEY_PAGEUP       33
+#constant KEY_PAGEDOWN     34
+#constant KEY_END          35
+#constant KEY_HOME         36
+#constant KEY_UP           38
+#constant KEY_DOWN         40
+#constant KEY_SPACE 	   32
 
 // ****************************************************************************************************************************************************************
 //																  Other constants

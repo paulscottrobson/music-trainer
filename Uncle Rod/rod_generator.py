@@ -32,7 +32,7 @@ for noteKey in rodChecks.keys():																	# For every key (C F G A D)
 	for repeat in range(4,0,-1):																	# blocks of 4,3,2,1
 		for chordSet in [x.strip().lower() for x in rodChecks[noteKey].split(",")]:					# For each set of chords	
 			chords = [x for x in chordSet.split(" ") if x.strip() != ""]							# Convert into a python list
-			name = "Rod - {0} - Chords {2} x {1}.strum".format(exNumber,",".join(chords),repeat)
+			name = "Rod - {0:02} - Chords {2} x {1}.strum".format(exNumber,",".join(chords),repeat)
 			group = "".join([(" "+c) * repeat for c in chords])										# one chord set, all chords repeated
 			group = group * (6 / repeat)															# make all lines roughly the same
 			group = (group + "\n\n\n") * 3															# Three lines of each

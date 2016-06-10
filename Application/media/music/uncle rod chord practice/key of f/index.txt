@@ -1,4 +1,12 @@
-rod - 1 - chords 4 x f,dm,bb,c7.music
+rod - 01 - chords 4 x f,dm,bb,c7.music
+rod - 02 - chords 4 x f,f0,gm7,c7.music
+rod - 03 - chords 4 x f,f7,bb,bbm6.music
+rod - 04 - chords 4 x f,dm,g7,c7.music
+rod - 05 - chords 4 x a7,dm,g7,c7,f.music
+rod - 06 - chords 3 x f,dm,bb,c7.music
+rod - 07 - chords 3 x f,f0,gm7,c7.music
+rod - 08 - chords 3 x f,f7,bb,bbm6.music
+rod - 09 - chords 3 x f,dm,g7,c7.music
 rod - 10 - chords 3 x a7,dm,g7,c7,f.music
 rod - 11 - chords 2 x f,dm,bb,c7.music
 rod - 12 - chords 2 x f,f0,gm7,c7.music
@@ -9,12 +17,4 @@ rod - 16 - chords 1 x f,dm,bb,c7.music
 rod - 17 - chords 1 x f,f0,gm7,c7.music
 rod - 18 - chords 1 x f,f7,bb,bbm6.music
 rod - 19 - chords 1 x f,dm,g7,c7.music
-rod - 2 - chords 4 x f,f0,gm7,c7.music
 rod - 20 - chords 1 x a7,dm,g7,c7,f.music
-rod - 3 - chords 4 x f,f7,bb,bbm6.music
-rod - 4 - chords 4 x f,dm,g7,c7.music
-rod - 5 - chords 4 x a7,dm,g7,c7,f.music
-rod - 6 - chords 3 x f,dm,bb,c7.music
-rod - 7 - chords 3 x f,f0,gm7,c7.music
-rod - 8 - chords 3 x f,f7,bb,bbm6.music
-rod - 9 - chords 3 x f,dm,g7,c7.music

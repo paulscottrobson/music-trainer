@@ -49,8 +49,13 @@ function MusicSelector_New(mse ref as MusicSelector,itemList$ as String,iWidth a
 	if mse.hasScrollBar then mse.scrollWidth = iWidth / 16
 	mse.selected = 1
 	for i = 1 to mse.vCount
-		SelectorItem_New(mse.vItems[i],iWidth,iHeight,depth,baseID+i)
+		SelectorItem_New(mse.vItems[i],iWidth,iHeight,depth,baseID+i+10)
 	next i
+	if mse.hasScrollBar <> 0
+		CreateSprite(baseID,IDSTRING)																// Use the string as the scroll bar
+		SetSpriteAngle(baseID,90)
+		CreateSprite(baseID+1,IDGREENCIRCLE)
+	endif
 	_MusicSelector_UpdateText(mse)	
 	SelectorItem_SetSelected(mse.vItems[1],1)
 	MusicSelector_Move(mse,-1,-1)																	// Move it.
@@ -75,17 +80,31 @@ endfunction
 
 function MusicSelector_Move(mse ref as MusicSelector,x as integer,y as integer)
 	if mse.isInitialised <> 0		
-		if x < 0 then x = ctrl.scWidth/2 - mse.scrollWidth
-		if y < 0 then y = ctrl.scHeight/2 - (mse.iHeight*(mse.vCount-1))/2 - (mse.vSpacing*(mse.vCount-1))/2
+		totalHeight = mse.iHeight*(mse.vCount-1) + mse.vSpacing*(mse.vCount-1)
+		if x < 0 then x = ctrl.scWidth/2 - mse.scrollWidth / 2
+		if y < 0 then y = ctrl.scHeight/2 - totalHeight / 2
 		mse.x = x
 		mse.y = y
 		for i = 1 to mse.vCount
 			SelectorItem_Move(mse.vItems[i],x,y)
 			y = y + mse.iHeight + mse.vSpacing
 		next i
+		if mse.hasScrollBar 
+			xc = mse.x+mse.iWidth/2+mse.scrollWidth/2
+			SetSpritePositionByOffset(mse.baseID,xc,mse.y+totalHeight / 2)
+			SetSpriteSize(mse.baseID,totalHeight,mse.scrollWidth / 5)
+			SetSpriteDepth(mse.baseID,mse.depth)
+			SetSpriteSize(mse.baseID+1,mse.scrollWidth*0.8,mse.scrollWidth*0.8)
+			SetSpriteDepth(mse.baseID+1,mse.depth)
+			y = mse.y + totalHeight * mse.scrollPosition / (mse.totalCount - mse.vCount)
+			SetSpritePosition(mse.baseID+1,xc-GetSpriteWidth(mse.baseID+1)/2,y-GetSpriteHeight(mse.baseID+1)/2)
+		endif
 	endif
 endfunction
 
+// ****************************************************************************************************************************************************************
+//																Update text in a selector
+// ****************************************************************************************************************************************************************
 
 function _MusicSelector_UpdateText(mse ref as MusicSelector)
 	for i = 1 to mse.vCount
@@ -97,4 +116,52 @@ function _MusicSelector_UpdateText(mse ref as MusicSelector)
 		if right(item$,6) = ".music" then item$ = left(item$,len(item$)-6)
 		SelectorItem_SetText(mse.vItems[i],item$)
 	next i
+endfunction
+
+// ****************************************************************************************************************************************************************
+//														Run selector, returns text of selected
+// ****************************************************************************************************************************************************************
+
+function MusicSelector_Select(mse as MusicSelector)
+	hasSelected = 0
+	while hasSelected = 0
+		selectResult$ = GetStringToken(mse.itemList$,";",mse.selected)								// Get the result
+		if GetRawKeyState(KEY_SPACE) or GetRawKeyState(KEY_ENTER) then hasSelected = 1				// Exit if selected.
+		offset = 0
+		if GetRawKeyPressed(KEY_UP) then offset = -1												// Handle keys moving selected
+		if GetRawKeyPressed(KEY_DOWN) then offset = 1
+		if GetRawKeyPressed(KEY_PAGEUP) then offset = -mse.vCount
+		if GetRawKeyPressed(KEY_PAGEDOWN) then offset = mse.vCount
+		if GetRawKeyPressed(KEY_HOME) then offset = -mse.totalCount
+		if GetRawKeyPressed(KEY_END) then offset = mse.totalCount
+		
+		if offset <> 0  																			// Moving position
+			newSelected = mse.selected + offset														// Calculate new select
+			if newSelected < 1 then newSelected = 1													// Check in range
+			if newSelected > mse.totalCount then newSelected = mse.totalCount
+			if newSelected <> mse.selected 															// Actually changed ?
+				SelectorItem_SetSelected(mse.vItems[mse.selected-mse.scrollPosition],0)				// Deselect
+				offsetInItems = newSelected-mse.scrollPosition
+				if offsetInItems < 1 then _MusicSelector_ScrollTo(mse,newSelected-1) 					
+				if offsetInItems > mse.vCount then _MusicSelector_ScrollTo(mse,newSelected-(mse.vCount))
+				SelectorItem_SetSelected(mse.vItems[newSelected-mse.scrollPosition],1)				// Reselect
+				mse.selected = newSelected
+			endif
+		endif
+		
+		if GetRawKeyPressed(27) <> 0 then End
+		Sync()
+	endwhile
+	
+endfunction selectResult$
+
+// ****************************************************************************************************************************************************************
+//															Scroll so the given item is the top item
+// ****************************************************************************************************************************************************************
+
+function _MusicSelector_ScrollTo(mse ref as MusicSelector,newScroll as integer)
+	debug = debug + str(newScroll)+";"
+	mse.scrollPosition = newScroll
+	_MusicSelector_UpdateText(mse)
+	MusicSelector_Move(mse,mse.x,mse.y)
 endfunction
