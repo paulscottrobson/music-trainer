@@ -16,14 +16,17 @@ FILE_12=src%2Fpositioner.agc;-1
 FILE_13=src%2Ftempometer.agc;-1
 FILE_14=src%2Fgame.agc;-1
 FILE_15=src%2Fio.agc;-1
+FILE_16=src%2Fselectoritem.agc;-1
 
 [files]
-FILE_NAME_0=1;main.agc;2512;0
-FILE_NAME_1=0;src%2Fconstants.agc;3328;1
-FILE_NAME_2=0;src%2Fresources.agc;1343;2
-FILE_NAME_3=0;src%2Fsong.agc;4235;3
-FILE_NAME_4=0;src%2Fgame.agc;7600;4
-FILE_NAME_5=0;src%2Fio.agc;2332;5
+FILE_NAME_0=1;main.agc;2764;0
+FILE_NAME_1=0;src%2Fconstants.agc;3266;1
+FILE_NAME_2=0;src%2Fresources.agc;1937;2
+FILE_NAME_3=0;src%2Fchorddisplay.agc;6670;7
+FILE_NAME_4=0;src%2Fsong.agc;4235;3
+FILE_NAME_5=0;src%2Fgame.agc;7600;4
+FILE_NAME_6=0;src%2Fio.agc;2332;5
+FILE_NAME_7=0;src%2Fselectoritem.agc;1693;6
 
 [project]
 description=

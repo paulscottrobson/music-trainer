@@ -44,6 +44,7 @@
 #constant	IDMETER 		121 																	// ID of meter body
 #constant 	IDMETERNEEDLE 	122 																	// ID of meter needle
 #constant 	IDSINECURVEWIDE 123 																	// ID for sine curve (wide version)
+#constant	IDFRAME 		124 																	// ID for selector frame
 
 #constant 	ISMETRONOME 	1 																		// ID of metronome SFX
 #constant	ISPING 			2 																		// ID of action SFX

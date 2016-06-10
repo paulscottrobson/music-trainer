@@ -91,6 +91,38 @@
          in2="result2"
          id="feBlend3116" />
     </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter3095">
+      <feFlood
+         flood-opacity="0.5"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood3097" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite3099" />
+      <feGaussianBlur
+         in="composite"
+         stdDeviation="2"
+         result="blur"
+         id="feGaussianBlur3101" />
+      <feOffset
+         dx="4"
+         dy="4"
+         result="offset"
+         id="feOffset3103" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite3105" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -131,7 +163,7 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="opacity:0.97000002;color:#000000;fill:#d4aa00;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:3.11240625;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="opacity:0.97000001999999996;color:#000000;fill:#d4aa00;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3.11240624999999980;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;filter:url(#filter3095)"
        id="rect3000"
        width="508.57144"
        height="28.571428"
@@ -141,7 +173,8 @@
        transform="matrix(1.0323033,0,0,1.6000003,-1.7766839,-207.98884)"
        rx="9.6870518"
        inkscape:export-xdpi="70"
-       inkscape:export-ydpi="70" />
+       inkscape:export-ydpi="70"
+       inkscape:export-filename="C:\music-trainer\Graphics\selector.png" />
     <path
        style="opacity:0.97000001999999996;color:#000000;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:3;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        d="m 99.000004,453.69552 -20.999993,18.66667 6.999997,0 6.999999,0 0,23.33332 13.999993,0 0,-23.33332 14.00001,0 -21.000006,-18.66667 z"

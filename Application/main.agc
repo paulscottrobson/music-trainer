@@ -24,6 +24,7 @@
 #include "src/positioner.agc" 																		// Positioner
 #include "src/tempometer.agc" 																		// Tempo meter/controller
 #include "src/game.agc" 																			// "Game" object
+#include "src/selectoritem.agc" 																	// Selector item
 
 InitialiseConstants()																				// Set up constants etc.
 LoadResources()																						// Load in resources
@@ -43,16 +44,16 @@ a$ = "when im cleaning windows.music"
 rem a$ = "dont worry be happy.music"
 rem a$ = "ukulele buddy:21 hokey pokey.music"
 rem a$ = "uncle rod chord practice:key of d:rod - 5 - chords 4 x f#7,bm,e7,a7,d.music"
-
-
+ 
 game as Game
 Game_New(game,a$)
 //_Game_SetDisplayMode(game,0)
 Game_Run(game)
 Game_Delete(game)
-while GetRawKeyState(27) <> 0
+while GetRawKeyState(27) = 0
 	Sync()
 endwhile
+
 //"C:\music-trainer\Application\media\music\uncle rod chord practice\key of d\rod - 5 - chords 4 x f#7,bm,e7,a7,d.music"
 //	X exit
 //	M metronome

@@ -34,6 +34,7 @@ function LoadResources()
 	LoadImage(IDEXIT,GFXDIR+"exit.png")
 	LoadImage(IDMETER,GFXDIR+"meter.png")
 	LoadImage(IDMETERNEEDLE,GFXDIR+"meter_needle.png")
+	LoadImage(IDFRAME,GFXDIR+"selector.png")
 	LoadSound(ISMETRONOME,SFXDIR+"metronome.wav")
 	LoadSound(ISPING,SFXDIR+"ping.wav")
 endfunction
