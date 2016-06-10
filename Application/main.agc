@@ -25,6 +25,7 @@
 #include "src/tempometer.agc" 																		// Tempo meter/controller
 #include "src/game.agc" 																			// "Game" object
 #include "src/selectoritem.agc" 																	// Selector item
+#include "src/musicselector.agc" 																	// Music Selector
 
 InitialiseConstants()																				// Set up constants etc.
 LoadResources()																						// Load in resources
@@ -38,19 +39,28 @@ SetSpriteSize(IDBACKGROUND,ctrl.scWidth,ctrl.scHeight)
 SetSpriteDepth(IDBACKGROUND,DEPTHBACKGROUND)
 SetPrintSize(16)
 
-debug = IOLoadDirectory("")
+item$ = IOLoadDirectory("uncle rod chord practice:key of c")
+ms as MusicSelector
+MusicSelector_New(ms,item$,880,70,10,8,20,300)
+//MusicSelector_Delete(ms)
 
 a$ = "when im cleaning windows.music"
 rem a$ = "dont worry be happy.music"
 rem a$ = "ukulele buddy:21 hokey pokey.music"
 rem a$ = "uncle rod chord practice:key of d:rod - 5 - chords 4 x f#7,bm,e7,a7,d.music"
- 
+
+/* 
 game as Game
 Game_New(game,a$)
 //_Game_SetDisplayMode(game,0)
 Game_Run(game)
 Game_Delete(game)
+*/
+
 while GetRawKeyState(27) = 0
+	for i = 1 to CountStringTokens(debug,";")
+		print(GetStringToken(debug,";",i))
+	next i
 	Sync()
 endwhile
 
