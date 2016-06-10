@@ -23,10 +23,11 @@ endfunction filename
 // ****************************************************************************************************************************************************************
 
 function IOLoadDirectory(directoryRoot as string)
-	if directoryRoot <> "" then directoryRoot = directoryRoot + ":" 								// index.txt or <tree>.<index.txt>
+	if directoryRoot <> "" then directoryRoot = directoryRoot + ":" 								// index.txt or <tree>:index.txt
 	indexFile$ = IOAccessFile(directoryRoot+"index.txt")											// This is the index file.
 	ASSERT(GetFileExists(indexFile$) <> 0,"Index file missing "+indexFile$)
 	itemList$ = ""																					// List of ; seperated items.
+	if directoryRoot <> "" then itemList$ = ";(..)"													// Add parent option if not root
 	OpenToRead(1,indexFile$)																		// Open file to read
 	while FileEOF(1) = 0																			// Read in ; seperate them
 		itemList$ = itemList$ + ";"+ReadLine(1)

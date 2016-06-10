@@ -29,17 +29,17 @@ for n in c:
 header = header+"\n"
 for noteKey in rodChecks.keys():																	# For every key (C F G A D)
 	exNumber = 1																					# Numbers exercises.
-	for chordSet in [x.strip().lower() for x in rodChecks[noteKey].split(",")]:						# For each set of chords
-		chords = [x for x in chordSet.split(" ") if x.strip() != ""]								# Convert into a python list
-		render = header
-		for beats in range(4,0,-1):																	# number of beats of each.
-			for repeats in range(0,[None,8,4,4,3][beats]):
-				for ch in chords:
-					render = (render + (" "+ch) * beats)+"  "
-			render = render+"\n\n"
-		chords = " ".join(x for x in chords)
-		name = "{0} - Chords {1}.strum".format(exNumber,chords)
-		tgtFile = "..\\Application\\media\\music\\uncle rod chord practice\\key of {0}\\{1}".format(noteKey,name)			
-		render = "\n".join([x.strip() for x in render.split("\n")])
-		open(tgtFile,"w").write(render)
-		exNumber += 1																				# Go to next chord
+	for repeat in range(4,0,-1):																	# blocks of 4,3,2,1
+		for chordSet in [x.strip().lower() for x in rodChecks[noteKey].split(",")]:					# For each set of chords	
+			chords = [x for x in chordSet.split(" ") if x.strip() != ""]							# Convert into a python list
+			name = "Rod - {0} - Chords {2} x {1}.strum".format(exNumber,",".join(chords),repeat)
+			group = "".join([(" "+c) * repeat for c in chords])										# one chord set, all chords repeated
+			group = group * (6 / repeat)															# make all lines roughly the same
+			group = (group + "\n\n\n") * 3															# Three lines of each
+			tgtFile = "..\\Application\\media\\music\\uncle rod chord practice\\key of {0}\\{1}".format(noteKey,name)			
+			render = "\n".join([x.strip() for x in (header+group).split("\n")])
+			open(tgtFile,"w").write(render)
+			exNumber += 1																			# Go to next chord
+
+print("Generated "+str(exNumber*5))
+#print(render)

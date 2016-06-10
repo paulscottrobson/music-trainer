@@ -37,10 +37,13 @@ SetSpriteSize(IDBACKGROUND,ctrl.scWidth,ctrl.scHeight)
 SetSpriteDepth(IDBACKGROUND,DEPTHBACKGROUND)
 SetPrintSize(16)
 
+debug = IOLoadDirectory("")
+
 a$ = "when im cleaning windows.music"
 rem a$ = "dont worry be happy.music"
 rem a$ = "ukulele buddy:21 hokey pokey.music"
-rem a$ = "uncle rod chord practice:key of d:2 - chords d d0 em7 a7.music"
+rem a$ = "uncle rod chord practice:key of d:rod - 5 - chords 4 x f#7,bm,e7,a7,d.music"
+
 
 game as Game
 Game_New(game,a$)
@@ -50,7 +53,7 @@ Game_Delete(game)
 while GetRawKeyState(27) <> 0
 	Sync()
 endwhile
-
+//"C:\music-trainer\Application\media\music\uncle rod chord practice\key of d\rod - 5 - chords 4 x f#7,bm,e7,a7,d.music"
 //	X exit
 //	M metronome
 //	Q quiet

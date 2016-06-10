@@ -1,6 +1,24 @@
-1 - chords c am f g7.music
-2 - chords c c0 dm7 g7.music
-3 - chords c c7 f fm6.music
-4 - chords c am d7 g7.music
-5 - chords e7 am d7 g7.music
-6 - chords e7 am d7 g7 c.music
+rod - 1 - chords 4 x c,am,f,g7.music
+rod - 10 - chords 3 x c,am,d7,g7.music
+rod - 11 - chords 3 x e7,am,d7,g7.music
+rod - 12 - chords 3 x e7,am,d7,g7,c.music
+rod - 13 - chords 2 x c,am,f,g7.music
+rod - 14 - chords 2 x c,c0,dm7,g7.music
+rod - 15 - chords 2 x c,c7,f,fm6.music
+rod - 16 - chords 2 x c,am,d7,g7.music
+rod - 17 - chords 2 x e7,am,d7,g7.music
+rod - 18 - chords 2 x e7,am,d7,g7,c.music
+rod - 19 - chords 1 x c,am,f,g7.music
+rod - 2 - chords 4 x c,c0,dm7,g7.music
+rod - 20 - chords 1 x c,c0,dm7,g7.music
+rod - 21 - chords 1 x c,c7,f,fm6.music
+rod - 22 - chords 1 x c,am,d7,g7.music
+rod - 23 - chords 1 x e7,am,d7,g7.music
+rod - 24 - chords 1 x e7,am,d7,g7,c.music
+rod - 3 - chords 4 x c,c7,f,fm6.music
+rod - 4 - chords 4 x c,am,d7,g7.music
+rod - 5 - chords 4 x e7,am,d7,g7.music
+rod - 6 - chords 4 x e7,am,d7,g7,c.music
+rod - 7 - chords 3 x c,am,f,g7.music
+rod - 8 - chords 3 x c,c0,dm7,g7.music
+rod - 9 - chords 3 x c,c7,f,fm6.music

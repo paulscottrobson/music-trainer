@@ -1,5 +1,20 @@
-1 - chords a f#m d e7.music
-2 - chords a a0 bm7 e7.music
-3 - chords a a7 d dm6.music
-4 - chords a f#m b7 e7.music
-5 - chords c#7 f#m b7 e7 a.music
+rod - 1 - chords 4 x a,f#m,d,e7.music
+rod - 10 - chords 3 x c#7,f#m,b7,e7,a.music
+rod - 11 - chords 2 x a,f#m,d,e7.music
+rod - 12 - chords 2 x a,a0,bm7,e7.music
+rod - 13 - chords 2 x a,a7,d,dm6.music
+rod - 14 - chords 2 x a,f#m,b7,e7.music
+rod - 15 - chords 2 x c#7,f#m,b7,e7,a.music
+rod - 16 - chords 1 x a,f#m,d,e7.music
+rod - 17 - chords 1 x a,a0,bm7,e7.music
+rod - 18 - chords 1 x a,a7,d,dm6.music
+rod - 19 - chords 1 x a,f#m,b7,e7.music
+rod - 2 - chords 4 x a,a0,bm7,e7.music
+rod - 20 - chords 1 x c#7,f#m,b7,e7,a.music
+rod - 3 - chords 4 x a,a7,d,dm6.music
+rod - 4 - chords 4 x a,f#m,b7,e7.music
+rod - 5 - chords 4 x c#7,f#m,b7,e7,a.music
+rod - 6 - chords 3 x a,f#m,d,e7.music
+rod - 7 - chords 3 x a,a0,bm7,e7.music
+rod - 8 - chords 3 x a,a7,d,dm6.music
+rod - 9 - chords 3 x a,f#m,b7,e7.music
