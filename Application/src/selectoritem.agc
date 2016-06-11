@@ -77,7 +77,7 @@ function SelectorItem_SetText(sli ref as SelectorItem,txt$ as String)
 		for i = 1 to len(txt$)
 			if doNext <> 0 then txt$ = left(txt$,i-1)+Upper(mid(txt$,i,1))+mid(txt$,i+1,999)
 			c$ = mid(txt$,i,1)
-			doNext = c$ = " " or c$ = ","
+			doNext = c$ = " " or c$ = "," or c$ = "'" or c$ = chr(34)
 		next
 		SetTextString(sli.baseID,txt$)																// Update text
 		SelectorItem_Move(sli,sli.x,sli.y)															// Move as size probably changed

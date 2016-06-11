@@ -91,6 +91,7 @@ function MusicSelector_Move(mse ref as MusicSelector,x as integer,y as integer)
 		mse.y = y
 		for i = 1 to mse.vCount
 			SelectorItem_Move(mse.vItems[i],x,y)
+			SelectorItem_SetSelected(mse.vItems[i],(i + mse.scrollPosition) = mse.selected)
 			y = y + mse.iHeight + mse.vSpacing
 		next i
 		if mse.hasScrollBar 
@@ -132,7 +133,7 @@ function MusicSelector_Select(mse as MusicSelector)
 	hasSelected = 0
 	while hasSelected = 0
 		selectResult$ = GetStringToken(mse.itemList$,";",mse.selected)								// Get the result
-		if GetRawKeyState(KEY_SPACE) or GetRawKeyState(KEY_ENTER) then hasSelected = 1				// Exit if selected.
+		if GetRawKeyPressed(KEY_SPACE) or GetRawKeyPressed(KEY_ENTER) then hasSelected = 1			// Exit if selected.
 		offset = 0
 		if GetRawKeyPressed(KEY_UP) then offset = -1												// Handle keys moving selected
 		if GetRawKeyPressed(KEY_DOWN) then offset = 1
@@ -146,12 +147,14 @@ function MusicSelector_Select(mse as MusicSelector)
 			if newSelected < 1 then newSelected = 1													// Check in range
 			if newSelected > mse.totalCount then newSelected = mse.totalCount
 			if newSelected <> mse.selected 															// Actually changed ?
-				SelectorItem_SetSelected(mse.vItems[mse.selected-mse.scrollPosition],0)				// Deselect
 				offsetInItems = newSelected-mse.scrollPosition
+				if offsetInItems >=1 and offsetInItems <= mse.vCount									// No Scroll
+					SelectorItem_SetSelected(mse.vItems[mse.selected-mse.scrollPosition],0)			// Deselect
+					SelectorItem_SetSelected(mse.vItems[newSelected-mse.scrollPosition],1)			// Reselect
+				endif
+				mse.selected = newSelected
 				if offsetInItems < 1 then _MusicSelector_ScrollTo(mse,newSelected-1) 					
 				if offsetInItems > mse.vCount then _MusicSelector_ScrollTo(mse,newSelected-(mse.vCount))
-				SelectorItem_SetSelected(mse.vItems[newSelected-mse.scrollPosition],1)				// Reselect
-				mse.selected = newSelected
 			endif
 		endif
 		
@@ -166,12 +169,12 @@ function MusicSelector_Select(mse as MusicSelector)
 			next i
 			y = y - GetSpriteY(mse.baseID)+GetSpriteWidth(mse.baseID)/2								// Offset from top of scroll bar, calculate if hit
 			x = x - (mse.x+mse.iWidth/2+mse.scrollWidth/2)
-			if y >= 0 and y < GetSpriteWidth(mse.baseID) and abs(x) < mse.scrollWidth/2
-				pos = y * (mse.totalCount - mse.vCount) / GetSpriteWidth(mse.baseID)
+			if y >= 0 and y < GetSpriteWidth(mse.baseID) and abs(x) < mse.scrollWidth/2				// If in range
+				pos = y * (mse.totalCount - mse.vCount) / GetSpriteWidth(mse.baseID)				// Reposition scroll bar
 				_MusicSelector_ScrollTo(mse,pos)
 			endif			
 		endif
-		if GetRawKeyPressed(27) <> 0 then End
+		//if GetRawKeyPressed(27) <> 0 then End
 		Sync()
 	endwhile
 	PlaySound(ISPING)

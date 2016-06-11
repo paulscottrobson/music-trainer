@@ -130,3 +130,22 @@ endfunction
 function ASSERT(test as integer,loc$ as String)
 	if test = 0 then ERROR("Assert failed "+loc$)
 endfunction
+
+// ****************************************************************************************************************************************************************
+//																		Set up display etc
+// ****************************************************************************************************************************************************************
+
+function Setup()
+	InitialiseConstants()																			// Set up constants etc.
+	LoadResources()																					// Load in resources
+
+	SetWindowTitle("MusicTrainer")																	// Set up the display
+	SetWindowSize(ctrl.scWidth,ctrl.scHeight,0)
+	SetVirtualResolution(ctrl.scWidth,ctrl.scHeight)
+	SetOrientationAllowed(0,0,1,1)																	// Landscape only
+	CreateSprite(IDBACKGROUND,IDBACKGROUND)															// Create the background
+	SetSpriteSize(IDBACKGROUND,ctrl.scWidth,ctrl.scHeight)												
+	SetSpriteDepth(IDBACKGROUND,DEPTHBACKGROUND)
+	SetPrintSize(16)
+endfunction
+

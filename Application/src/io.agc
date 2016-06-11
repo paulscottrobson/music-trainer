@@ -35,3 +35,36 @@ function IOLoadDirectory(directoryRoot as string)
 	CloseFile(1)
 	itemList$ = mid(itemList$,2,99999)																// Drop first semicolon.	
 endfunction itemList$
+
+// ****************************************************************************************************************************************************************
+//														Select from current directory
+// ****************************************************************************************************************************************************************
+
+function IOSelectFromDirectory(root$ as String)
+	completed = 0
+	result$ = ""
+	while completed = 0																				// Loop until selected something or parent
+		mse as MusicSelector
+		MusicSelector_New(mse,IOLoadDirectory(root$),900,70,10,8,20,300)							// Create selector
+		item$ = MusicSelector_Select(mse)															// Do selection
+		MusicSelector_Delete(mse)																	// Deleete it
+		if left(item$,1) = "("																		// Directory ?
+			if item$ = "(..)"																		// Parent dictionary
+				result$ = ""
+				completed = 1
+			else
+				if root$ = "" then dir$ = "" else dir$ = root$+":"									// Build path to directory
+				dir$ = dir$ + mid(item$,2,len(item$)-2)
+				result$ = IOSelectFromDirectory(dir$)												// Select from it
+				if result$ <> ""																	// If something returned other than parent
+					result$ = mid(item$,2,len(item$)-2)+":"+result$								// Construct full path from here and return
+					completed = 1
+				endif
+			endif
+		else																						// Selected something
+			result$ = item$																			// return it.
+			completed = 1
+		endif
+	endwhile
+endfunction result$
+
