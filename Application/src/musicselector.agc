@@ -116,6 +116,7 @@ function _MusicSelector_UpdateText(mse ref as MusicSelector)
 		item$ = GetStringToken(mse.itemList$,";",i+mse.scrollPosition)
 		if left(item$,1) = "(" and right(item$,1) = ")"
 			item$ = mid(item$,2,len(item$)-2)
+			if right(item$,8) = "_private" then item$ = left(item$,len(item$)-8)
 			if item$ = ".." then item$ = "Parent Folder" else item$ = "'"+item$+"' Folder"
 		endif
 		if right(item$,6) = ".music" then item$ = left(item$,len(item$)-6)

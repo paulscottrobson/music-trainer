@@ -30,7 +30,9 @@ function IOLoadDirectory(directoryRoot as string)
 	if directoryRoot <> "" then itemList$ = ";(..)"													// Add parent option if not root
 	OpenToRead(1,indexFile$)																		// Open file to read
 	while FileEOF(1) = 0																			// Read in ; seperate them
-		itemList$ = itemList$ + ";"+ReadLine(1)
+		line$ = ReadLine(1)
+		if right(line$,9) = "_private)" and GetDeviceBaseName() = "html5" then line$ = "" 			// Private in executable only																// Private (Exe only)
+		if line$ <> "" then itemList$ = itemList$ + ";" + line$
 	endwhile
 	CloseFile(1)
 	itemList$ = mid(itemList$,2,99999)																// Drop first semicolon.	
