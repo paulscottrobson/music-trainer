@@ -32,8 +32,6 @@ type Bar
 endtype
 
 type Song 
-	instrument$ as string 																			// Instrument name in lower case.
-	strings as integer 																				// Number of strings on instrument
 	tempo as integer 																				// Tempo in beats / minute
 	beats as integer 																				// Beats in a bar
 	barCount as integer 																			// Number of bars in song
@@ -45,8 +43,6 @@ endtype
 // ****************************************************************************************************************************************************************
 
 function Song_New(song ref as Song)
-	song.instrument$ = "" 																			// Reset data to default values
-	song.strings = 0
 	song.tempo = 120
 	song.beats = 4
 	song.barCount = 0 																				// Clear song array.
@@ -100,11 +96,6 @@ function _Song_DoAssignment(song ref as Song,assign$ as String)
 	assign$ = mid(assign$,FindString(assign$,":")+1,9999)											// Throw away the positional prefix.
 	value$ = mid(assign$,FindString(assign$,":=")+2,9999)											// This is the RHS of the assignment
 	select TrimString(Lower(GetStringToken(assign$,":=",1))," ")
-		case "instrument"																			// Set instrument.
-			song.instrument$ = TrimString(Lower(value$)," ")										// Set instrument and number of strings
-			song.strings = 4									
-			if song.instrument$ = "merlin" or song.instrument$ = "dulcimer" then song.strings = 3
-		endcase
 		case "tempo"																				// Set bpm
 			song.tempo = Val(value$)
 		endcase
@@ -139,8 +130,8 @@ function _Song_ProcessLine(song ref as Song,line$ as String)
 			endif
 			song.bars[song.barCount].strums[pos].chordName$ = ""									// Initialise the new strum.
 			song.bars[song.barCount].strums[pos].fretDesc$ = ""
-			song.bars[song.barCount].strums[pos].frets.length = song.strings
-			for i = 1 to song.strings																// Set to all no strum.
+			song.bars[song.barCount].strums[pos].frets.length = ctrl.strings
+			for i = 1 to ctrl.strings																// Set to all no strum.
 				song.bars[song.barCount].strums[pos].frets[i] = -1
 			next i
 			song.bars[song.barCount].strums[pos].direction = 1
@@ -165,13 +156,13 @@ function _Song_ProcessLine(song ref as Song,line$ as String)
 			endif
 			
 			fretDesc$ = ""																			// Copy fret data to strum and build 0232 descriptor
-			for i = 1 to song.strings
+			for i = 1 to ctrl.strings
 				fPos = Val(GetStringToken(line$,",",i))												// Get fret pos
 				song.bars[song.barCount].strums[pos].frets[i] = fPos								// Save it
 				fretDesc$ = fretDesc$ + str(fPos)													// Build descriptor
 				if fPos > 9 then fretDesc$ = ""														// If off the end then clear it.
 			next i
-			if len(fretDesc$) = song.strings 														// passed only if never cleared.
+			if len(fretDesc$) = ctrl.strings 														// passed only if never cleared.
 				song.bars[song.barCount].strums[pos].fretDesc$ = fretDesc$ 							// in which case the fret descriptor is okay.
 			endif
 		endif

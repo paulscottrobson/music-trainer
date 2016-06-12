@@ -56,6 +56,9 @@ function MusicSelector_New(mse ref as MusicSelector,itemList$ as String,iWidth a
 		SetSpriteAngle(baseID,90)
 		CreateSprite(baseID+1,IDGREENCIRCLE)
 	endif
+	CreateText(baseID,"Build "+str(BUILD_NUMBER)+" ("+BUILD_DATE+") (c) Paul Robson 2016")
+	SetTextSize(baseID,ctrl.scWidth/40)
+	SetTextPosition(baseID,ctrl.scWidth-GetTextTotalWidth(baseID),ctrl.scHeight-GetTextTotalHeight(baseID))
 	_MusicSelector_UpdateText(mse)	
 	SelectorItem_SetSelected(mse.vItems[1],1)
 	MusicSelector_Move(mse,-1,-1)																	// Move it.
@@ -71,6 +74,7 @@ function MusicSelector_Delete(mse ref as MusicSelector)
 		for i = 1 to mse.vCount
 			SelectorItem_Delete(mse.vItems[i])
 		next i
+		DeleteText(mse.baseID)
 		if mse.hasScrollBar <> 0
 			DeleteSprite(mse.baseID)
 			DeleteSprite(mse.baseID+1)
@@ -119,7 +123,7 @@ function _MusicSelector_UpdateText(mse ref as MusicSelector)
 			if right(item$,8) = "_private" then item$ = left(item$,len(item$)-8)
 			if item$ = ".." then item$ = "Parent Folder" else item$ = "'"+item$+"' Folder"
 		endif
-		if right(item$,6) = ".music" then item$ = left(item$,len(item$)-6)
+		if right(item$,8) = "."+ctrl.instrument then item$ = left(item$,len(item$)-len(ctrl.instrument)-1)
 		SelectorItem_SetText(mse.vItems[i],item$)
 		sel = (i+mse.scrollPosition) = mse.selected
 		SelectorItem_SetSelected(mse.vItems[i],sel)

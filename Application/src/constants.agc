@@ -97,6 +97,7 @@
 type _Constants
 	scWidth as integer 																				// Screen width
 	scHeight as integer 																			// Screen height
+	instrument as string
 	strings as integer 																				// Number of strings
 	showHelpers as integer 																			// Show debug helper boxes
 endtype
@@ -107,6 +108,7 @@ function InitialiseConstants()
 	ctrl.scWidth = 1024																				// Physical and Logical Screen Size
 	ctrl.scHeight = 768
 	ctrl.strings = 4 																				// Number of instrument strings.
+	ctrl.instrument = "ukulele"
 	ctrl.showHelpers = 0																			// When non zero displays debug boxes
 endfunction
 

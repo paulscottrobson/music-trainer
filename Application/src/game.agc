@@ -55,7 +55,7 @@ function Game_New(gm ref as Game,song$ as string)
 	RenderManager_New(gm.renderManager, 824,350, 60,32, 70, 400,8,IDB_RMANAGER)						// Create render manager
 	RenderManager_Move(gm.renderManager,gm.song,190,350)
 
-	Fretboard_New(gm.fretBoard,350,80,gm.song.strings,IDB_FRETBRD)									// Create fretboard
+	Fretboard_New(gm.fretBoard,350,80,ctrl.strings,IDB_FRETBRD)										// Create fretboard
 	Fretboard_Move(gm.fretBoard,350)
 
 	Metronome_New(gm.metronome,190,60,IDB_METRONOME)												// Create metronome

@@ -148,8 +148,7 @@ class Compiler:
 		self.beatPosition = 0															# on beat index 0
 		self.loader = FileLoader(fileName) 												# save loader
 		self.beats = int(self.loader.ctrl("beats"))										# read the beats in a bar.
-		stringMapper = { "ukulele":4, "merlin":3 }
-		self.strings = stringMapper[self.loader.ctrl("instrument").lower()]				# work out how many strings
+		self.strings = 4 																# number of strings
 		self.dictionary = UkuleleDictionary()											# working dictionary.
 		self.missing = {}																# list of missing chords
 		self.compile()																	# compile the tune.
@@ -162,7 +161,6 @@ class Compiler:
 		render = ""																		# build up the rendered song.
 		for bar in self.music:
 			render = render + bar.render()
-		render = render + self.getAssign("instrument",0)
 		render = render + self.getAssign("beats",1)
 		render = render + self.getAssign("tempo",2)
 		render = [x.strip() for x in render.strip().split("\n") if x.strip() != 0]		# split remove empty strings
@@ -196,7 +194,7 @@ class Compiler:
 
 	def save(self):
 		render = self.render()															# get result
-		targetFile = ".".join(self.srcFile.split(".")[:-1])+".music"					# create object file name
+		targetFile = ".".join(self.srcFile.split(".")[:-1])+".ukulele"					# create object file name
 		targetFile = targetFile.lower().replace("&","and").replace(":"," ")				# tidy up name for URL/Filename
 		targetFile = targetFile.replace("'","")
 		handle = open(targetFile,"w")													# write to file.

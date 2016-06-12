@@ -1,19 +1,19 @@
-03 frere jacques.music
-04 brother john.music
-05 this old man in c.music
-05 this old man in f.music
-06 twinkle twinkle.music
-07 baa baa black sheep.music
-09 accenting 2 and 4 over c.music
-10 accenting 2 and 4 over f.music
-11 accenting 2 and 4 over a.music
-12 accenting 2 and 4 over gd.music
-13 intro to 2 chords.music
-14 jamming on c and g.music
-15 jamming on c and f.music
-16 jamming on d and a.music
-17 jamming on g and d.music
-18 jamming on f and c7.music
-19 intro to 2 chords.music
-20 hokey pokey warm up.music
-21 hokey pokey.music
+03 frere jacques.ukulele
+04 brother john.ukulele
+05 this old man in c.ukulele
+05 this old man in f.ukulele
+06 twinkle twinkle.ukulele
+07 baa baa black sheep.ukulele
+09 accenting 2 and 4 over c.ukulele
+10 accenting 2 and 4 over f.ukulele
+11 accenting 2 and 4 over a.ukulele
+12 accenting 2 and 4 over gd.ukulele
+13 intro to 2 chords.ukulele
+14 jamming on c and g.ukulele
+15 jamming on c and f.ukulele
+16 jamming on d and a.ukulele
+17 jamming on g and d.ukulele
+18 jamming on f and c7.ukulele
+19 intro to 2 chords.ukulele
+20 hokey pokey warm up.ukulele
+21 hokey pokey.ukulele

@@ -11,6 +11,9 @@
 
 #include "src/includes.agc"
 
+#constant BUILD_NUMBER 		1
+#constant BUILD_DATE 		"12 June 2016"
+
 Setup()
 
 while 1 = 1
@@ -21,7 +24,7 @@ while 1 = 1
 		Game_Run(game)
 		Game_Delete(game)
 	else
-		a$ = "when im cleaning windows.music"
+		a$ = "when im cleaning windows.ukulele"
 		rem a$ = "dont worry be happy.music"
 		rem a$ = "ukulele buddy:21 hokey pokey.music"
 		rem a$ = "uncle rod chord practice:key of d:rod - 5 - chords 4 x f#7,bm,e7,a7,d.music"
