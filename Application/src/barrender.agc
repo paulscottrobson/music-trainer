@@ -211,7 +211,8 @@ function _BarRender_CreateChord(rdr ref as BarRender,bar ref as bar,strum ref as
 	a$ = Upper(left(a$,1))+Lower(mid(a$,2,99))
 	CreateText(id,a$)																				// Create text label
 	SetTextSize(id,GetSpriteWidth(id)/1.4)								
-	if len(a$) > 2 then SetTextSize(id,GetSpriteWidth(id)/2.8)										// So it can display C7sus
+	if len(a$) > 2 then SetTextSize(id,GetSpriteWidth(id)/2.2)										// So it can display C7sus
+	if len(a$) > 3 then SetTextSize(id,GetSpriteWidth(id)/2.8)										// So it can display C7sus
 	SetTextSpacing(id,-GetTextSize(id)/6)															// Compress the spacing a bit.
 	SetTextFontImage(id,IDFRAMEFONT)																// Use the white framed font.
 	

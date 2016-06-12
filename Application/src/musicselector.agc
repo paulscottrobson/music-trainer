@@ -172,6 +172,10 @@ function MusicSelector_Select(mse as MusicSelector)
 					hasSelected = 1																	// And exit					
 				endif				
 			next i
+		endif
+		if GetPointerState() <> 0
+			x = GetPointerX()
+			y = GetPointerY()
 			y = y - GetSpriteY(mse.baseID)+GetSpriteWidth(mse.baseID)/2								// Offset from top of scroll bar, calculate if hit
 			x = x - (mse.x+mse.iWidth/2+mse.scrollWidth/2)
 			if y >= 0 and y < GetSpriteWidth(mse.baseID) and abs(x) < mse.scrollWidth/2				// If in range

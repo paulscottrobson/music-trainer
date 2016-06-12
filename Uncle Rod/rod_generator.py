@@ -36,7 +36,8 @@ for noteKey in rodChecks.keys():																	# For every key (C F G A D)
 			group = "".join([(" "+c) * repeat for c in chords])										# one chord set, all chords repeated
 			group = group * (6 / repeat)															# make all lines roughly the same
 			group = (group + "\n\n\n") * 3															# Three lines of each
-			tgtFile = "..\\Application\\media\\music\\uncle rod chord practice\\key of {0}\\{1}".format(noteKey,name)			
+			tgtFile = "..\\Application\\media\\music\\uncle rod chord practice\\key of {0}\\{1}".format(noteKey,name)
+			tgtFile = tgtFile.replace("#","sh")			
 			render = "\n".join([x.strip() for x in (header+group).split("\n")])
 			open(tgtFile,"w").write(render)
 			exNumber += 1																			# Go to next chord

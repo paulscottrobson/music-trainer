@@ -16,6 +16,24 @@
 function IOAccessFile(filename as string)
 	filename = ReplaceString(filename,":","/",9999)													// We use . as seperators
 	filename = "music/"+filename																	// Put in music directory	
+	
+	if _IONetworkData() <> 0 																		// Reading data from HTTP
+		
+		iHTTP= CreateHTTPConnection()																// Access the internet
+		szHost$ = "www.scrollmusic.com"																// This is the host
+		ret=SetHTTPHost(iHTTP,szHost$,0)
+		szLocalFile$="temp.dat"																	// Copy it here.
+		szPostData$=""
+		GetHTTPFile( iHTTP, filename, szLocalFile$, szPostData$ )
+		while GetHTTPFileComplete(iHTTP) = 0														// Wait for completion.
+			Sync()
+		endwhile
+		CloseHTTPConnection( iHTTP )
+		DeleteHTTPConnection( iHTTP )
+		filename = szLocalFile$
+		
+	else
+	endif
 endfunction filename
 
 // ****************************************************************************************************************************************************************
@@ -31,12 +49,21 @@ function IOLoadDirectory(directoryRoot as string)
 	OpenToRead(1,indexFile$)																		// Open file to read
 	while FileEOF(1) = 0																			// Read in ; seperate them
 		line$ = ReadLine(1)
-		if right(line$,9) = "_private)" and GetDeviceBaseName() = "html5" then line$ = "" 			// Private in executable only																// Private (Exe only)
+		if right(line$,9) = "_private)" and _IONetworkData() then line$ = "" 			// Private in executable only																// Private (Exe only)
 		if line$ <> "" then itemList$ = itemList$ + ";" + line$
 	endwhile
 	CloseFile(1)
 	itemList$ = mid(itemList$,2,99999)																// Drop first semicolon.	
 endfunction itemList$
+
+// ****************************************************************************************************************************************************************
+//											Check if loading data from web or HD, also check security 
+// ****************************************************************************************************************************************************************
+
+function _IONetworkData()
+	isNetwork = GetDeviceBaseName() = "html5"
+	//isNetwork = 1
+endfunction isNetwork
 
 // ****************************************************************************************************************************************************************
 //														Select from current directory
