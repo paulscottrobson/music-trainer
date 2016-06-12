@@ -87,21 +87,25 @@ endfunction
 function ChordHelper_Update(ch ref as ChordHelper,song ref as Song,pos# as float)
 	if ch.isInitialised <> 0
 		bar = floor(pos#)																			// This is the bar
-		if abs(ch.lastPos# - pos#) > 0.5 then ch.currentChord$ = "????"								// Forces a redraw for a serious move
-		for s = 1 to song.bars[bar].strumCount														// For each strum in bar
-			time# = bar + song.bars[bar].strums[s].time / 1000.0 									// Calculate strum time
-			if ch.lastPos# < time# and pos# >= time# 												// Time to play ?
-				chord$ = song.bars[bar].strums[s].chordName$
-				if chord$ <> ch.currentChord$ 														// Chord changed ?
-					ch.currentChord$ = chord$ 
-					chordID = ChordBucket_Find(ch.bucket,chord$)
-					nextChordID = ChordBucket_Find(ch.bucket,song.bars[bar].strums[s]._nextChord$)
-					_ChordHelper_ChangeDisplay(ch,chordID,nextChordID)								// Change the display
-					//debug = debug + chord$ + " " + song.bars[bar].strums[s]._nextChord$+ " "+str(chordID)+" "+str(nextChordID)+";"
+		if bar <= song.barCount
+			if abs(ch.lastPos# - pos#) > 0.5 then ch.currentChord$ = "????"								// Forces a redraw for a serious move
+			for s = 1 to song.bars[bar].strumCount														// For each strum in bar
+				time# = bar + song.bars[bar].strums[s].time / 1000.0 									// Calculate strum time
+				if ch.lastPos# < time# and pos# >= time# 												// Time to play ?
+					chord$ = song.bars[bar].strums[s].chordName$
+					if chord$ <> ch.currentChord$ 														// Chord changed ?
+						ch.currentChord$ = chord$ 
+						chordID = ChordBucket_Find(ch.bucket,chord$)
+						nextChordID = ChordBucket_Find(ch.bucket,song.bars[bar].strums[s]._nextChord$)
+						_ChordHelper_ChangeDisplay(ch,chordID,nextChordID)								// Change the display
+						//debug = debug + chord$ + " " + song.bars[bar].strums[s]._nextChord$+ " "+str(chordID)+" "+str(nextChordID)+";"
+					endif
 				endif
-			endif
-		next s		
+			next s		
+		endif
+		
 		ch.lastPos# = pos#																			// Save last position.
+		
 		time = GetMilliseconds()																	// Get time
 		if time > ch.startTime 
 			pos# = (time-ch.startTime+0.0) / (ch.endTime-ch.startTime)								// Work out position as 0->1

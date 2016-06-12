@@ -49,7 +49,7 @@ class StrumCompiler(Compiler):
 				chunkSize = len(m.group(0))												# amount to remove
 				self.music[self.barPosition].addLyric(lyrics[:chunkSize].strip())		# add lyrics if any.
 				strums = "/"+m.group(2).replace(" ","")									# first strummed + the rest.
-				assert self.beatPosition + len(strums) <= self.beats,"Bar overflow"		# check that the strums fit in this bar
+				assert self.beatPosition + len(strums) <= self.beats,"Bar overflow"+chords		# check that the strums fit in this bar
 				for s in strums:														# do each strum pair.
 					if s == "/":														# if doing a strum here.
 						self.generateChords(m.group(1).strip())							# generate the chords.						

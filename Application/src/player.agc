@@ -99,18 +99,20 @@ function Player_Update(pl ref as Player,song ref as Song,pos# as float)
 			endif
 		next i
 		bar = floor(pos#)																			// This is the bar
-		for s = 1 to song.bars[bar].strumCount														// For each strum in bar
-			time# = bar + song.bars[bar].strums[s].time / 1000.0 									// Calculate strum time
-			if pl.lastPos# < time# and pos# >= time# 												// Time to play ?
-				for i = 1 to pl.strings
-					pl.nextStrum[i] = song.bars[bar].strums[s].frets[i]
-					pl.nextStrumTime[i] = timeMS+(i-1) * 30
-					if pl.nextDirection < 0 then pl.nextStrumTime[i] = timeMS + (pl.strings-i)*30
-				next i
-				pl.nextVolume = song.bars[bar].strums[s].volume
-				pl.nextDirection = song.bars[bar].strums[s].direction
-			endif
-		next s		
+		if bar <= song.barCount
+			for s = 1 to song.bars[bar].strumCount													// For each strum in bar
+				time# = bar + song.bars[bar].strums[s].time / 1000.0 								// Calculate strum time
+				if pl.lastPos# < time# and pos# >= time# 											// Time to play ?
+					for i = 1 to pl.strings
+						pl.nextStrum[i] = song.bars[bar].strums[s].frets[i]
+						pl.nextStrumTime[i] = timeMS+(i-1) * 30
+						if pl.nextDirection < 0 then pl.nextStrumTime[i] = timeMS + (pl.strings-i)*30
+					next i
+					pl.nextVolume = song.bars[bar].strums[s].volume
+					pl.nextDirection = song.bars[bar].strums[s].direction
+				endif
+			next s		
+		endif
 		pl.lastPos# = pos#																			// Save the current position as the last
 	endif	
 endfunction
