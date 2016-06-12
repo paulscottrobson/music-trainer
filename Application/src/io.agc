@@ -62,7 +62,6 @@ endfunction itemList$
 
 function _IONetworkData()
 	isNetwork = GetDeviceBaseName() = "html5"
-	//isNetwork = 1
 endfunction isNetwork
 
 // ****************************************************************************************************************************************************************
