@@ -1,0 +1,21 @@
+#
+#       Ukulele Buddy exercise 24 Itsy Bitsy Spider in F.
+#
+Tempo:=70
+Beats:=4
+Swing := No
+Pattern1 := e-d-e-d-
+
+@1
+
+F ///                     C/           F/
+Itsy Bitsy Spider climbed up the water spout 
+
+F ///                  C/                F/
+Down came the rain and washed the spider out
+
+F ///                C/               F/
+Out came the sun and dried up all the rain and the
+
+F ///                     C/           F/
+Itsy Bitsy Spider climbed up the spout again

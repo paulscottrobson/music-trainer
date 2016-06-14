@@ -1,0 +1,21 @@
+#
+#       Ukulele Buddy exercise 23 Itsy Bitsy Spider More Practice
+#
+Tempo:=70
+Beats:=4
+Swing := No
+Pattern1 := e-d-e-d-
+
+@1
+
+C ///                     G/           C/
+Itsy Bitsy Spider climbed up the water spout 
+
+C ///                  G/                C/
+Down came the rain and washed the spider out
+
+C ///                G/               C/
+Out came the sun and dried up all the rain and the
+
+C ///                     G/           C/
+Itsy Bitsy Spider climbed up the spout again
