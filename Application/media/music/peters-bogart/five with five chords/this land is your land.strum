@@ -1,0 +1,22 @@
+#
+#   This land is your land (Guthrie/Peters)
+#
+Beats:=2
+Tempo := 80
+Swing := No
+Pattern1 := dudu
+Pattern2 := d---
+
+@1
+
+X/            F/        @2F.            @1C/  
+%This land is your land   %This land is   my land
+
+@2C.         @1G7/    @2G7.              @1C/  
+  %From Cali   fornia   %to the New York   island
+
+@2C7.                @1F/     @2F.                  @1C/          
+  %From the red wood   forest   %to the Gulf Stream   waters 
+
+Am/    G7/           G7/              C/   @2C.
+       This land was made for you and Me.

@@ -192,11 +192,8 @@ class Compiler:
 			frets = self.loader.ctrl(key.lower())										# try it from there
 		return frets
 
-	def save(self):
+	def save(self,targetFile):
 		render = self.render()															# get result
-		targetFile = ".".join(self.srcFile.split(".")[:-1])+".ukulele"					# create object file name
-		targetFile = targetFile.lower().replace("&","and").replace(":"," ")				# tidy up name for URL/Filename
-		targetFile = targetFile.replace("'","")
 		handle = open(targetFile,"w")													# write to file.
 		handle.write(render)
 		handle.close()
