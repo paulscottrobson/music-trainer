@@ -1,0 +1,33 @@
+#
+# Auld Lang Syne
+#
+Beats:= 4
+Tempo := 90
+Swing := No
+Pattern1 := d-du-udu
+
+@1
+
+X...    C///              G7///
+%Should auld acquaintance be forgot,
+
+C///                 F///
+and never brought to mind?
+
+       C///              G7///
+Should auld acquaintance be forgot,
+
+    Am/  G7/  C///
+and auld lang syne?
+
+    C///      G7///
+For auld lang syne, my dear,
+
+    C///      F///
+for auld lang syne,
+
+      C///          G7///
+we'll take a cup of kindness yet,
+
+    Am/  G7/  C/// C.
+for auld lang syne.

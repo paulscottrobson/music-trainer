@@ -1,0 +1,21 @@
+#
+# Amazing Grace 
+#
+Beats:= 3
+Tempo := 100
+Swing := Yes
+Pattern1 := d-dud-
+
+@1
+
+X..   C//    C7//       F//       C//
+%A    mazing grace, How sweet the sound
+
+     C//     Am//        G7//
+That saved a wretch like me.
+
+G7//  C//      C7//      F//    C//
+%I    once was lost, but now am found
+
+    Am//       G7//  C//    C..
+Was blind, but now I see.
