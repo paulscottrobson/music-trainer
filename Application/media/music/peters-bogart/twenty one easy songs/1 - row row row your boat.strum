@@ -1,0 +1,12 @@
+Beats:= 2
+Tempo := 100
+Swing := Yes
+Pattern1 := dudu
+
+@1
+
+C/      C/            C/              C/ 
+Row row row your boat Gently down the stream
+
+C/              C/              C/            C/ 
+Merrily merrily merrily merrily life is but a dream
