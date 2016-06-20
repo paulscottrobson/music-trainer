@@ -26,6 +26,15 @@ class Chord:
 			chordName = baseNote + '#' + chordName[2:]
 		return chordName
 
+	@staticmethod
+	def standardise(chordName):
+		chordName = Chord.normalise(chordName)
+		if chordName[:2] == "d#":
+			chordName = "eb"+chordName[2:]
+		if chordName[:2] == "a#":
+			chordName = "bb"+chordName[2:]
+		return chordName
+
 	def render(self,isDownStrum,volume):
 		render = ",".join([x for x in self.strumDefinition.upper()])							# create strum pattern
 		if volume < 100:																		# add volume adjuster

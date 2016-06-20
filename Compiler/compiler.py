@@ -122,12 +122,12 @@ class Compiler:
 				self.lyricData = self.lyricData[1:]
 				self.compileLineNumber += 1 														# one extra line.
 			else:
-				m = re.match("^([a-gx][\\#b]?[a-z0679]*)([\\/\\.]*)\\s*",self.chordData)
+				m = re.match("^([a-gx][\\#b]?[a-z0679]*)([\\/\\.\\s]*)",self.chordData)
 				if m is None:
 					self.reportError("Syntax in Music",self.compileLineNumber)
 				lenSection = len(m.group(0))														# this is the whole bit to chop.
 				chordName = m.group(1)																# this is the chord name
-				beatDesc = "/"+m.group(2)															# this is the beat pattern / and .
+				beatDesc = ("/"+m.group(2)).replace(" ","")											# this is the beat pattern / and .
 				lyrics = self.lyricData[:lenSection].strip()										# these are the lyrics for this bit.
 				self.chordData = self.chordData[lenSection:]										# strip the used bits off.
 				self.lyricData = self.lyricData[lenSection:]
@@ -180,26 +180,27 @@ class Compiler:
 				if spair.chord != "x":																# chord here (e.g. not none-chord)
 					pattern = self.equates["pattern"+str(spair.patternID)]						
 					chordName = Chord.transpose(spair.chord,transposition)							# work out the transposed chord.
+					chordStd = Chord.standardise(chordName)
 					beatPos = 1000 * pos / beats 													# this is the downstrum position.
 					#
 					#	Down stroke
 					#
 					stroke = pattern[pos * 2]														# this is du or ef or .
 					if stroke != '-':																# stroke found (i.e. not no strum)
-						self.writeLine(fileHandle,barNumber,beatPos,"<"+chordName+">")				# output chord.
+						self.writeLine(fileHandle,barNumber,beatPos,"<"+chordStd+">")				# output chord.
 						chordInfo = self.dictionary.find(instrument,chordName)						# find the chord.
 						if chordInfo is not None:													# if the chord exists.
 							volume = 100 if stroke == "d" or stroke == "u" else 50 					# how loud should we play it.
 							self.writeLine(fileHandle,barNumber,beatPos,chordInfo[0].render(True,volume))
 
 					syncopation = 50 if self.equates["swing"][0] != 'y' else 60 					# work out syncopation					
-					beatPos = beatPos + syncopation * 1000 / beats / 100							# work out downstroke position
+					beatPos = beatPos + 1000 / beats * syncopation / 100							# work out downstroke position
 					#
 					#	Up stroke
 					#	
 					stroke = pattern[pos * 2+1]														# this is du or ef or .
 					if stroke != '-':																# stroke found (i.e. not no strum)
-						self.writeLine(fileHandle,barNumber,beatPos,"<"+chordName+">")				# output chord.
+						self.writeLine(fileHandle,barNumber,beatPos,"<"+chordStd+">")				# output chord.
 						chordInfo = self.dictionary.find(instrument,chordName)						# find the chord.
 						if chordInfo is not None:													# if the chord exists.
 							volume = 50 if stroke == "d" or stroke == "u" else 25 					# how loud should we play it.
@@ -212,11 +213,5 @@ class Compiler:
 	def writeLine(self,handle,time,subtime,line):									
 		handle.write("{0:05}.{1:04}:{2}\n".format(time,subtime,line))
 
-c = Compiler()
-src = open("windows.strum").readlines()
-c.compile(src)
-#print(c.scoreTransposition("ukulele",0))
-h = sys.stdout
-#h = open("windows.ukulele","w")
-c.render(h,"ukulele",0)
+
 
