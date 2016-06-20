@@ -1,0 +1,19 @@
+#
+#       Ukulele Buddy exercise 25 Itsy Bitsy Spider
+#
+Tempo:=100
+Beats:=4
+Swing := No
+Pattern1 := e-d-e-d-
+
+@1
+
+C /// G/ C/
+
+C /// G/ C/
+
+C /// G/ C/
+
+C /// G/ C/
+
+C /// G/ C.
