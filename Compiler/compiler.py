@@ -167,14 +167,44 @@ class Compiler:
 	#
 	#	Render the compiled data.
 	#
-	def render(self,fileHandle):
+	def render(self,fileHandle,instrument,transposition):
 		self.writeLine(fileHandle,100,1,"beats := {0}".format(self.equates["beats"]))				# output beats/bar and tempo
 		self.writeLine(fileHandle,100,2,"tempo := {0}".format(self.equates["tempo"]))
-		barNumber = 1001 
+		barNumber = 1001 																			# bar ID to use.
+		beats = int(self.equates["beats"])															# handy beats
 		for bar in self.barList:																	# render all bars.
 			if bar.lyrics != "":																	# lyric first if any
 				self.writeLine(fileHandle,barNumber,0,'"'+bar.lyrics)
-			# TODO: Render individual strums where appropriate.
+			for pos in range(0,len(bar.strums)):													# work through all strums.
+				spair = bar.strums[pos]																# get the chord, and pattern
+				if spair.chord != "x":																# chord here (e.g. not none-chord)
+					pattern = self.equates["pattern"+str(spair.patternID)]						
+					chordName = Chord.transpose(spair.chord,transposition)							# work out the transposed chord.
+					beatPos = 1000 * pos / beats 													# this is the downstrum position.
+					#
+					#	Down stroke
+					#
+					stroke = pattern[pos * 2]														# this is du or ef or .
+					if stroke != '-':																# stroke found (i.e. not no strum)
+						self.writeLine(fileHandle,barNumber,beatPos,"<"+chordName+">")				# output chord.
+						chordInfo = self.dictionary.find(instrument,chordName)						# find the chord.
+						if chordInfo is not None:													# if the chord exists.
+							volume = 100 if stroke == "d" or stroke == "u" else 50 					# how loud should we play it.
+							self.writeLine(fileHandle,barNumber,beatPos,chordInfo[0].render(True,volume))
+
+					syncopation = 50 if self.equates["swing"][0] != 'y' else 60 					# work out syncopation					
+					beatPos = beatPos + syncopation * 1000 / beats / 100							# work out downstroke position
+					#
+					#	Up stroke
+					#	
+					stroke = pattern[pos * 2+1]														# this is du or ef or .
+					if stroke != '-':																# stroke found (i.e. not no strum)
+						self.writeLine(fileHandle,barNumber,beatPos,"<"+chordName+">")				# output chord.
+						chordInfo = self.dictionary.find(instrument,chordName)						# find the chord.
+						if chordInfo is not None:													# if the chord exists.
+							volume = 50 if stroke == "d" or stroke == "u" else 25 					# how loud should we play it.
+							self.writeLine(fileHandle,barNumber,beatPos,chordInfo[0].render(False,volume))
+
 			barNumber += 1 																			# next bar.
 	#
 	#	Output a single line.
@@ -186,5 +216,7 @@ c = Compiler()
 src = open("windows.strum").readlines()
 c.compile(src)
 #print(c.scoreTransposition("ukulele",0))
-c.render(sys.stdout)
+h = sys.stdout
+#h = open("windows.ukulele","w")
+c.render(h,"ukulele",0)
 
