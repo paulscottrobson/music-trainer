@@ -10,6 +10,7 @@
 # ***************************************************************************************************************************
 
 import sys,re,os
+from chords import Chord,ChordDictionary
 
 # ***************************************************************************************************************************
 #													Represents a bar
@@ -43,21 +44,34 @@ class StrumPair:
 # ***************************************************************************************************************************
 
 class Compiler:
-
+	#
+	#	Report errors
+	#
 	def reportError(self,message,line):
 		print("Error '{0}' at {1}".format(message,line+1))
 		sys.exit(1)
-
+	#
+	#	Compile one source file to a collection of bar information.
+	#
 	def compile(self,sourceCode):
 		sourceCode.append("")																		# add extra blank line just in case.
+		self.dictionary = ChordDictionary()															# get a new dictionary instance.
 		sourceCode = [x if x.find("#") < 0 else x[:x.find("#")] for x in sourceCode]				# remove spaces.
 		self.equates = { "tempo":"120","swing":"no","beats":"4","pattern1":"d-d-d-d-" }				# initial equates
 		for eq in [x for x in sourceCode if x.find(":=") >= 0]:										# process equates
-			self.equates[eq.split(":=")[0].strip().lower()] = eq.split(":=")[1].strip().lower()
+			key = eq.split(":=")[0].strip().lower()													# key
+			if key.find(".") >= 0:																	# is it a.b := c, if so load into dictionary
+				self.dictionary.append(key.split(".")[0].strip(),key.split(".")[1].strip(),eq.split(":=")[1].strip())
+			else:
+				self.equates[key] = eq.split(":=")[1].strip().lower()								# set value.
+
+
 		self.sourceCode = [x.rstrip() if x.find(":=") < 0 else "" for x in sourceCode]				# remove equates, trailing spaces
 		self.createChordLyricStrings()
 		self.createBarData()
-
+	#
+	#	Create the two long strings of chord data and lyric data
+	#
 	def createChordLyricStrings(self):
 		self.chordData = ""																			# chord information
 		self.lyricData = ""																			# lyric information.
@@ -80,7 +94,9 @@ class Compiler:
 				self.chordData = self.chordData + (" " * (ls - len(self.chordData))) + "  "			# pad out to same length
 				self.lyricData = self.lyricData + (" " * (ls - len(self.lyricData))) + "||"			# add two bar seperators, two lines.
 				assert len(self.chordData) == len(self.lyricData)									# check.
-
+	#
+	#	Create the bar data from the chord and lyric data.
+	#
 	def createBarData(self):
 		self.currentPattern = 1																		# currently pattern 1.
 		self.chordData = self.chordData.lower()														# chord data always L/C
@@ -97,6 +113,8 @@ class Compiler:
 				self.currentPattern = int(m.group(1))												# set current pattern
 				if self.lyricData[:2] != "  ":														# error if not mirrored by two spaces
 					self.reportError("Pattern setting can not happen over lyric",self.compileLineNumber)
+				if "pattern"+str(self.currentPattern) not in self.equates:							# do we not know this pattern ?
+					self.reportError("Unknown pattern "+str(self.currentPattern),self.compileLineNumber)
 				self.chordData = self.chordData[2:]													# chuck the @x and the spaces.
 				self.lyricData = self.lyricData[2:]
 			elif self.chordData[0] == ' ' and self.lyricData[0] == '|':								# if space/bar (e.g. line seperator normal place)
@@ -125,10 +143,48 @@ class Compiler:
 						self.reportError("Bar overflow",self.compileLineNumber)
 				if size == int(self.equates["beats"]):												# do we need a new bar ?
 					self.barList.append(Bar())
+	#
+	#	Score a specific transposition in semi tones for a specific instrument.
+	#
+	def scoreTransposition(self,instrument,transpose):
+		chordCount = {}																				# count chords used.
+		chordAdjust = {}																			# amount of reductions for each chord.
+		for b in self.barList:																		# look through all bars
+			for s in b.strums:																		# and strums
+				if s.chord != "x":		
+					chord = Chord.transpose(s.chord,transpose)										# the chord transposed
+					if chord not in chordCount:
+						chordCount[chord] = 0														# none so far					
+						chordAdjust[chord] = -30													# score if we can't do it full stop
+						cInst = self.dictionary.find(instrument,chord)								# get the instance
+						if cInst is not None:
+							chordAdjust[chord] = -(cInst[3]*cInst[3])
+					chordCount[chord] += 1															# one chord of this type.
+		score = 0
+		for c in chordCount.keys():																	# calculate the overall score
+			score = score + chordCount[c] * chordAdjust[c]
+		return score
+	#
+	#	Render the compiled data.
+	#
+	def render(self,fileHandle):
+		self.writeLine(fileHandle,100,1,"beats := {0}".format(self.equates["beats"]))				# output beats/bar and tempo
+		self.writeLine(fileHandle,100,2,"tempo := {0}".format(self.equates["tempo"]))
+		barNumber = 1001 
+		for bar in self.barList:																	# render all bars.
+			if bar.lyrics != "":																	# lyric first if any
+				self.writeLine(fileHandle,barNumber,0,'"'+bar.lyrics)
+			# TODO: Render individual strums where appropriate.
+			barNumber += 1 																			# next bar.
+	#
+	#	Output a single line.
+	#
+	def writeLine(self,handle,time,subtime,line):									
+		handle.write("{0:05}.{1:04}:{2}\n".format(time,subtime,line))
 
 c = Compiler()
 src = open("windows.strum").readlines()
 c.compile(src)
-print(c.equates)
-for b in c.barList:
-	print("-".join([x.chord for x in b.strums]),b.lyrics)
+#print(c.scoreTransposition("ukulele",0))
+c.render(sys.stdout)
+

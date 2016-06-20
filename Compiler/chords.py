@@ -99,7 +99,7 @@ class ChordDictionary:
 		self.load("ukulele",chordInfo)
 
 
-cd = ChordDictionary()
-cd.append("ukulele","gsus","0101")
-f = cd.find("ukulele","gsus")
-print(f,f[0].render(True,100))
+#cd = ChordDictionary()
+#cd.append("ukulele","gsus","0101")
+#f = cd.find("ukulele","gsus")
+#print(f,f[0].render(True,100))
