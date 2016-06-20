@@ -42,7 +42,7 @@ endfunction filename
 
 function IOLoadDirectory(directoryRoot as string)
 	if directoryRoot <> "" then directoryRoot = directoryRoot + ":" 								// index.txt or <tree>:index.txt
-	indexFile$ = IOAccessFile(directoryRoot+"index.txt")											// This is the index file.
+	indexFile$ = IOAccessFile(directoryRoot+"ukulele.index")										// This is the index file.
 	if GetFileExists(indexFile$) <> 0
 		itemList$ = ""																				// List of ; seperated items.
 		if directoryRoot <> "" then itemList$ = ";(..)"												// Add parent option if not root

@@ -31,7 +31,7 @@ def compileTree(directory):
 				indexFile.append(targetFile[len(root)+1:])
 		if len(indexFile) != 0:
 			indexFile.sort()
-			open(root+os.sep+"index.txt","w").write("\n".join(indexFile))
+			open(root+os.sep+"ukulele.index","w").write("\n".join(indexFile))
 
 compileTree("..\\Application\\media\\music")
 
