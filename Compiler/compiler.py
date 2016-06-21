@@ -56,7 +56,8 @@ class Compiler:
 	def compile(self,sourceCode):
 		sourceCode.append("")																		# add extra blank line just in case.
 		self.dictionary = ChordDictionary()															# get a new dictionary instance.
-		sourceCode = [x if x.find("#") < 0 else x[:x.find("#")] for x in sourceCode]				# remove spaces.
+		sourceCode = [x if x != "" and x[0] != '#' else "" for x in sourceCode]						# remove comment lines.
+
 		self.equates = { "tempo":"120","swing":"no","beats":"4","pattern1":"d-d-d-d-" }				# initial equates
 		for eq in [x for x in sourceCode if x.find(":=") >= 0]:										# process equates
 			key = eq.split(":=")[0].strip().lower()													# key
