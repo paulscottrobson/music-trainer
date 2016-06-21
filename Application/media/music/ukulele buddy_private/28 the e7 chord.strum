@@ -1,0 +1,13 @@
+#
+#       Ukulele Buddy exercise 28 E7
+
+Tempo:=80
+Beats:=4
+Swing := No
+Pattern1 := d-d-d-d-
+
+@1
+
+E7... A... E7... A...
+
+

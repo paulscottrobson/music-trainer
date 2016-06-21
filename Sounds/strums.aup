@@ -1,11 +1,11 @@
 <?xml version="1.0" standalone="no" ?>
 <!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
-<project xmlns="http://audacity.sourceforge.net/xml/" projname="strums_data" version="1.3.0" audacityversion="2.0.6" sel0="68.2769931663" sel1="68.2769931663" vpos="0" h="13.6553986333" zoom="30.3176795580" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds">
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="strums_data" version="1.3.0" audacityversion="2.0.6" sel0="0.0000000000" sel1="231.6800000000" vpos="0" h="0.0000000000" zoom="30.3176795580" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds">
 	<tags>
 		<tag name="TRACKNUMBER" value="1"/>
 		<tag name="TITLE" value="1"/>
 	</tags>
-	<wavetrack name="strums" channel="2" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="11025" gain="1.0" pan="0.0">
+	<wavetrack name="strums" channel="2" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="11025" gain="1.0" pan="0.0">
 		<waveclip offset="0.00000000">
 			<sequence maxsamples="262144" sampleformat="262159" numsamples="2554272">
 				<waveblock start="0">
@@ -67,41 +67,41 @@
 		</waveclip>
 	</wavetrack>
 	<labeltrack name="Label Track" numlabels="36" height="73" minimized="0" isSelected="0">
-		<label t="-0.02018141" t1="0.72857143" title="1"/>
-		<label t="6.39523810" t1="7.48321995" title="2"/>
-		<label t="12.83061224" t1="14.04829932" title="3"/>
-		<label t="19.25600907" t1="20.36394558" title="4"/>
-		<label t="25.69138322" t1="26.70952381" title="5"/>
-		<label t="32.10680272" t1="33.18480726" title="6"/>
-		<label t="38.54217687" t1="39.58027211" title="7"/>
-		<label t="44.97755102" t1="45.93582766" title="8"/>
-		<label t="51.41292517" t1="52.49092971" title="9"/>
-		<label t="57.82834467" t1="58.83650794" title="10"/>
-		<label t="64.26371882" t1="65.28185941" title="11"/>
-		<label t="70.69909297" t1="71.14852608" title="12"/>
-		<label t="77.12448980" t1="77.85328798" title="13"/>
-		<label t="83.55986395" t1="84.29863946" title="14"/>
-		<label t="89.97528345" t1="90.51451247" title="15"/>
-		<label t="96.41065760" t1="96.84013605" title="16"/>
-		<label t="102.84603175" t1="103.21564626" title="17"/>
-		<label t="109.27142857" t1="109.73083900" title="18"/>
-		<label t="115.69682540" t1="116.22607710" title="19"/>
-		<label t="122.12222222" t1="122.47188209" title="20"/>
-		<label t="128.55759637" t1="129.02698413" title="21"/>
-		<label t="134.98299320" t1="135.53219955" title="22"/>
-		<label t="141.40839002" t1="141.87777778" title="23"/>
-		<label t="147.84376417" t1="148.11360544" title="24"/>
-		<label t="154.26916100" t1="154.66870748" title="25"/>
-		<label t="160.70453515" t1="161.10408163" title="26"/>
-		<label t="167.11995465" t1="167.44965986" title="27"/>
-		<label t="173.55532880" t1="173.88503401" title="28"/>
-		<label t="179.99070295" t1="180.25056689" title="29"/>
-		<label t="186.41609977" t1="186.69591837" title="30"/>
-		<label t="192.85147392" t1="193.14126984" title="31"/>
-		<label t="199.26689342" t1="199.54671202" title="32"/>
-		<label t="205.70226757" t1="205.98208617" title="33"/>
-		<label t="212.13764172" t1="212.39750567" title="34"/>
-		<label t="218.56303855" t1="218.82290249" title="35"/>
-		<label t="224.98843537" t1="225.22834467" title="36"/>
+		<label t="-0.02018141" t1="1.86598639" title="1"/>
+		<label t="6.39523810" t1="8.45102041" title="2"/>
+		<label t="12.83061224" t1="15.01609977" title="3"/>
+		<label t="19.25600907" t1="21.40158730" title="4"/>
+		<label t="25.69138322" t1="27.98662132" title="5"/>
+		<label t="32.10680272" t1="34.07278912" title="6"/>
+		<label t="38.54217687" t1="40.47823129" title="7"/>
+		<label t="44.97755102" t1="46.98344671" title="8"/>
+		<label t="51.40294785" t1="53.43877551" title="9"/>
+		<label t="57.82834467" t1="59.87414966" title="10"/>
+		<label t="64.25374150" t1="66.19977324" title="11"/>
+		<label t="70.68911565" t1="72.35578231" title="12"/>
+		<label t="77.12448980" t1="78.96077098" title="13"/>
+		<label t="83.54988662" t1="85.24648526" title="14"/>
+		<label t="89.97528345" t1="91.65192744" title="15"/>
+		<label t="96.41065760" t1="97.78798186" title="16"/>
+		<label t="102.83605442" t1="104.36303855" title="17"/>
+		<label t="109.27142857" t1="110.67868481" title="18"/>
+		<label t="115.68684807" t1="117.14399093" title="19"/>
+		<label t="122.12222222" t1="123.42970522" title="20"/>
+		<label t="128.55759637" t1="130.16439909" title="21"/>
+		<label t="134.98299320" t1="136.50997732" title="22"/>
+		<label t="141.40839002" t1="142.69591837" title="23"/>
+		<label t="147.84376417" t1="149.35079365" title="24"/>
+		<label t="154.26916100" t1="155.61655329" title="25"/>
+		<label t="160.70453515" t1="162.06190476" title="26"/>
+		<label t="167.11995465" t1="168.58707483" title="27"/>
+		<label t="173.55532880" t1="174.83287982" title="28"/>
+		<label t="179.98072562" t1="181.27823129" title="29"/>
+		<label t="186.41609977" t1="187.54399093" title="30"/>
+		<label t="192.85147392" t1="194.10907029" title="31"/>
+		<label t="199.26689342" t1="200.46462585" title="32"/>
+		<label t="205.70226757" t1="206.85011338" title="33"/>
+		<label t="212.12766440" t1="213.24557823" title="34"/>
+		<label t="218.56303855" t1="219.69092971" title="35"/>
+		<label t="224.98843537" t1="226.00657596" title="36"/>
 	</labeltrack>
 </project>

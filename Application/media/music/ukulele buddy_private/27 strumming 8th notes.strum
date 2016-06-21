@@ -1,0 +1,13 @@
+#
+#       Ukulele Buddy exercise 27 Eighths strums.
+#
+Tempo:=60
+Beats:=4
+Swing := No
+Pattern1 := eudueudu
+
+@1
+
+C/// C/// C/// C///
+
+G/// G/// G/// G///
