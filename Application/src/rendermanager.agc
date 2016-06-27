@@ -68,7 +68,7 @@ function RenderManager_New(rm ref as RenderManager,width as integer,height as in
 	if bounceHeight > 0																				// Create the bouncy ball.
 		CreateSprite(rm.baseID+1,IDORANGECIRCLE)	
 		sz# = height / 10.0 / GetSpriteHeight(rm.baseID+1)	
-		SetSpriteScale(rm.baseID+1,sz#,sz#)														// Make it a sensible size
+		SetSpriteScale(rm.baseID+1,sz#,sz#)															// Make it a sensible size
 	endif
 endfunction
 
@@ -211,6 +211,7 @@ function _RenderManager_moveBall(rm ref as RenderManager,bar ref as Bar,position
 	firstPos = 0																					// Initialise it to do the whole thing.
 	lastPos = 1000
 	if bar.strumCount > 0 																			// Are there strums in this bar.
+		if bar.strums[1].time > 0 then lastPos = bar.strums[1].time
 		for i = 1 to bar.strumCount 																// Look at each strum
 			if i < bar.strumCount then thisEnd = bar.strums[i+1].time else thisEnd = 1000
 			if position > bar.strums[i].time and position <= thisEnd 								// Found the "slot"

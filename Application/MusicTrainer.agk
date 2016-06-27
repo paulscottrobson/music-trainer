@@ -21,21 +21,22 @@ FILE_17=src%2Fmusicselector.agc;-1
 FILE_18=src%2Fincludes.agc;-1
 
 [files]
-FILE_NAME_0=0;main.agc;1556;0
+FILE_NAME_0=0;main.agc;874;0
 FILE_NAME_1=0;src%2Fconstants.agc;7068;1
 FILE_NAME_2=0;src%2Fresources.agc;1937;2
 FILE_NAME_3=0;src%2Fchorddisplay.agc;6670;7
 FILE_NAME_4=0;src%2Fsong.agc;2861;3
 FILE_NAME_5=0;src%2Fchordbucket.agc;3057;10
 FILE_NAME_6=0;src%2Fbarrender.agc;1745;11
-FILE_NAME_7=1;src%2Frendermanager.agc;0;14
+FILE_NAME_7=1;src%2Frendermanager.agc;13893;14
 FILE_NAME_8=0;src%2Fplayer.agc;6296;12
 FILE_NAME_9=0;src%2Fchordhelper.agc;2925;13
-FILE_NAME_10=0;src%2Fgame.agc;3451;4
-FILE_NAME_11=0;src%2Fio.agc;3014;5
-FILE_NAME_12=0;src%2Fselectoritem.agc;4264;6
-FILE_NAME_13=0;src%2Fmusicselector.agc;9556;8
-FILE_NAME_14=0;src%2Fincludes.agc;385;9
+FILE_NAME_10=0;src%2Fpositioner.agc;0;15
+FILE_NAME_11=0;src%2Fgame.agc;5746;4
+FILE_NAME_12=0;src%2Fio.agc;2948;5
+FILE_NAME_13=0;src%2Fselectoritem.agc;4264;6
+FILE_NAME_14=0;src%2Fmusicselector.agc;9556;8
+FILE_NAME_15=0;src%2Fincludes.agc;385;9
 
 [project]
 description=

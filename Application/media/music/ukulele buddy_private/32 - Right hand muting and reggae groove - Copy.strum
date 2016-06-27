@@ -1,0 +1,11 @@
+#
+#       Ukulele Buddy exercise 32 Muting and Reggae
+#
+Tempo:=80
+Beats:=4
+Swing := No
+Pattern1 := --d---d-
+
+@1
+
+A/// A/// A/// A/// A/// A/// A/// A/// 

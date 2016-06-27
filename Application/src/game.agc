@@ -107,6 +107,7 @@ function Game_Run(gm ref as Game)
 	while gm.gameOver = 0																			// Main loop
 		//Print(ScreenFPS())
 		//Print(gm.position#)
+		//print(debug)
 		if GetRawKeyPressed(27) <> 0 then End 														// Abandon on ESC
 
 		for i = 1 to len(CMDKEYS)																	// Check if any command keys pressed
