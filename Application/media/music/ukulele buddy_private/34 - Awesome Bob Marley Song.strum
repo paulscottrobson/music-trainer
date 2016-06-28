@@ -1,0 +1,26 @@
+#
+#       Ukulele Buddy exercise 34 Bob Marley Song
+#
+Tempo:=100
+Beats:=4
+Swing := No
+Pattern1 := --d---d-
+
+@1
+
+A/// A/// A/// A/// 
+
+D/// D/// A/// A/// 
+
+A/// A/// A/// A/// 
+
+D/// D/// A/// A/// 
+
+A/// A/// A/// A/// 
+
+D/// D/// A/// A/// 
+
+A/// A/// A/// A/// 
+
+D/// D/// A/// A/// 
+

@@ -125,6 +125,7 @@ class Compiler:
 			else:
 				m = re.match("^([a-gx][\\#b]?[a-z0679]*)([\\/\\.\\s]*)",self.chordData)
 				if m is None:
+					print(self.chordData)
 					self.reportError("Syntax in Music",self.compileLineNumber)
 				lenSection = len(m.group(0))														# this is the whole bit to chop.
 				chordName = m.group(1)																# this is the chord name
