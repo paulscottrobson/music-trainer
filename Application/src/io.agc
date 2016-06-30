@@ -22,7 +22,7 @@ function IOAccessFile(filename as string)
 		iHTTP= CreateHTTPConnection()																// Access the internet
 		szHost$ = "www.scrollmusic.com"																// This is the host
 		ret=SetHTTPHost(iHTTP,szHost$,0)
-		szLocalFile$="temp.dat"																	// Copy it here.
+		szLocalFile$="temp.dat"																		// Copy it here.
 		szPostData$=""
 		GetHTTPFile( iHTTP, filename, szLocalFile$, szPostData$ )
 		while GetHTTPFileComplete(iHTTP) = 0														// Wait for completion.

@@ -94,7 +94,7 @@ function Player_Update(pl ref as Player,song ref as Song,pos# as float)
 			if pl.nextStrumTime[i] <> 0 and timeMS > pl.nextStrumTime[i]							// If strum pending and strum due
 				pl.nextStrumTime[i] = 0																// Cancel pending
 				if pl.nextStrum[i] >= 0																// If a strum
-					PlaySound(pl.baseSoundID[i]+pl.nextStrum[i],pl.nextVolume)						// play it
+					PlaySound(pl.baseSoundID[i]+pl.nextStrum[i],pl.nextVolume)					// play it
 				endif
 			endif
 		next i

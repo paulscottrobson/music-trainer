@@ -1,0 +1,17 @@
+#
+#       Ukulele Buddy exercise 34 Bob Marley Song
+#
+Tempo:=120
+Beats:=4
+Swing := No
+Pattern1 := --d---d-
+
+@1
+
+A///
+
+       A///            A///     A///      A///
+%Don't worry%          %about a thing     %cause
+
+D///               D///          A///   A///        
+every little thing %gonna be all right% %Singing
