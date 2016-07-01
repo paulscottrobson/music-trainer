@@ -1,0 +1,17 @@
+#
+#       Ukulele Buddy exercise 36 Waltz & Happy Birthday
+#
+Tempo:=80
+Beats:=3
+Swing := No
+Pattern1 := d-d-d-
+
+@1
+
+
+
+X..    C//         G//       G//         C//
+%Happy Birthday to you Happy Birthday to you
+
+      C//           F//          C/       G  C..
+Happy Birthday dear thingy Happy Birthday to you
