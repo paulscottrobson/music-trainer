@@ -1,0 +1,36 @@
+#
+# 37 - Amazing Grace 
+#
+Beats:= 3
+Tempo := 80
+Swing := Yes
+Pattern1 := d-d-d-
+Pattern2 := d-d-du
+
+@1
+
+X..   C//    C//       F//       C//
+%A    mazing grace, How sweet the sound
+
+     C//     C//         G//
+That saved a wretch like me.
+
+G//   C//      C//       F//    C//
+%I    once was lost, but now am found
+
+    C//        G//   C//    C//
+Was blind, but now I see.
+
+@2
+
+X..   C//    C//       F//       C//
+%A    mazing grace, How sweet the sound
+
+     C//     C//         G//
+That saved a wretch like me.
+
+G//   C//      C//       F//    C//
+%I    once was lost, but now am found
+
+    C//        G//   C//    C//
+Was blind, but now I see.

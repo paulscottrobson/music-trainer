@@ -1,0 +1,16 @@
+#
+# 40 - Great Strumming Pattern
+#
+Beats:= 4
+Tempo := 80
+Swing := No
+Pattern1 := d-d-dudu
+
+@1
+
+G/// G/// G/// G///
+
+G/// G/// G/// G///
+
+G/// G/// G/// G///
+
