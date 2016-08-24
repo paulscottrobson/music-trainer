@@ -1,0 +1,16 @@
+#
+# 41 Stand by me strum pattern
+#
+Beats:= 4
+Tempo := 80
+Swing := No
+Pattern1 := d-du-udu
+
+@1
+
+C/// C/// C/// C///
+
+C/// C/// C/// C///
+
+C/// C/// C/// C///
+
